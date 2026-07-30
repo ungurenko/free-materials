@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Дизайн-токены: молочная палитра + приглушённый салатовый акцент
+   ============================================================ */
+@theme {
+  --color-milk: #f6f6f0;
+  --color-paper: #fdfdf8;
+  --color-ink: #26281f;
+  --color-ink-soft: #5f6355;
+  --color-ink-faint: #8f927f;
+  --color-line: #e5e6da;
+  --color-line-strong: #d3d5c4;
+
+  --color-lime-100: #f0f4df;
+  --color-lime-200: #e3edc6;
+  --color-lime-300: #cadd97;
+  --color-lime-400: #b2c96e;
+  --color-lime-500: #99b64f;
+  --color-lime-600: #7c9838;
+  --color-lime-700: #637a2c;
+
+  --color-moss-800: #38422a;
+  --color-moss-900: #262e1b;
+  --color-moss-950: #1b2113;
+
+  --font-display: "Unbounded", "Golos Text", sans-serif;
+  --font-body: "Golos Text", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+/* ---------- база ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-milk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* мягкая верхняя подсветка */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 420px at 8% -6%, rgba(153, 182, 79, 0.14), transparent 62%),
+    radial-gradient(720px 380px at 96% 4%, rgba(153, 182, 79, 0.09), transparent 60%),
+    linear-gradient(180deg, #f9f9f3 0%, #f6f6f0 340px);
+}
+
+/* деликатное зерно поверх всего */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#__next {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-lime-300);
+  color: var(--color-moss-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-lime-600);
+  outline-offset: 3px;
+}
+
+iframe {
+  display: block;
+}
+
+/* тонкий скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-milk);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 8px;
+  border: 2px solid var(--color-milk);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-lime-500);
+}
+
+/* ---------- переиспользуемые классы ---------- */
+@layer components {
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn-primary,
+  .btn-ghost,
+  .btn-on-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.15s ease,
+      box-shadow 0.2s ease;
+  }
+  .btn-primary:active,
+  .btn-ghost:active,
+  .btn-on-dark:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  .btn-primary {
+    background: var(--color-lime-500);
+    color: var(--color-moss-950);
+    box-shadow:
+      0 1px 0 rgba(38, 46, 27, 0.08),
+      0 8px 24px -12px rgba(124, 152, 56, 0.55);
+  }
+  .btn-primary:hover {
+    background: var(--color-lime-400);
+  }
+
+  .btn-ghost {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line-strong);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-lime-500);
+    background: var(--color-lime-100);
+  }
+
+  .btn-on-dark {
+    background: var(--color-lime-400);
+    color: var(--color-moss-950);
+  }
+  .btn-on-dark:hover {
+    background: var(--color-lime-300);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -4px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-lime-500);
+    transition: right 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover::after {
+    right: 0;
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(rgba(38, 40, 31, 0.13) 1px, transparent 1.3px);
+    background-size: 21px 21px;
+  }
+  .dot-grid-light {
+    background-image: radial-gradient(rgba(253, 253, 248, 0.16) 1px, transparent 1.3px);
+    background-size: 22px 22px;
+  }
+}
+
+/* ---------- появление при скролле ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- живые элементы ---------- */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.anim-spin-slow {
+  animation: spin-slow 70s linear infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.anim-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 152, 56, 0.45);
+  }
+  60% {
+    box-shadow: 0 0 0 7px rgba(124, 152, 56, 0);
+  }
+}
+.anim-pulse-dot {
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .anim-spin-slow,
+  .anim-float,
+  .anim-pulse-dot {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
