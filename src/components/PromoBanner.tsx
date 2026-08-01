@@ -59,11 +59,7 @@ export default function PromoBanner() {
                   alt={promo.imageAlt}
                   className="aspect-[16/10] w-full rounded-2xl border border-moss-800 object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 />
-                {promo.buttonLabel && (
-                  <span className="pill absolute bottom-4 left-4 bg-moss-950/80 px-3.5 py-2 text-lime-300 backdrop-blur-sm">
-                    {promo.buttonLabel}
-                  </span>
-                )}
+
               </div>
             )}
           </div>

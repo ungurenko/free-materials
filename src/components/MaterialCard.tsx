@@ -30,7 +30,10 @@ export default function MaterialCard({ material }: { material: Material }) {
         <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{material.summary}</p>
         <div className="mt-6 flex items-center justify-between gap-4 border-t border-line pt-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-faint">
-            {material.formatLabel}
+            {new Date(material.publishedAt).toLocaleDateString("ru-RU", {
+              day: "numeric",
+              month: "long",
+            })}
           </span>
           <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-lime-700">
             Открыть

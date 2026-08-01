@@ -59,7 +59,7 @@ export default function RootLayout({
   const { analytics } = siteConfig;
 
   return (
-    <html lang="ru">
+    <html lang="ru" className={`${golos.variable} ${unbounded.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="theme-color" content="#F6F6F0" />
         {analytics.umami.enabled && analytics.umami.websiteId && analytics.umami.src && (
@@ -71,7 +71,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className={`${golos.variable} ${unbounded.variable} ${jetbrains.variable}`}>
+      <body>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
