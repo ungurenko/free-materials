@@ -70,6 +70,7 @@ describe("allMaterials", () => {
     const promptBase = allMaterials.find((material) => material.slug === "baza-promtov-vibe-kodinga");
 
     expect(sandbox?.blocks.filter((block) => block.type === "prompt")).toHaveLength(1);
-    expect(promptBase?.blocks.filter((block) => block.type === "prompt")).toHaveLength(44);
+    // 5 premium task prompts + 6 style prefixes
+    expect(promptBase?.blocks.filter((block) => block.type === "prompt")).toHaveLength(11);
   });
 });
