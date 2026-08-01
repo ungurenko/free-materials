@@ -279,3 +279,28 @@ iframe {
     animation-duration: 0.01ms !important;
   }
 }
+
+@media print {
+  body::before,
+  body::after,
+  .site-header,
+  .info-note,
+  .open-hint,
+  .telegram-cta,
+  .site-footer,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .accordion-panel[hidden] {
+    display: block;
+  }
+}

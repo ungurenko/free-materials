@@ -40,7 +40,7 @@ interface SiteConfig {
 export const siteConfig: SiteConfig = {
   siteName: "Вайб-кодинг с нуля",
   siteDescription:
-    "5 готовых промптов для создания первого сайта или веб-приложения без знания программирования. Выберите проект, вставьте промпт в Qwen, Google AI Studio или GLM и получите рабочую версию.",
+    "5 готовых промптов для создания первого сайта, калькулятора, теста, генератора идей или трекера привычек с помощью Qwen, Google AI Studio и GLM.",
   siteUrl: "https://example.com", // TODO: заменить на production-домен
 
   author: {

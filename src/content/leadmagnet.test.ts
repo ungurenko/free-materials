@@ -2,86 +2,77 @@ import { describe, expect, it } from "vitest";
 import {
   checklistItems,
   commands,
-  comparisonRows,
-  examples,
-  instructionSteps,
-  instructionWarning,
-  leadmagnetHero,
-  marketingIdea,
+  howToUseSteps,
+  pageCopy,
   projects,
   safetyRules,
   services,
-  telegramCta,
-  vibeCodingExplanation,
 } from "./leadmagnet";
 
 describe("leadmagnet content", () => {
-  it("hero has all required fields", () => {
-    expect(leadmagnetHero.title).toBe("Вайб-кодинг с нуля");
-    expect(leadmagnetHero.subtitle.length).toBeGreaterThan(10);
-    expect(leadmagnetHero.promise.length).toBeGreaterThan(10);
-    expect(leadmagnetHero.callout.length).toBeGreaterThan(10);
+  it("matches the source HTML page structure and primary copy", () => {
+    expect(pageCopy.header.brand).toBe("Вайб-кодинг с нуля");
+    expect(pageCopy.hero.eyebrow).toBe("Практическая база для новичка");
+    expect(pageCopy.hero.lead).toBe(
+      "5 готовых промптов, с которыми можно собрать первый сайт или веб-сервис без знания программирования.",
+    );
+    expect(pageCopy.projects.title).toBe("Выберите первый проект");
+    expect(pageCopy.resources.title).toBe("Материалы для первого запуска");
+    expect(pageCopy.telegram.title).toBe("Продолжайте создавать проекты с помощью ИИ");
+    expect(pageCopy.footer.note).toBe("Возможности и лимиты нейросетей могут меняться.");
   });
 
-  it("vibe-coding explanation has 3 paragraphs", () => {
-    expect(vibeCodingExplanation).toHaveLength(3);
-  });
-
-  it("instruction has 7 steps and 7 warning items", () => {
-    expect(instructionSteps).toHaveLength(7);
-    expect(instructionWarning.items).toHaveLength(7);
-  });
-
-  it("services has exactly 3 entries with required fields", () => {
-    expect(services).toHaveLength(3);
-    for (const s of services) {
-      expect(s.id).toBeTruthy();
-      expect(s.name).toBeTruthy();
-      expect(s.url).toMatch(/^https?:\/\//);
-      expect(s.suitableFor.length).toBeGreaterThan(0);
-      expect(s.howToStart.length).toBeGreaterThan(0);
-      expect(s.feature.length).toBeGreaterThan(0);
-    }
-  });
-
-  it("comparison table has 6 rows", () => {
-    expect(comparisonRows).toHaveLength(6);
-  });
-
-  it("projects has exactly 5 entries with valid prompts and ids", () => {
+  it("contains exactly five source projects with complete modal content", () => {
     expect(projects).toHaveLength(5);
-    const ids = new Set<string>();
-    for (let i = 0; i < projects.length; i++) {
-      const p = projects[i];
-      expect(p.id).toBeTruthy();
-      expect(ids.has(p.id)).toBe(false);
-      ids.add(p.id);
-      expect(p.number).toBe(i + 1);
-      expect(p.prompt.length).toBeGreaterThan(100);
-      expect(["Простой", "Средний"]).toContain(p.level);
+    expect(projects.map((project) => project.id)).toEqual([
+      "project-page",
+      "calculator",
+      "quiz",
+      "idea-generator",
+      "habit-tracker",
+    ]);
+    expect(projects.map((project) => project.cardTitle)).toEqual([
+      "Страница проекта",
+      "Интерактивный калькулятор",
+      "Тест с результатом",
+      "Генератор идей",
+      "Трекер привычек",
+    ]);
+
+    for (const project of projects) {
+      expect(project.cardDescription.length).toBeGreaterThan(20);
+      expect(project.description.length).toBeGreaterThan(40);
+      expect(project.prompt.length).toBeGreaterThan(1_000);
+      expect(project.services).toEqual(["Qwen", "Google AI Studio", "GLM"]);
+      expect(["web", "calculator", "quiz", "ideas", "habits"]).toContain(project.cover);
     }
   });
 
-  it("commands has exactly 5 entries", () => {
+  it("contains the exact compact resources from the source HTML", () => {
+    expect(services.map((service) => service.name)).toEqual(["Google AI Studio", "Qwen", "GLM"]);
+    expect(services.map((service) => service.url)).toEqual([
+      "https://aistudio.google.com/",
+      "https://qwen.ai/qwenchat",
+      "https://chat.z.ai/",
+    ]);
     expect(commands).toHaveLength(5);
-    for (const c of commands) {
-      expect(c.prompt.length).toBeGreaterThan(50);
-    }
-  });
-
-  it("safety rules and checklist have expected sizes", () => {
-    expect(safetyRules.items).toHaveLength(8);
+    expect(commands.every((command) => command.text.length > 100)).toBe(true);
     expect(checklistItems).toHaveLength(10);
+    expect(checklistItems[7]).toBe("в проекте нет технических заглушек");
+    expect(checklistItems[9]).toBe("результат можно показать другому человеку");
+    expect(safetyRules.items).toHaveLength(8);
+    expect(safetyRules.items.at(-1)).toBe("сведения, публикация которых может причинить вред.");
+    expect(howToUseSteps).toHaveLength(3);
   });
 
-  it("examples and telegram CTA are well-formed", () => {
-    expect(examples.items).toHaveLength(5);
-    expect(telegramCta.main.buttonLabel.length).toBeGreaterThan(0);
-    expect(telegramCta.cases.benefits.length).toBeGreaterThan(0);
-  });
-
-  it("marketing idea has quote and note", () => {
-    expect(marketingIdea.quote.length).toBeGreaterThan(20);
-    expect(marketingIdea.note.length).toBeGreaterThan(20);
+  it("keeps project ids unique and replacement markers source-accurate", () => {
+    expect(new Set(projects.map((project) => project.id)).size).toBe(projects.length);
+    expect(projects.map((project) => project.replace)).toEqual([
+      "[ВПИШИТЕ ТЕМУ]",
+      "[ВПИШИТЕ, ЧТО ОН ДОЛЖЕН РАССЧИТЫВАТЬ]",
+      "[ВПИШИТЕ ТЕМУ ТЕСТА]",
+      "[ВПИШИТЕ ТЕМУ]",
+      "",
+    ]);
   });
 });

@@ -37,12 +37,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_RU",
     siteName: siteConfig.siteName,
-    title: siteConfig.siteName,
+    title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
     description: siteConfig.siteDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.siteName,
+    title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
     description: siteConfig.siteDescription,
   },
   robots: {
@@ -72,9 +72,15 @@ export default function RootLayout({
         )}
       </head>
       <body>
+        <a
+          href="#main"
+          className="fixed left-3 top-3 z-[100] -translate-y-24 rounded-xl bg-moss-950 px-4 py-2.5 text-sm font-medium text-paper transition-transform focus:translate-y-0"
+        >
+          Перейти к материалам
+        </a>
         <div className="site-shell flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main" className="flex-1">{children}</main>
           <Footer />
         </div>
       </body>
