@@ -14,6 +14,7 @@ export const RichTextBlockSchema = z.object({
 export const HeadingBlockSchema = z.object({
   type: z.literal("heading"),
   level: z.union([z.literal(2), z.literal(3)]).default(2),
+  id: z.string().min(1).optional(),
   content: z.string().min(1, "heading: content обязателен"),
 });
 
@@ -94,6 +95,7 @@ export const MaterialSchema = z.object({
   updatedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "updatedAt должен быть в формате YYYY-MM-DD").optional(),
   order: z.number().int().nonnegative(),
   published: z.boolean().default(true),
+  layout: z.enum(["article", "promptLibrary"]).optional(),
   seo: MaterialSeoSchema,
   blocks: z.array(ContentBlockSchema).min(1, "blocks: минимум один блок"),
 });

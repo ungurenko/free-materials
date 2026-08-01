@@ -1,14 +1,20 @@
 import type { ContentBlock } from "@/lib/content/schema";
 import { formatRichText } from "@/lib/content/rich-text";
 import PromptBlock from "./PromptBlock";
+import PromptLibrary from "./PromptLibrary";
 import YouTubeBlock from "./YouTubeBlock";
 
 interface ContentRendererProps {
   blocks: ContentBlock[];
   materialSlug?: string;
+  layout?: "article" | "promptLibrary";
 }
 
-export default function ContentRenderer({ blocks, materialSlug }: ContentRendererProps) {
+export default function ContentRenderer({ blocks, materialSlug, layout }: ContentRendererProps) {
+  if (layout === "promptLibrary") {
+    return <PromptLibrary blocks={blocks} materialSlug={materialSlug} />;
+  }
+
   let promptIndex = 0;
 
   return (

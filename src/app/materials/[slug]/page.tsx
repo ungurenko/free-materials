@@ -98,7 +98,7 @@ export default async function MaterialPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className="container-x max-w-3xl pb-4 pt-8 sm:pt-12">
+      <article className="container-x max-w-6xl pb-4 pt-8 sm:pt-12">
         <Reveal>
           <Link
             href="/"
@@ -142,7 +142,7 @@ export default async function MaterialPage({ params }: PageProps) {
         </Reveal>
 
         <div className="mt-14">
-          <ContentRenderer blocks={material.blocks} materialSlug={material.slug} />
+          <ContentRenderer blocks={material.blocks} materialSlug={material.slug} layout={material.layout} />
         </div>
 
         <div className="mt-14">

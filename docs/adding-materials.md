@@ -27,6 +27,7 @@ const material: Material = {
   publishedAt: "2026-07-29", // Формат YYYY-MM-DD
   order: 1, // Порядок отображения в каталоге
   published: true, // false = материал не публикуется
+  layout: "article", // или "promptLibrary" для каталога промптов с секциями
 
   // === SEO ===
   seo: {
@@ -67,6 +68,7 @@ export default material;
 {
   type: "heading",
   level: 2, // 2 или 3
+  id: "section-id", // Опционально; одинаковый id объединяет части раздела
   content: "Заголовок раздела",
 }
 ```

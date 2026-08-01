@@ -15,6 +15,7 @@ const material: Material = {
   publishedAt: "2026-08-01",
   order: 2,
   published: true,
+  layout: "promptLibrary",
   seo: {
     title: "База промптов для вайб-кодинга — 31 идея",
     description:
@@ -34,6 +35,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "vizitki",
       content: "1. Личная страница-визитка эксперта",
     },
     {
@@ -93,6 +95,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "lendingi",
       content: "2. Лендинг под одну услугу или продукт",
     },
     {
@@ -152,6 +155,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "instrumenty",
       content: "3. Простой полезный инструмент",
     },
     {
@@ -219,6 +223,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "igry",
       content: "4. Мини-игра",
     },
     {
@@ -274,6 +279,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "otkrytki",
       content: "5. Красивая страница-открытка или приглашение",
     },
     {
@@ -332,6 +338,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "socseti",
       content: "6. Штука для соцсетей",
     },
     {
@@ -389,7 +396,8 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
-      content: "Поиграй со стилями",
+      id: "styles",
+      content: "7. Стили оформления",
     },
     {
       type: "richText",
@@ -408,6 +416,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "styles",
       content: "Библиотека стилей",
     },
     {
@@ -497,6 +506,7 @@ const material: Material = {
     {
       type: "heading",
       level: 2,
+      id: "styles",
       content: "Подсказки по сочетаниям",
     },
     {

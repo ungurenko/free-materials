@@ -44,23 +44,23 @@ export default function PromptBlock({
 
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-[#f1f2e9] transition-shadow duration-300 hover:shadow-[0_18px_44px_-30px_rgba(38,40,31,0.35)]">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line/80 bg-paper/70 px-4 py-3.5 sm:flex-nowrap sm:px-5">
-        <div className="flex min-w-0 items-baseline gap-3">
+      <div className="border-b border-line/80 bg-paper/70 px-4 py-4 sm:px-5">
+        <div className="flex min-w-0 items-start gap-3">
           <span className="shrink-0 font-mono text-xs font-medium text-lime-700">
             {String(index + 1).padStart(2, "0")}
           </span>
           {title && (
-            <h3 className="truncate text-[15px] font-semibold text-ink sm:text-base">{title}</h3>
+            <h3 className="min-w-0 break-words text-[15px] font-semibold leading-snug text-ink sm:text-base">{title}</h3>
           )}
         </div>
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-line/70 pt-3">
           {collapsed !== undefined && (
             <button
               type="button"
               onClick={() => setIsOpen((value) => !value)}
               aria-expanded={isOpen}
               aria-controls={`prompt-content-${id}`}
-              className="btn-ghost h-11 shrink-0 px-4 text-sm"
+              className="btn-ghost h-10 shrink-0 px-3.5 text-sm"
             >
               <svg
                 className={`size-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
@@ -79,7 +79,7 @@ export default function PromptBlock({
             type="button"
             onClick={handleCopy}
             aria-label={`Скопировать промпт${title ? ` «${title}»` : ""}`}
-            className={`${copied ? "btn-primary" : "btn-ghost"} h-11 min-w-[142px] shrink-0 px-5 text-sm`}
+            className={`${copied ? "btn-primary" : "btn-ghost"} h-10 min-w-[142px] shrink-0 px-4 text-sm`}
           >
             {copied ? <IconCheck className="size-[18px]" /> : <IconCopy className="size-[18px]" />}
             <span aria-live="polite">{copied ? "Скопировано" : "Скопировать"}</span>
