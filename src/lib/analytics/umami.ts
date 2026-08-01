@@ -4,9 +4,10 @@
 
 import { siteConfig } from "@/config/site";
 
-type AnalyticsEvent =
-  | { name: "prompt_copy"; props: { material_slug: string; prompt_id: string } }
-  | { name: "youtube_play"; props: { material_slug: string; video_id: string } };
+type AnalyticsEvent = {
+  name: "prompt_copy";
+  props: { material_slug: string; prompt_id: string };
+};
 
 declare global {
   interface Window {
@@ -30,8 +31,4 @@ export function trackEvent(event: AnalyticsEvent): void {
 
 export function trackPromptCopy(slug: string, promptId: string): void {
   trackEvent({ name: "prompt_copy", props: { material_slug: slug, prompt_id: promptId } });
-}
-
-export function trackYouTubePlay(slug: string, videoId: string): void {
-  trackEvent({ name: "youtube_play", props: { material_slug: slug, video_id: videoId } });
 }

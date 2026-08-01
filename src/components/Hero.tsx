@@ -1,11 +1,11 @@
 import { siteConfig } from "@/config/site";
-import { IconGift, IconInstagram, IconTelegram, IconYoutube } from "./icons";
+import { leadmagnetHero } from "@/content/leadmagnet";
+import { IconArrowRight, IconGift, IconInstagram, IconTelegram, IconYoutube } from "./icons";
 import Reveal from "./Reveal";
-
-const expertises = ["AI-разработка", "AI-агенты", "Сайты и сервисы", "Вайб-кодинг"];
 
 export default function Hero() {
   const { author, socials } = siteConfig;
+  const { title, subtitle, promise, callout } = leadmagnetHero;
 
   return (
     <section className="relative overflow-hidden">
@@ -24,71 +24,43 @@ export default function Hero() {
           <Reveal>
             <p className="pill border border-lime-300/70 bg-lime-100 px-4 py-2 text-lime-700">
               <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />
-              Бесплатные материалы об AI-разработке
+              Лидмагнит · 5 промптов
             </p>
 
-            <h1 className="mt-6 font-display text-[clamp(1.75rem,5vw,3.3rem)] font-semibold leading-[1.13] tracking-[-0.015em] text-ink">
-              Создавайте сайты, приложения и боты с помощью{" "}
-              <span className="relative whitespace-nowrap">
-                ИИ
-                <svg
-                  className="absolute -bottom-2 left-0 w-full text-lime-500"
-                  viewBox="0 0 220 12"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M3 9c40-6 120-7 214-3"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    opacity="0.8"
-                  />
-                </svg>
-              </span>
+            <h1 className="mt-6 font-display text-[clamp(1.85rem,5vw,3.3rem)] font-semibold leading-[1.13] tracking-[-0.015em] text-ink">
+              {title}
             </h1>
 
+            <p className="mt-5 font-display text-[clamp(1.05rem,2vw,1.35rem)] font-medium leading-snug text-ink-soft">
+              {subtitle}
+            </p>
+
             <p className="mt-6 text-base leading-relaxed text-ink-soft sm:text-lg">
-              Практические инструкции и промпты для создания цифровых продуктов с ИИ.
-              Откройте материал, скопируйте нужное и примените в своём проекте.
+              {promise}
             </p>
           </Reveal>
 
           <Reveal delay={120}>
-            <blockquote className="mt-8 border-l-2 border-lime-500 pl-4">
-              <p className="text-[15px] leading-relaxed text-ink-soft">{author.heroIntro}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {expertises.map((e) => (
-                  <span
-                    key={e}
-                    className="pill border border-line bg-paper px-3 py-1.5 text-[11px] normal-case tracking-[0.08em] text-ink-soft"
-                  >
-                    <span className="size-1 rounded-full bg-lime-500" aria-hidden />
-                    {e}
-                  </span>
-                ))}
-              </div>
-            </blockquote>
+            <div className="mt-8 border-l-2 border-lime-500 pl-4">
+              <p className="text-[15px] leading-relaxed text-ink-soft">{callout}</p>
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="btn-primary h-12 flex-1 basis-[170px] px-6 text-[15px]"
+              >
+                Перейти к выбору проекта
+                <IconArrowRight className="size-5" />
+              </a>
               <a
                 href={socials.telegram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary h-12 flex-1 basis-[170px] px-6 text-[15px]"
-              >
-                <IconTelegram className="size-5" />
-                Telegram-канал
-              </a>
-              <a
-                href={socials.instagram.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="btn-ghost h-12 flex-1 basis-[150px] px-5 text-[15px]"
               >
-                <IconInstagram className="size-5" />
-                Instagram
+                <IconTelegram className="size-5" />
+                Telegram
               </a>
               <a
                 href={socials.youtube.url}
@@ -100,6 +72,21 @@ export default function Hero() {
                 YouTube
               </a>
             </div>
+
+            <p className="mt-4 flex flex-wrap items-center gap-2 text-[13px] text-ink-faint">
+              <span className="pill border border-line bg-paper px-2.5 py-1 text-[10.5px] text-ink-soft">
+                <span className="size-1 rounded-full bg-lime-500" aria-hidden />
+                Qwen
+              </span>
+              <span className="pill border border-line bg-paper px-2.5 py-1 text-[10.5px] text-ink-soft">
+                <span className="size-1 rounded-full bg-lime-500" aria-hidden />
+                Google AI Studio
+              </span>
+              <span className="pill border border-line bg-paper px-2.5 py-1 text-[10.5px] text-ink-soft">
+                <span className="size-1 rounded-full bg-lime-500" aria-hidden />
+                GLM в Z.ai
+              </span>
+            </p>
           </Reveal>
         </div>
 

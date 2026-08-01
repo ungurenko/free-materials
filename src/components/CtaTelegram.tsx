@@ -1,9 +1,11 @@
 import { siteConfig } from "@/config/site";
+import { telegramCta } from "@/content/leadmagnet";
 import { IconTelegram } from "./icons";
 import Reveal from "./Reveal";
 
 export default function CtaTelegram() {
   const { socials } = siteConfig;
+  const { main } = telegramCta;
 
   return (
     <section className="container-x" aria-label="Подписка на Telegram-канал">
@@ -26,11 +28,10 @@ export default function CtaTelegram() {
                 Telegram-канал
               </p>
               <h2 className="mt-5 font-display text-xl font-medium leading-snug text-moss-950 sm:text-2xl lg:text-[1.65rem]">
-                Новые разборы по AI-разработке сначала появляются в канале
+                {main.text}
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-moss-800/80">
-                Подпишитесь, чтобы получать инструкции, эксперименты и разборы сайтов,
-                приложений, ботов и AI-агентов.
+                {main.detail}
               </p>
             </div>
             <div className="lg:pl-4">
@@ -41,7 +42,7 @@ export default function CtaTelegram() {
                 className="btn-primary h-13 w-full px-8 text-[15px] sm:w-auto"
               >
                 <IconTelegram className="size-5" />
-                Подписаться на канал
+                {main.buttonLabel}
               </a>
               <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.1em] text-lime-700/70 lg:text-right">
                 {socials.telegram.handle}

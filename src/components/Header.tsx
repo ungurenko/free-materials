@@ -24,10 +24,10 @@ export default function Header() {
         <nav className="flex items-center gap-3 sm:gap-6">
           {pathname !== "/" && (
             <Link
-              href="/#materials"
+              href="/#projects"
               className="nav-link hidden text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:block"
             >
-              Материалы
+              Проекты
             </Link>
           )}
           {pathname !== "/" && (

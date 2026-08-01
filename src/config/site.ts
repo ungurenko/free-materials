@@ -1,16 +1,47 @@
-import type { SiteConfig } from "@/lib/content/schema";
-
 // ============================================================
 //  КОНФИГУРАЦИЯ САЙТА
-//  Здесь меняются: автор, соцсети, рекламный баннер, SEO, аналитика.
+//  Здесь меняются: автор, соцсети, SEO, аналитика.
 // ============================================================
 
+interface SocialLink {
+  label: string;
+  handle: string;
+  url: string;
+}
+
+interface AnalyticsConfig {
+  umami: {
+    enabled: boolean;
+    websiteId?: string;
+    src: string;
+  };
+}
+
+interface SiteConfig {
+  siteName: string;
+  siteDescription: string;
+  siteUrl: string;
+  author: {
+    name: string;
+    role: string;
+    initials: string;
+    heroIntro: string;
+    photo: string;
+    photoAlt: string;
+  };
+  socials: {
+    telegram: SocialLink;
+    instagram: SocialLink;
+    youtube: SocialLink;
+  };
+  analytics: AnalyticsConfig;
+}
+
 export const siteConfig: SiteConfig = {
-  siteName: "Александр Унгуренко — бесплатные материалы",
+  siteName: "Вайб-кодинг с нуля",
   siteDescription:
-    "Практические инструкции, промпты и разборы по AI-разработке: сайты, приложения, Telegram-боты и AI-агенты для людей без опыта программирования.",
+    "5 готовых промптов для создания первого сайта или веб-приложения без знания программирования. Выберите проект, вставьте промпт в Qwen, Google AI Studio или GLM и получите рабочую версию.",
   siteUrl: "https://example.com", // TODO: заменить на production-домен
-  homepageMaxMaterials: 2, // Сколько материалов показывать на главной
 
   author: {
     name: "Александр Унгуренко",
@@ -38,18 +69,6 @@ export const siteConfig: SiteConfig = {
       handle: "@ungurenkos",
       url: "https://www.youtube.com/@ungurenkos",
     },
-  },
-
-  promo: {
-    enabled: true,
-    label: "ВАЙБС",
-    title: "Создавайте цифровые продукты с помощью ИИ",
-    description:
-      "Практический курс для людей без опыта программирования: от идеи до лендинга, веб-сервиса, Telegram-бота или приложения.",
-    buttonLabel: "Перейти на VIBES",
-    url: "https://vibes.ungurenko.ru",
-    image: "/images/promo.webp",
-    imageAlt: "Скриншот платформы VIBES для создания цифровых продуктов с помощью ИИ",
   },
 
   analytics: {
