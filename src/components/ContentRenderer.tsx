@@ -74,6 +74,7 @@ export default function ContentRenderer({ blocks, materialSlug }: ContentRendere
                   title={block.title}
                   description={block.description}
                   prompt={block.prompt}
+                  collapsed={block.collapsed}
                   index={promptIndex++}
                   materialSlug={materialSlug}
                 />

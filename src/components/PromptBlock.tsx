@@ -10,12 +10,22 @@ interface PromptBlockProps {
   title?: string;
   description?: string;
   prompt: string;
+  collapsed?: boolean;
   index: number;
   materialSlug?: string;
 }
 
-export default function PromptBlock({ id, title, description, prompt, index, materialSlug }: PromptBlockProps) {
+export default function PromptBlock({
+  id,
+  title,
+  description,
+  prompt,
+  collapsed,
+  index,
+  materialSlug,
+}: PromptBlockProps) {
   const [copied, setCopied] = useState(false);
+  const [isOpen, setIsOpen] = useState(!collapsed);
   const timer = useRef<number | undefined>(undefined);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
@@ -43,26 +53,53 @@ export default function PromptBlock({ id, title, description, prompt, index, mat
             <h3 className="truncate text-[15px] font-semibold text-ink sm:text-base">{title}</h3>
           )}
         </div>
-        <button
-          type="button"
-          onClick={handleCopy}
-          aria-label={`Скопировать промпт${title ? ` «${title}»` : ""}`}
-          className={`${copied ? "btn-primary" : "btn-ghost"} ml-auto h-11 min-w-[142px] shrink-0 px-5 text-sm`}
-        >
-          {copied ? <IconCheck className="size-[18px]" /> : <IconCopy className="size-[18px]" />}
-          <span aria-live="polite">{copied ? "Скопировано" : "Скопировать"}</span>
-        </button>
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+          {collapsed !== undefined && (
+            <button
+              type="button"
+              onClick={() => setIsOpen((value) => !value)}
+              aria-expanded={isOpen}
+              aria-controls={`prompt-content-${id}`}
+              className="btn-ghost h-11 shrink-0 px-4 text-sm"
+            >
+              <svg
+                className={`size-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                aria-hidden
+              >
+                <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>{isOpen ? "Свернуть" : "Показать промпт"}</span>
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={handleCopy}
+            aria-label={`Скопировать промпт${title ? ` «${title}»` : ""}`}
+            className={`${copied ? "btn-primary" : "btn-ghost"} h-11 min-w-[142px] shrink-0 px-5 text-sm`}
+          >
+            {copied ? <IconCheck className="size-[18px]" /> : <IconCopy className="size-[18px]" />}
+            <span aria-live="polite">{copied ? "Скопировано" : "Скопировать"}</span>
+          </button>
+        </div>
       </div>
 
-      {description && (
-        <p className="border-b border-line/60 px-4 py-3 text-[13px] leading-relaxed text-ink-soft sm:px-5">
-          {description}
-        </p>
-      )}
+      {isOpen && (
+        <div id={`prompt-content-${id}`}>
+          {description && (
+            <p className="border-b border-line/60 px-4 py-3 text-[13px] leading-relaxed text-ink-soft sm:px-5">
+              {description}
+            </p>
+          )}
 
-      <pre className="overflow-x-auto whitespace-pre-wrap break-words px-4 py-5 font-mono text-[13px] leading-[1.75] text-ink/85 sm:px-6 sm:text-[13.5px]">
-        {prompt}
-      </pre>
+          <pre className="overflow-x-auto whitespace-pre-wrap break-words px-4 py-5 font-mono text-[13px] leading-[1.75] text-ink/85 sm:px-6 sm:text-[13.5px]">
+            {prompt}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }

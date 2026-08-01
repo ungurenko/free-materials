@@ -20,6 +20,12 @@ describe("formatRichText", () => {
     );
   });
 
+  it("оставляет внутренние ссылки в текущей вкладке", () => {
+    expect(formatRichText("[база](/materials/baza-promtov-vibe-kodinga)")).toBe(
+      '<p><a href="/materials/baza-promtov-vibe-kodinga">база</a></p>'
+    );
+  });
+
   it("экранирует HTML в тексте", () => {
     expect(formatRichText("<script>alert(1)</script>")).toBe(
       "<p>&lt;script&gt;alert(1)&lt;/script&gt;</p>"

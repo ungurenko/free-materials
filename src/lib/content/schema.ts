@@ -38,6 +38,7 @@ export const PromptBlockSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
   prompt: z.string().min(1, "prompt: prompt обязателен"),
+  collapsed: z.boolean().optional(),
 });
 
 export const LinkBlockSchema = z.object({

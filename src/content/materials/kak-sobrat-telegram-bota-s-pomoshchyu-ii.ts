@@ -14,7 +14,7 @@ const material: Material = {
   coverAlt: "Обложка: фигурка чат-бота с бумажным самолётиком",
   publishedAt: "2026-07-29",
   order: 2,
-  published: true,
+  published: false,
   seo: {
     title: "Как собрать Telegram-бота с помощью ИИ — инструкция",
     description:

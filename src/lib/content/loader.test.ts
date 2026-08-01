@@ -57,4 +57,19 @@ describe("allMaterials", () => {
     expect(allMaterials.length).toBeGreaterThan(0);
     expect(allMaterials.every((m) => m.published)).toBe(true);
   });
+
+  it("публикует две страницы нового лид-магнита", () => {
+    expect(allMaterials.map((material) => material.slug)).toEqual([
+      "pesochitsa-vibe-kodinga",
+      "baza-promtov-vibe-kodinga",
+    ]);
+  });
+
+  it("сохраняет полный набор промптов и стилей", () => {
+    const sandbox = allMaterials.find((material) => material.slug === "pesochitsa-vibe-kodinga");
+    const promptBase = allMaterials.find((material) => material.slug === "baza-promtov-vibe-kodinga");
+
+    expect(sandbox?.blocks.filter((block) => block.type === "prompt")).toHaveLength(1);
+    expect(promptBase?.blocks.filter((block) => block.type === "prompt")).toHaveLength(44);
+  });
 });

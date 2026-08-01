@@ -21,6 +21,10 @@ function isSafeUrl(url: string): boolean {
   }
 }
 
+function isExternalUrl(url: string): boolean {
+  return /^(?:https?:)?\/\//i.test(url);
+}
+
 export function formatRichText(text: string): string {
   return text
     .split("\n\n")
@@ -31,7 +35,10 @@ export function formatRichText(text: string): string {
         .replace(/\*(.+?)\*/g, "<em>$1</em>")
         .replace(/\[(.+?)\]\((.+?)\)/g, (match, label: string, url: string) => {
           if (isSafeUrl(url)) {
-            return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+            const externalAttributes = isExternalUrl(url)
+              ? ' target="_blank" rel="noopener noreferrer"'
+              : "";
+            return `<a href="${url}"${externalAttributes}>${label}</a>`;
           }
           return match;
         });

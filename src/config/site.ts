@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
   siteDescription:
     "Практические инструкции, промпты и разборы по AI-разработке: сайты, приложения, Telegram-боты и AI-агенты для людей без опыта программирования.",
   siteUrl: "https://example.com", // TODO: заменить на production-домен
-  homepageMaxMaterials: 7, // Сколько материалов показывать на главной
+  homepageMaxMaterials: 2, // Сколько материалов показывать на главной
 
   author: {
     name: "Александр Унгуренко",

@@ -14,7 +14,7 @@ const material: Material = {
   coverAlt: "Обложка: парящие карточки интерфейса — промпты для лендинга",
   publishedAt: "2026-07-29",
   order: 1,
-  published: true,
+  published: false,
   seo: {
     title: "Промпты для продающего лендинга — 3 шага",
     description:
