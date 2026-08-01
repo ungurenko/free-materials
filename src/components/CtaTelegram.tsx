@@ -26,11 +26,11 @@ export default function CtaTelegram() {
                 Telegram-канал
               </p>
               <h2 className="mt-5 font-display text-xl font-medium leading-snug text-moss-950 sm:text-2xl lg:text-[1.65rem]">
-                Новые разборы AI-разработки выходят сначала в канале
+                Новые разборы по AI-разработке сначала появляются в канале
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-moss-800/80">
-                Подпишитесь, чтобы получать новые тесты, гайды и разборы о сайтах,
-                приложениях, ботах и AI-агентах.
+                Подпишитесь, чтобы получать инструкции, эксперименты и разборы сайтов,
+                приложений, ботов и AI-агентов.
               </p>
             </div>
             <div className="lg:pl-4">

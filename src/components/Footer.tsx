@@ -24,8 +24,8 @@ export default function Footer() {
               <span className="font-display text-[15px] font-medium tracking-tight">{author.name}</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
-              {author.role}. Все материалы базы бесплатны — берите, применяйте
-              и делитесь ссылкой с коллегами.
+              {author.role}. Все материалы бесплатны. Берите, применяйте и делитесь
+              ссылкой с коллегами.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-line pt-6 font-mono text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {author.name}. Материалы можно пересылать, продавать — нельзя.</p>
+          <p>© {year} {author.name}. Материалы можно пересылать. Продавать их нельзя.</p>
           <a
             href="#top"
             className="nav-link w-fit text-ink-soft transition-colors hover:text-ink"

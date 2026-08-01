@@ -28,8 +28,8 @@ export default function HomePage() {
                 Бесплатные материалы
               </h2>
               <p className="mt-4 text-base leading-relaxed text-ink-soft">
-                База небольшая и растёт по мере выхода новых разборов. Каждый материал
-                самодостаточен: открыли — и сразу применили.
+                Каждый материал — самостоятельная инструкция: откройте, скопируйте и
+                примените его в своём проекте.
               </p>
             </div>
             <p className="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint">

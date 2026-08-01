@@ -114,7 +114,11 @@ export default async function MaterialPage({ params }: PageProps) {
             </span>
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-faint">
               <IconClock className="size-3.5" />
-              {material.publishedAt}
+              {new Date(`${material.publishedAt}T00:00:00`).toLocaleDateString("ru-RU", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </span>
           </div>
 
