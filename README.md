@@ -23,8 +23,11 @@ npm run dev
 # Production build
 npm run build
 
-# Предпросмотр production build
-npm run preview
+# Предпросмотр собранного сайта (статический экспорт в out/)
+npx serve out
+
+# Запуск тестов
+npm test
 
 # Проверка типов
 npm run typecheck
@@ -51,26 +54,26 @@ src/
 │   └── materials/        # Файлы материалов (каждый материал — отдельный файл)
 ├── lib/
 │   ├── analytics/        # Umami analytics
-│   ├── content/          # Zod-схемы и loader
+│   ├── content/          # Zod-схемы, loader и форматирование текста
 │   ├── youtube/          # YouTube utils
 │   ├── copy.ts           # Копирование в буфер
 │   └── ...
-└── utils/
-    └── cn.ts             # Утилита для классов
 public/
 └── images/               # Изображения (обложки, фото автора)
 docs/
-└── adding-materials.md   # Инструкция по добавлению материалов
+├── adding-materials.md   # Инструкция по добавлению материалов
+└── archive/              # Архив: план миграции, спецификация проекта
 ```
 
 ## Добавление материала
 
 1. Создайте файл в `src/content/materials/[slug].ts`
-2. Скопируйте шаблон из существующего материала
-3. Заполните все обязательные поля
-4. Убедитесь, что `slug` уникален
-5. Установите `published: true` для публикации
-6. Запустите `npm run build` — валидация автоматически проверит материал
+2. Зарегистрируйте материал в `src/content/materials/index.ts`
+3. Скопируйте шаблон из существующего материала
+4. Заполните все обязательные поля
+5. Убедитесь, что `slug` уникален
+6. Установите `published: true` для публикации
+7. Запустите `npm run build` — валидация автоматически проверит материал
 
 Подробная инструкция: [docs/adding-materials.md](docs/adding-materials.md)
 
@@ -82,33 +85,17 @@ docs/
 - **Соцсети:** Telegram, Instagram, YouTube
 - **Рекламный баннер:** тексты, ссылка, изображение
 - **SEO:** название сайта, описание
-- **Аналитика:** Umami website ID
+- **Аналитика:** Umami website ID в `src/config/site.ts` (не переменные окружения — сайт статический, конфиг собирается при сборке)
 
 ## Деплой на Vercel
 
-```bash
-# Установите Vercel CLI
-npm i -g vercel
-
-# Деплой
-vercel
-
-# Production деплой
-vercel --prod
-```
-
-### Переменные окружения (опционально)
-
-Для включения Umami analytics:
-
-```bash
-UMAMI_ENABLED=true
-UMAMI_WEBSITE_ID=your-website-id
-```
+Сайт собирается как статический экспорт (`output: export` в `next.config.ts`) — Vercel
+автоматически собирает и публикует его при пуше в GitHub.
 
 ## Требования к материалам
 
 - Уникальный `slug` в формате kebab-case
+- Уникальные `prompt.id` в рамках одного материала
 - Минимум один блок контента
 - Валидные YouTube ID (11 символов)
 - Все изображения должны иметь `alt` текст
@@ -119,6 +106,7 @@ UMAMI_WEBSITE_ID=your-website-id
 ```bash
 npm run typecheck  # Проверка типов
 npm run lint       # Линтинг
+npm test           # Тесты
 npm run build      # Production build
 ```
 

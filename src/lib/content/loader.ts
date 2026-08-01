@@ -6,13 +6,11 @@ import * as materialModules from "@/content/materials/index";
 //  Content Loader: загрузка, валидация, сортировка материалов
 // ============================================================
 
-function loadAndValidateMaterials(): Material[] {
+export function validateMaterials(rawMaterials: unknown[]): Material[] {
   const materials: Material[] = [];
   const slugs = new Set<string>();
 
-  const modules = Object.values(materialModules) as Material[];
-
-  for (const raw of modules) {
+  for (const raw of rawMaterials) {
     const result = MaterialSchema.safeParse(raw);
 
     if (!result.success) {
@@ -35,12 +33,30 @@ function loadAndValidateMaterials(): Material[] {
     }
     slugs.add(material.slug);
 
+    const promptIds = new Set<string>();
+    for (const block of material.blocks) {
+      if (block.type === "prompt" && promptIds.has(block.id)) {
+        throw new Error(
+          `\n\n❌ Дубликат prompt.id: "${block.id}" в материале "${material.slug}"\n\n` +
+            `Каждый промпт в материале должен иметь уникальный id.\n`
+        );
+      }
+      if (block.type === "prompt") {
+        promptIds.add(block.id);
+      }
+    }
+
     materials.push(material);
   }
 
   return materials
     .filter((m) => m.published)
     .sort((a, b) => a.order - b.order);
+}
+
+function loadAndValidateMaterials(): Material[] {
+  const modules = Object.values(materialModules);
+  return validateMaterials(modules);
 }
 
 export const allMaterials: Material[] = loadAndValidateMaterials();

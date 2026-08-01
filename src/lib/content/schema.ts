@@ -130,6 +130,7 @@ export const SiteConfigSchema = z.object({
   siteName: z.string().min(1),
   siteDescription: z.string().min(1),
   siteUrl: z.string().url("siteUrl должен быть валидным URL"),
+  homepageMaxMaterials: z.number().int().min(1).default(7),
   author: z.object({
     name: z.string().min(1),
     role: z.string().min(1),

@@ -24,9 +24,9 @@
   --color-moss-900: #262e1b;
   --color-moss-950: #1b2113;
 
-  --font-display: "Unbounded", "Golos Text", sans-serif;
-  --font-body: "Golos Text", "Segoe UI", Tahoma, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-unbounded), "Golos Text", sans-serif;
+  --font-body: var(--font-golos), "Segoe UI", Tahoma, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
 }
 
 /* ---------- база ---------- */

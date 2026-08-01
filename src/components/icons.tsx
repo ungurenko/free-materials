@@ -82,20 +82,6 @@ export const IconClock = (p: P) => (
   </svg>
 );
 
-export const IconDoc = (p: P) => (
-  <svg {...base} {...p}>
-    <path d="M6 3.5h8L19 8.5v12H6a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1Z" />
-    <path d="M14 3.5v5h5" />
-    <path d="M9 13h6M9 16.5h6" />
-  </svg>
-);
-
-export const IconBolt = (p: P) => (
-  <svg {...base} {...p}>
-    <path d="M13 2.5 5 13.5h5.5L11 21.5l8-11h-5.5L13 2.5Z" />
-  </svg>
-);
-
 export const IconGift = (p: P) => (
   <svg {...base} {...p}>
     <rect x="4" y="9" width="16" height="11" rx="1.5" />

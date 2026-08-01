@@ -1,4 +1,5 @@
 import type { ContentBlock } from "@/lib/content/schema";
+import { formatRichText } from "@/lib/content/rich-text";
 import PromptBlock from "./PromptBlock";
 import YouTubeBlock from "./YouTubeBlock";
 
@@ -128,17 +129,4 @@ export default function ContentRenderer({ blocks, materialSlug }: ContentRendere
       })}
     </>
   );
-}
-
-function formatRichText(text: string): string {
-  return text
-    .split("\n\n")
-    .map((paragraph) => {
-      const formatted = paragraph
-        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-        .replace(/\*(.+?)\*/g, "<em>$1</em>")
-        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-      return `<p>${formatted}</p>`;
-    })
-    .join("");
 }

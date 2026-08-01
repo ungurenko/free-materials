@@ -10,6 +10,7 @@ export const siteConfig: SiteConfig = {
   siteDescription:
     "Бесплатная база практических материалов по нейросетям, маркетингу, контенту и вайб-кодингу: промпты, гайды и разборы.",
   siteUrl: "https://example.com", // TODO: заменить на production-домен
+  homepageMaxMaterials: 7, // Сколько материалов показывать на главной
 
   author: {
     name: "Артём Волков", // TODO: финальное имя автора

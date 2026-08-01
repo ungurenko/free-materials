@@ -1,4 +1,5 @@
 import { getPublishedMaterials } from "@/lib/content/loader";
+import { siteConfig } from "@/config/site";
 import Hero from "@/components/Hero";
 import PromoBanner from "@/components/PromoBanner";
 import MaterialCard from "@/components/MaterialCard";
@@ -6,7 +7,8 @@ import CtaTelegram from "@/components/CtaTelegram";
 import Reveal from "@/components/Reveal";
 
 export default function HomePage() {
-  const materials = getPublishedMaterials().slice(0, 7);
+  const limit = siteConfig.homepageMaxMaterials;
+  const materials = getPublishedMaterials().slice(0, limit);
 
   return (
     <>
@@ -31,7 +33,7 @@ export default function HomePage() {
               </p>
             </div>
             <p className="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint">
-              {String(materials.length).padStart(2, "0")} / 07
+              {String(materials.length).padStart(2, "0")} / {String(limit).padStart(2, "0")}
             </p>
           </div>
         </Reveal>

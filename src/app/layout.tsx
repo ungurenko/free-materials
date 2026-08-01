@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
+import { Golos_Text, JetBrains_Mono, Unbounded } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
+
+const golos = Golos_Text({
+  subsets: ["cyrillic"],
+  variable: "--font-golos",
+  display: "swap",
+});
+
+const unbounded = Unbounded({
+  subsets: ["cyrillic"],
+  variable: "--font-unbounded",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["cyrillic"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -42,12 +61,6 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <meta name="theme-color" content="#F6F6F0" />
         {analytics.umami.enabled && analytics.umami.websiteId && analytics.umami.src && (
           <script
@@ -58,7 +71,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body>
+      <body className={`${golos.variable} ${unbounded.variable} ${jetbrains.variable}`}>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
