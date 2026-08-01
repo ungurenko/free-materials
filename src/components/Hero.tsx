@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site";
 import { IconGift, IconInstagram, IconTelegram, IconYoutube } from "./icons";
 import Reveal from "./Reveal";
 
-const expertises = ["Нейросети", "Маркетинг", "Продажи", "Вайб-кодинг"];
+const expertises = ["AI-разработка", "AI-агенты", "Сайты и сервисы", "Вайб-кодинг"];
 
 export default function Hero() {
   const { author, socials } = siteConfig;
@@ -24,13 +24,13 @@ export default function Hero() {
           <Reveal>
             <p className="pill border border-lime-300/70 bg-lime-100 px-4 py-2 text-lime-700">
               <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />
-              Бесплатная база материалов
+              Бесплатные материалы по AI-разработке
             </p>
 
             <h1 className="mt-6 font-display text-[clamp(1.75rem,5vw,3.3rem)] font-semibold leading-[1.13] tracking-[-0.015em] text-ink">
-              Промпты и гайды, которые{" "}
+              Создавайте сайты, приложения и боты с помощью{" "}
               <span className="relative whitespace-nowrap">
-                экономят часы
+                ИИ
                 <svg
                   className="absolute -bottom-2 left-0 w-full text-lime-500"
                   viewBox="0 0 220 12"
@@ -46,14 +46,12 @@ export default function Hero() {
                     opacity="0.8"
                   />
                 </svg>
-              </span>{" "}
-              работы
+              </span>
             </h1>
 
             <p className="mt-6 text-base leading-relaxed text-ink-soft sm:text-lg">
-              Короткие практические материалы о нейросетях — для контента, маркетинга,
-              продаж и вайб-кодинга. Открыли, скопировали промпт — и в тот же день
-              применили в работе.
+              Практические гайды и промпты о том, как собирать реальные цифровые
+              продукты с ИИ. Открыли, скопировали — и применили в своём проекте.
             </p>
           </Reveal>
 

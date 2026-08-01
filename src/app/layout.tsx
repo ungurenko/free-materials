@@ -25,8 +25,8 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Артём Волков — бесплатные материалы по нейросетям и вайб-кодингу",
-    template: "%s — Артём Волков",
+    default: "Александр Унгуренко — бесплатные материалы по AI-разработке",
+    template: "%s — Александр Унгуренко",
   },
   description: siteConfig.siteDescription,
   metadataBase: new URL(siteConfig.siteUrl),

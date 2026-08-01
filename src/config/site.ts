@@ -6,50 +6,50 @@ import type { SiteConfig } from "@/lib/content/schema";
 // ============================================================
 
 export const siteConfig: SiteConfig = {
-  siteName: "Артём Волков — бесплатные материалы",
+  siteName: "Александр Унгуренко — бесплатные материалы",
   siteDescription:
-    "Бесплатная база практических материалов по нейросетям, маркетингу, контенту и вайб-кодингу: промпты, гайды и разборы.",
+    "Практические гайды, промпты и разборы по AI-разработке: сайты, приложения, Telegram-боты и AI-агенты для людей без классического программистского опыта.",
   siteUrl: "https://example.com", // TODO: заменить на production-домен
   homepageMaxMaterials: 7, // Сколько материалов показывать на главной
 
   author: {
-    name: "Артём Волков", // TODO: финальное имя автора
-    role: "Эксперт по нейросетям, маркетингу, продажам и вайб-кодингу",
-    initials: "АВ",
+    name: "Александр Унгуренко",
+    role: "Практик AI-разработки и AI-агентов",
+    initials: "АУ",
     heroIntro:
-      "Меня зовут Артём. Восемь лет в маркетинге и продажах, три года — в нейросетях. Здесь я собираю то, что реально использую в проектах: без теории ради теории.",
-    photo: "/images/author.jpg", // TODO: заменить на реальное фото
-    photoAlt: "Артём Волков — автор базы материалов",
+      "Я Александр Унгуренко. Работаю в AI-разработке без классического программистского бэкграунда и показываю, как с помощью ИИ создавать сайты, приложения, Telegram-ботов и сервисы.",
+    photo: "/images/author.webp",
+    photoAlt: "Александр Унгуренко — практик AI-разработки",
   },
 
   socials: {
     telegram: {
       label: "Telegram",
-      handle: "@artemvolkov_ai",
-      url: "https://t.me/artemvolkov_ai", // TODO: реальная ссылка
+      handle: "@ungurenko_adout_digital",
+      url: "https://t.me/ungurenko_adout_digital",
     },
     instagram: {
       label: "Instagram",
-      handle: "@artemvolkov.ai",
-      url: "https://www.instagram.com/artemvolkov.ai", // TODO: реальная ссылка
+      handle: "@ungurenko",
+      url: "https://www.instagram.com/ungurenko",
     },
     youtube: {
       label: "YouTube",
-      handle: "Артём Волков · AI и маркетинг",
-      url: "https://www.youtube.com/@artemvolkov_ai", // TODO: реальная ссылка
+      handle: "@ungurenkos",
+      url: "https://www.youtube.com/@ungurenkos",
     },
   },
 
   promo: {
     enabled: true,
-    label: "Мой основной проект",
-    title: "Все продукты и практические программы в одном месте",
+    label: "ВАЙБС",
+    title: "Создавайте IT-продукты с помощью ИИ",
     description:
-      "Курсы, гайды и готовые AI-решения с обратной связью. База материалов — бесплатная витрина, а вся глубина живёт на платформе.",
-    buttonLabel: "Посмотреть продукты",
-    url: "https://example.com/products", // TODO: реальная ссылка
-    image: "/images/promo.jpg", // TODO: заменить на реальное изображение
-    imageAlt: "Платформа с продуктами Артёма Волкова",
+      "Практический курс для людей без опыта программирования: от идеи до лендинга, веб-сервиса, Telegram-бота или приложения.",
+    buttonLabel: "Перейти на VIBES",
+    url: "https://vibes.ungurenko.ru",
+    image: "/images/promo.webp",
+    imageAlt: "Платформа VIBES для создания IT-продуктов с помощью ИИ",
   },
 
   analytics: {
