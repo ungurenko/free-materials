@@ -1,5 +1,6 @@
 import CtaTelegram from "@/components/CtaTelegram";
 import Hero from "@/components/Hero";
+import PromoBanner from "@/components/PromoBanner";
 import ImprovementPromptsSection from "@/components/leadmagnet/ImprovementPromptsSection";
 import ProjectGallery from "@/components/leadmagnet/ProjectGallery";
 import ResourcesSection from "@/components/leadmagnet/ResourcesSection";
@@ -9,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <PromoBanner />
 
       <section className="container-x scroll-mt-24 pt-12 sm:pt-16" aria-labelledby="projects-title">
         <div className="max-w-2xl">

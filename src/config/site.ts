@@ -17,6 +17,24 @@ interface AnalyticsConfig {
   };
 }
 
+interface PromoMedia {
+  src: string;
+  alt: string;
+}
+
+interface PromoBannerConfig {
+  enabled: boolean;
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  meta: string;
+  buttonLabel: string;
+  url: string;
+  logo: PromoMedia;
+  image: PromoMedia;
+}
+
 interface SiteConfig {
   siteName: string;
   siteDescription: string;
@@ -29,6 +47,7 @@ interface SiteConfig {
     photo: string;
     photoAlt: string;
   };
+  promoBanner: PromoBannerConfig;
   socials: {
     telegram: SocialLink;
     instagram: SocialLink;
@@ -51,6 +70,26 @@ export const siteConfig: SiteConfig = {
       "Я Александр Унгуренко. Пришёл в AI-разработку без классического опыта программирования и показываю, как с помощью ИИ создавать сайты, приложения, Telegram-ботов и цифровые сервисы.",
     photo: "/images/author.webp",
     photoAlt: "Александр Унгуренко — практик AI-разработки",
+  },
+
+  promoBanner: {
+    enabled: true,
+    id: "vibes-course",
+    eyebrow: "Следующий шаг после первого проекта",
+    title: "Создавайте IT-продукты с ИИ на курсе ВАЙБС",
+    description:
+      "Пройдите путь от идеи до запуска сайта, сервиса, Telegram-бота или приложения — даже если раньше не программировали.",
+    meta: "Старт сразу · от 9 990 ₽ · доступ к материалам навсегда",
+    buttonLabel: "Посмотреть программу",
+    url: "https://vibes.ungurenko.ru",
+    logo: {
+      src: "/images/vibes-logo.webp",
+      alt: "ВАЙБС",
+    },
+    image: {
+      src: "/images/vibes-platform.webp",
+      alt: "Учебная платформа курса ВАЙБС",
+    },
   },
 
   socials: {

@@ -4,10 +4,15 @@
 
 import { siteConfig } from "@/config/site";
 
-type AnalyticsEvent = {
-  name: "prompt_copy";
-  props: { material_slug: string; prompt_id: string };
-};
+type AnalyticsEvent =
+  | {
+      name: "prompt_copy";
+      props: { material_slug: string; prompt_id: string };
+    }
+  | {
+      name: "promo_click";
+      props: { promo_id: string; placement: "home_after_hero" };
+    };
 
 declare global {
   interface Window {
