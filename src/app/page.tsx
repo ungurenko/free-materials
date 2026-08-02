@@ -1,5 +1,6 @@
 import CtaTelegram from "@/components/CtaTelegram";
 import Hero from "@/components/Hero";
+import ImprovementPromptsSection from "@/components/leadmagnet/ImprovementPromptsSection";
 import ProjectGallery from "@/components/leadmagnet/ProjectGallery";
 import ResourcesSection from "@/components/leadmagnet/ResourcesSection";
 import { pageCopy } from "@/content/leadmagnet";
@@ -19,6 +20,7 @@ export default function HomePage() {
         <ProjectGallery />
       </section>
 
+      <ImprovementPromptsSection />
       <ResourcesSection />
       <CtaTelegram />
     </>

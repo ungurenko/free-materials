@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   checklistItems,
-  commands,
   howToUseSteps,
+  improvementPrompts,
   pageCopy,
   projects,
   safetyRules,
@@ -55,14 +55,26 @@ describe("leadmagnet content", () => {
       "https://qwen.ai/qwenchat",
       "https://chat.z.ai/",
     ]);
-    expect(commands).toHaveLength(5);
-    expect(commands.every((command) => command.text.length > 100)).toBe(true);
+    expect(improvementPrompts).toHaveLength(5);
+    expect(improvementPrompts.every((prompt) => prompt.text.length > 100)).toBe(true);
     expect(checklistItems).toHaveLength(10);
     expect(checklistItems[7]).toBe("в проекте нет технических заглушек");
     expect(checklistItems[9]).toBe("результат можно показать другому человеку");
     expect(safetyRules.items).toHaveLength(8);
     expect(safetyRules.items.at(-1)).toBe("сведения, публикация которых может причинить вред.");
     expect(howToUseSteps).toHaveLength(3);
+  });
+
+  it("presents improvement prompts as a dedicated next step", () => {
+    expect(pageCopy.improvementPrompts).toEqual({
+      eyebrow: "После первой версии",
+      title: "5 промтов для улучшения проекта",
+      description:
+        "Получили первую версию — отправляйте эти промты в том же диалоге по одному. Они помогут проверить работу, улучшить мобильную версию, дизайн и понятность.",
+      copyLabel: "Скопировать промт",
+      copiedStatus: "Промт скопирован",
+      copyErrorStatus: "Не удалось скопировать промт",
+    });
   });
 
   it("keeps project ids unique and replacement markers source-accurate", () => {

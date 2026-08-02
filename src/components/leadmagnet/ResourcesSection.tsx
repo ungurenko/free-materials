@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { checklistItems, commands, pageCopy, safetyRules, services } from "@/content/leadmagnet";
-import { copyText } from "@/lib/copy";
+import { useEffect, useState, type ReactNode } from "react";
+import { checklistItems, pageCopy, safetyRules, services } from "@/content/leadmagnet";
 import { getChecklistProgress, parseChecklistState } from "@/lib/leadmagnet-state";
-import { IconCheck, IconCopy } from "@/components/icons";
 
 const checklistStorageKey = "vibeCodingChecklist";
 
@@ -53,14 +51,11 @@ export default function ResourcesSection() {
   const [openPanels, setOpenPanels] = useState<string[]>([]);
   const [checkedIndexes, setCheckedIndexes] = useState<number[]>([]);
   const [checklistHydrated, setChecklistHydrated] = useState(false);
-  const [copyStatus, setCopyStatus] = useState("");
-  const copyTimer = useRef<number | undefined>(undefined);
   const progress = getChecklistProgress(checkedIndexes, checklistItems.length);
 
   useEffect(() => {
     setCheckedIndexes(parseChecklistState(localStorage.getItem(checklistStorageKey), checklistItems.length));
     setChecklistHydrated(true);
-    return () => window.clearTimeout(copyTimer.current);
   }, []);
 
   useEffect(() => {
@@ -78,13 +73,6 @@ export default function ResourcesSection() {
 
   const handleCheck = (index: number) => {
     setCheckedIndexes((current) => current.includes(index) ? current.filter((item) => item !== index) : [...current, index].sort((a, b) => a - b));
-  };
-
-  const handleCommandCopy = async (text: string) => {
-    const copied = await copyText(text);
-    setCopyStatus(copied ? `Команда скопирована` : "Не удалось скопировать команду");
-    window.clearTimeout(copyTimer.current);
-    copyTimer.current = window.setTimeout(() => setCopyStatus(""), 2100);
   };
 
   return (
@@ -108,21 +96,6 @@ export default function ResourcesSection() {
             ))}
           </div>
           <p className="mt-5 text-[15px] font-semibold text-ink">{pageCopy.resources.servicesRecommendation}</p>
-        </Accordion>
-
-        <Accordion id="commands" title={pageCopy.resources.commandsTitle} open={openPanels.includes("commands")} onToggle={() => togglePanel("commands")}>
-          <div className="grid gap-4 lg:grid-cols-2">
-            {commands.map((command) => (
-              <article key={command.id} className="flex flex-col rounded-2xl border border-line bg-milk/55 p-5">
-                <h4 className="font-display text-[15px] font-semibold text-ink">{command.title}</h4>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{command.text}</p>
-                <button type="button" onClick={() => handleCommandCopy(command.text)} className="btn-ghost mt-5 h-11 w-fit px-4 text-sm">
-                  {copyStatus === "Команда скопирована" ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
-                  Скопировать команду
-                </button>
-              </article>
-            ))}
-          </div>
         </Accordion>
 
         <Accordion id="checklist" title={pageCopy.resources.checklistTitle} open={openPanels.includes("checklist")} onToggle={() => togglePanel("checklist")}>
@@ -150,8 +123,6 @@ export default function ResourcesSection() {
           </div>
         </Accordion>
       </div>
-
-      <p className={`fixed bottom-5 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-moss-950 px-4 py-2.5 text-sm text-paper shadow-xl transition ${copyStatus ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`} role="status" aria-live="polite">{copyStatus}</p>
     </section>
   );
 }
