@@ -5,6 +5,7 @@ import Reveal from "./Reveal";
 
 export default function Hero() {
   const { author } = siteConfig;
+  const [mobileTitleFirstLine, mobileTitleEnding] = pageCopy.hero.title.split(" с ");
 
   return (
     <section className="relative overflow-hidden pb-8 pt-8 sm:pb-14 sm:pt-16 lg:pb-20 lg:pt-20">
@@ -26,7 +27,8 @@ export default function Hero() {
             data-mobile-headline="true"
             className="mt-5 font-display text-[clamp(1.7rem,8vw,2rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink"
           >
-            {pageCopy.hero.title}
+            <span className="block">{mobileTitleFirstLine}</span>
+            <span className="block">с {mobileTitleEnding}</span>
           </h1>
 
           <p className="mt-4 text-[1rem] leading-[1.55] text-ink-soft">

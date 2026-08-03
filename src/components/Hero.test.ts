@@ -10,6 +10,7 @@ describe("mobile Hero composition", () => {
 
     expect(headlinePosition).toBeGreaterThan(-1);
     expect(authorPosition).toBeGreaterThan(headlinePosition);
+    expect(html).toContain('<span class="block">Вайб-кодинг</span><span class="block">с нуля</span>');
     expect(html).toContain("Александр Унгуренко");
     expect(html).toContain("Практик AI-разработки и AI-агентов");
   });
