@@ -42,6 +42,7 @@ export default function Hero() {
                 alt={author.photoAlt}
                 fill
                 priority
+                fetchPriority="high"
                 sizes="56px"
                 className="object-cover object-center"
               />
@@ -89,6 +90,7 @@ export default function Hero() {
                 alt={author.photoAlt}
                 fill
                 priority
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 42vw, (min-width: 640px) 448px, calc(100vw - 40px)"
                 className="object-cover"
               />

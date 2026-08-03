@@ -26,7 +26,8 @@ export default function PromoBanner() {
                 alt={promo.logo.alt}
                 width={640}
                 height={339}
-                sizes="(min-width: 640px) 176px, 144px"
+                priority
+                fetchPriority="high"
                 className="h-auto w-36 drop-shadow-[0_12px_28px_rgba(238,170,255,0.24)] sm:w-44"
               />
 
@@ -66,6 +67,8 @@ export default function PromoBanner() {
                   alt={promo.image.alt}
                   width={1200}
                   height={890}
+                  priority
+                  fetchPriority="high"
                   sizes="(min-width: 1024px) 58vw, calc(100vw - 80px)"
                   className="h-auto w-full drop-shadow-[0_28px_42px_rgba(0,0,0,0.38)]"
                 />
