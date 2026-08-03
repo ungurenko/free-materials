@@ -22,28 +22,35 @@ export default function Hero() {
             {pageCopy.hero.mobile.eyebrow}
           </p>
 
-          <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2.5">
-            <h1 className="font-display text-[clamp(1.5rem,7.2vw,1.85rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink">
-              {pageCopy.hero.title}
-            </h1>
+          <h1
+            data-mobile-headline="true"
+            className="mt-5 font-display text-[clamp(1.7rem,8vw,2rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink"
+          >
+            {pageCopy.hero.title}
+          </h1>
 
-            <div className="relative size-[clamp(5.5rem,27vw,6.75rem)] shrink-0 overflow-hidden rounded-[22px] border border-line bg-paper shadow-[0_18px_36px_-24px_rgba(38,40,31,0.5)]">
+          <p className="mt-4 text-[1rem] leading-[1.55] text-ink-soft">
+            {pageCopy.hero.lead}
+          </p>
+
+          <figure data-mobile-author="true" className="mobile-author mt-5 flex items-center gap-3">
+            <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-line-strong bg-paper shadow-[0_12px_26px_-18px_rgba(38,40,31,0.5)]">
               <Image
                 src={author.photo}
                 alt={author.photoAlt}
                 fill
                 priority
-                sizes="108px"
+                sizes="56px"
                 className="object-cover object-center"
               />
             </div>
-          </div>
+            <figcaption className="min-w-0">
+              <span className="block text-sm font-semibold leading-tight text-ink">{author.name}</span>
+              <span className="mt-1 block text-xs leading-snug text-ink-soft">{author.role}</span>
+            </figcaption>
+          </figure>
 
-          <p className="mt-5 font-display text-[1.02rem] font-medium leading-snug text-ink-soft">
-            {pageCopy.hero.lead}
-          </p>
-
-          <div className="mt-6 flex items-center gap-2.5 border-t border-line pt-4 text-[13px] leading-snug text-ink-soft">
+          <div className="mt-5 flex items-center gap-2.5 border-t border-line pt-4 text-[13px] leading-snug text-ink-soft">
             <span className="font-semibold text-lime-600" aria-hidden>✓</span>
             <p>{pageCopy.hero.mobile.meta}</p>
           </div>
