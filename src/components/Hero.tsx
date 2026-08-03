@@ -7,7 +7,7 @@ export default function Hero() {
   const { author } = siteConfig;
 
   return (
-    <section className="relative overflow-hidden pb-10 pt-12 sm:pb-14 sm:pt-16 lg:pb-20 lg:pt-20">
+    <section className="relative overflow-hidden pb-8 pt-8 sm:pb-14 sm:pt-16 lg:pb-20 lg:pt-20">
       <div
         className="dot-grid pointer-events-none absolute -right-16 top-10 hidden size-72 opacity-70 lg:block"
         style={{ maskImage: "radial-gradient(closest-side, black, transparent)" }}
@@ -15,7 +15,42 @@ export default function Hero() {
       />
       <div className="pointer-events-none absolute -left-32 top-40 size-80 rounded-full bg-lime-200/50 blur-3xl" aria-hidden />
 
-      <div className="container-x grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div className="container-x sm:hidden">
+        <Reveal>
+          <p className="pill w-fit border border-lime-300/70 bg-lime-100 px-3 py-2 text-[0.65rem] text-lime-700">
+            <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />
+            {pageCopy.hero.mobile.eyebrow}
+          </p>
+
+          <div className="mt-5 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2.5">
+            <h1 className="font-display text-[clamp(1.5rem,7.2vw,1.85rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-ink">
+              {pageCopy.hero.title}
+            </h1>
+
+            <div className="relative size-[clamp(5.5rem,27vw,6.75rem)] shrink-0 overflow-hidden rounded-[22px] border border-line bg-paper shadow-[0_18px_36px_-24px_rgba(38,40,31,0.5)]">
+              <Image
+                src={author.photo}
+                alt={author.photoAlt}
+                fill
+                priority
+                sizes="108px"
+                className="object-cover object-center"
+              />
+            </div>
+          </div>
+
+          <p className="mt-5 font-display text-[1.02rem] font-medium leading-snug text-ink-soft">
+            {pageCopy.hero.lead}
+          </p>
+
+          <div className="mt-6 flex items-center gap-2.5 border-t border-line pt-4 text-[13px] leading-snug text-ink-soft">
+            <span className="font-semibold text-lime-600" aria-hidden>✓</span>
+            <p>{pageCopy.hero.mobile.meta}</p>
+          </div>
+        </Reveal>
+      </div>
+
+      <div className="container-x hidden items-center gap-12 sm:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <Reveal className="max-w-2xl">
           <p className="pill w-fit border border-lime-300/70 bg-lime-100 px-4 py-2 text-lime-700">
             <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />

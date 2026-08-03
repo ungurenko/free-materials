@@ -77,6 +77,13 @@ describe("leadmagnet content", () => {
     });
   });
 
+  it("provides compact Hero copy for phone screens", () => {
+    expect(pageCopy.hero.mobile).toEqual({
+      eyebrow: "Практическая база",
+      meta: "Один проект · один сервис · 30–60 минут",
+    });
+  });
+
   it("keeps project ids unique and replacement markers source-accurate", () => {
     expect(new Set(projects.map((project) => project.id)).size).toBe(projects.length);
     expect(projects.map((project) => project.replace)).toEqual([
