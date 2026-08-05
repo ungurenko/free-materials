@@ -30,3 +30,7 @@ yarn-error.log*
 
 # Lighthouse audit reports
 lh-*.json
+
+# Playwright MCP artifacts
+.playwright-mcp/
+favicon-preview.png
