@@ -15,6 +15,22 @@ export default function Footer() {
           >
             {pageCopy.footer.telegram}
           </a>
+          <a
+            href={siteConfig.socials.youtube.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-lime-700"
+          >
+            {siteConfig.socials.youtube.label}
+          </a>
+          <a
+            href={siteConfig.socials.ideaBot.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-lime-700"
+          >
+            {siteConfig.socials.ideaBot.label}
+          </a>
           <span>© {new Date().getFullYear()}</span>
           <span>{pageCopy.footer.note}</span>
         </div>

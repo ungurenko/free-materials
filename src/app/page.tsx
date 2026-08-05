@@ -4,6 +4,7 @@ import PromoBanner from "@/components/PromoBanner";
 import ImprovementPromptsSection from "@/components/leadmagnet/ImprovementPromptsSection";
 import ProjectGallery from "@/components/leadmagnet/ProjectGallery";
 import ResourcesSection from "@/components/leadmagnet/ResourcesSection";
+import UsefulLinksSection from "@/components/UsefulLinksSection";
 import { pageCopy } from "@/content/leadmagnet";
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
 
       <ImprovementPromptsSection />
       <ResourcesSection />
+      <UsefulLinksSection />
       <CtaTelegram />
     </>
   );

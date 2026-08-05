@@ -16,3 +16,18 @@ describe("site promo banner configuration", () => {
     expect(siteConfig.promoBanner.image.src).toBe("/images/vibes-platform.webp");
   });
 });
+
+describe("site free resource links", () => {
+  it("keeps the YouTube channel and idea bot editable from the shared social configuration", () => {
+    expect(siteConfig.socials.youtube).toEqual({
+      label: "YouTube",
+      handle: "@ungurenkos",
+      url: "https://www.youtube.com/@ungurenkos",
+    });
+    expect(siteConfig.socials.ideaBot).toEqual({
+      label: "Бот с идеями",
+      handle: "@Vibecoding_Ideas_Bot",
+      url: "https://t.me/Vibecoding_Ideas_Bot",
+    });
+  });
+});

@@ -84,6 +84,25 @@ describe("leadmagnet content", () => {
     });
   });
 
+  it("provides approved copy for the YouTube channel and idea bot", () => {
+    expect(pageCopy.usefulLinks).toEqual({
+      title: "Одну идею вы уже собрали. Время для следующей.",
+      description: "Два бесплатных маршрута, чтобы двигаться дальше и собирать новые проекты с ИИ.",
+      youtube: {
+        title: "Бесплатные уроки и прямые эфиры",
+        description:
+          "На YouTube я показываю, как создавать сайты, приложения и Telegram-ботов с помощью ИИ, и провожу прямые эфиры по вайб-кодингу.",
+        buttonLabel: "Смотреть YouTube-канал",
+      },
+      ideaBot: {
+        title: "Что можно создать для вашей ниши",
+        description:
+          "Опишите свою нишу — бот предложит пять идей проектов, которые можно собрать с помощью вайб-кодинга.",
+        buttonLabel: "Получить 5 идей в Telegram",
+      },
+    });
+  });
+
   it("keeps project ids unique and replacement markers source-accurate", () => {
     expect(new Set(projects.map((project) => project.id)).size).toBe(projects.length);
     expect(projects.map((project) => project.replace)).toEqual([

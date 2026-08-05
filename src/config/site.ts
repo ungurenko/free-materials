@@ -52,6 +52,7 @@ interface SiteConfig {
     telegram: SocialLink;
     instagram: SocialLink;
     youtube: SocialLink;
+    ideaBot: SocialLink;
   };
   analytics: AnalyticsConfig;
 }
@@ -107,6 +108,11 @@ export const siteConfig: SiteConfig = {
       label: "YouTube",
       handle: "@ungurenkos",
       url: "https://www.youtube.com/@ungurenkos",
+    },
+    ideaBot: {
+      label: "Бот с идеями",
+      handle: "@Vibecoding_Ideas_Bot",
+      url: "https://t.me/Vibecoding_Ideas_Bot",
     },
   },
 

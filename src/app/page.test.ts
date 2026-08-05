@@ -17,4 +17,16 @@ describe("home page promotion", () => {
 
     expect(componentSource).toMatch(/className="[^"]*w-full[^"]*sm:w-fit[^"]*"/);
   });
+
+  it("places free resource links between the guide materials and Telegram CTA", () => {
+    const pageSource = readFileSync(new URL("./page.tsx", import.meta.url), "utf8");
+    const resourcesPosition = pageSource.indexOf("<ResourcesSection");
+    const usefulLinksPosition = pageSource.indexOf("<UsefulLinksSection");
+    const telegramPosition = pageSource.indexOf("<CtaTelegram");
+
+    expect(pageSource).toContain('import UsefulLinksSection from "@/components/UsefulLinksSection"');
+    expect(resourcesPosition).toBeGreaterThan(-1);
+    expect(usefulLinksPosition).toBeGreaterThan(resourcesPosition);
+    expect(usefulLinksPosition).toBeLessThan(telegramPosition);
+  });
 });
