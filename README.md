@@ -4,7 +4,7 @@
 
 ## Стек
 
-- **Next.js 15** (App Router, статическая генерация)
+- **Next.js 16** (App Router, статическая генерация)
 - **React 19**
 - **TypeScript** (strict mode)
 - **Tailwind CSS 4**
