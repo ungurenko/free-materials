@@ -14,4 +14,11 @@ describe("mobile Hero composition", () => {
     expect(html).toContain("Александр Унгуренко");
     expect(html).toContain("Практик AI-разработки и AI-агентов");
   });
+
+  it("keeps the desktop headline on two explicit lines", () => {
+    const html = renderToStaticMarkup(Hero());
+    const desktopHeadline = html.slice(html.indexOf('data-desktop-headline="true"'));
+
+    expect(desktopHeadline).toContain('<span class="block">Вайб-кодинг</span><span class="block">с нуля</span>');
+  });
 });

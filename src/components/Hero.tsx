@@ -66,8 +66,12 @@ export default function Hero() {
             <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />
             {pageCopy.hero.eyebrow}
           </p>
-          <h1 className="mt-6 font-display text-[clamp(2rem,5vw,3.65rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
-            {pageCopy.hero.title}
+          <h1
+            data-desktop-headline="true"
+            className="mt-6 font-display text-[clamp(2rem,5vw,3.65rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink"
+          >
+            <span className="block">Вайб-кодинг</span>
+            <span className="block">с нуля</span>
           </h1>
           <p className="mt-5 font-display text-[clamp(1.05rem,2vw,1.35rem)] font-medium leading-snug text-ink-soft">
             {pageCopy.hero.lead}
