@@ -12,9 +12,11 @@ describe("useful links section", () => {
   });
 
   it("keeps a clear purpose for each next step", () => {
-    expect(markup).toContain("Бесплатные уроки и прямые эфиры");
-    expect(markup).toContain("Что можно создать для вашей ниши");
-    expect(markup).toContain("Смотреть YouTube-канал");
-    expect(markup).toContain("Получить 5 идей в Telegram");
+    expect(markup).toContain("Уроки и\u00A0прямые эфиры о\u00A0вайб-кодинге");
+    expect(markup).toContain("Пять идей для вашей ниши");
+    expect(markup).toContain("Перейти на\u00A0YouTube");
+    expect(markup).toContain("Получить идеи в\u00A0Telegram");
+    expect(markup).toContain("01 / YouTube");
+    expect(markup).toContain("02 / Telegram-бот");
   });
 });

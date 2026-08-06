@@ -112,7 +112,7 @@ export default function ResourcesSection() {
             <span className="shrink-0 font-mono text-xs text-ink-soft">Проверено: {progress.count} из {checklistItems.length}</span>
             <span className="h-2 flex-1 overflow-hidden rounded-full bg-line" aria-hidden><span className="block h-full rounded-full bg-lime-500 transition-[width] duration-300" style={{ width: `${progress.percent}%` }} /></span>
           </div>
-          {progress.complete && <p className="mt-5 rounded-xl border border-lime-300 bg-lime-100 p-4 text-sm font-semibold text-moss-900">Первый проект готов. Вы уже попробовали вайб-кодинг на практике.</p>}
+          {progress.complete && <p className="mt-5 rounded-xl border border-lime-300 bg-lime-100 p-4 text-sm font-semibold text-moss-900">{pageCopy.resources.completeStatus}</p>}
         </Accordion>
 
         <Accordion id="safety" title={pageCopy.resources.safetyTitle} open={openPanels.includes("safety")} onToggle={() => togglePanel("safety")}>

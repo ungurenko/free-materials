@@ -6,7 +6,6 @@ const links = [
   {
     id: "youtube",
     index: "01",
-    label: "Смотреть",
     icon: IconYoutube,
     content: pageCopy.usefulLinks.youtube,
     url: siteConfig.socials.youtube.url,
@@ -19,7 +18,6 @@ const links = [
   {
     id: "idea-bot",
     index: "02",
-    label: "Выбрать",
     icon: IconSpark,
     content: pageCopy.usefulLinks.ideaBot,
     url: siteConfig.socials.ideaBot.url,
@@ -41,7 +39,7 @@ export default function UsefulLinksSection() {
 
         <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-end lg:gap-12">
           <div className="max-w-3xl">
-            <p className="pill w-fit border border-lime-300 bg-lime-100 px-3.5 py-2 text-lime-700">Следующий шаг</p>
+            <p className="pill w-fit border border-lime-300 bg-lime-100 px-3.5 py-2 text-lime-700">{pageCopy.usefulLinks.eyebrow}</p>
             <h2 id="useful-links-title" className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3.35rem)] font-semibold leading-[1.06] tracking-[-0.045em] text-ink">
               {pageCopy.usefulLinks.title}
             </h2>
@@ -50,7 +48,7 @@ export default function UsefulLinksSection() {
         </div>
 
         <div className="relative mt-9 grid gap-4 sm:grid-cols-2 sm:gap-5">
-          {links.map(({ id, index, label, icon: Icon, content, url, cardClassName, iconClassName, labelClassName, descriptionClassName, decorationClassName }) => (
+          {links.map(({ id, index, icon: Icon, content, url, cardClassName, iconClassName, labelClassName, descriptionClassName, decorationClassName }) => (
             <article key={id} className="min-w-0">
               <a
                 href={url}
@@ -62,7 +60,7 @@ export default function UsefulLinksSection() {
                   {index}
                 </span>
                 <div className="relative flex items-start justify-between gap-5">
-                  <span className="font-mono text-[11px] font-medium tracking-[0.13em]">{index} / {label}</span>
+                  <span className="font-mono text-[11px] font-medium tracking-[0.13em]">{index} / {content.metaLabel}</span>
                   <span className={`grid size-11 place-items-center rounded-2xl ${iconClassName}`} aria-hidden>
                     <Icon className="size-5" />
                   </span>

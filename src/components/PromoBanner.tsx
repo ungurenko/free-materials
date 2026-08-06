@@ -20,7 +20,7 @@ export default function PromoBanner() {
           <div className="dot-grid-light pointer-events-none absolute inset-0 opacity-35" aria-hidden />
 
           <div className="relative grid items-center lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="z-10 px-6 py-8 sm:px-10 sm:py-11 lg:py-14 lg:pl-14 lg:pr-6">
+            <div className="z-10 min-w-0 px-6 py-8 sm:px-10 sm:py-11 lg:py-14 lg:pl-14 lg:pr-6">
               <Image
                 src={promo.logo.src}
                 alt={promo.logo.alt}

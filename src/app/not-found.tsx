@@ -9,8 +9,7 @@ export default function NotFound() {
         Такой страницы нет
       </h1>
       <p className="mt-4 text-base leading-relaxed text-ink-soft">
-        Возможно, ссылка устарела. На главной — лидмагнит «Вайб-кодинг с нуля» с пятью
-        готовыми промптами.
+        {"Возможно, ссылка устарела. На\u00A0главной — «Вайб-кодинг с\u00A0нуля» и\u00A0пять готовых промптов."}
       </p>
       <Link href="/" className="btn-primary mt-8 h-12 px-6 text-[15px]">
         <IconChevronLeft className="size-5" />

@@ -17,11 +17,11 @@ export default function CtaTelegram() {
           href={siteConfig.socials.telegram.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-on-dark relative mt-7 h-12 shrink-0 px-6 text-[15px] lg:mt-0"
+          className="btn-on-dark relative mt-7 h-12 w-full min-w-0 shrink-0 px-3 text-[14px] sm:w-fit sm:px-6 sm:text-[15px] lg:mt-0"
         >
           <IconTelegram className="size-5" />
           {pageCopy.telegram.buttonLabel}
-          <IconArrowRight className="size-4" />
+          <IconArrowRight className="hidden size-4 sm:block" />
         </a>
       </div>
     </section>
