@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { projects, howToUseSteps, pageCopy, type Project } from "@/content/leadmagnet";
 import { trackPromptCopy } from "@/lib/analytics/umami";
@@ -11,51 +12,14 @@ const projectIds = projects.map((project) => project.id);
 
 function ProjectCover({ project }: { project: Project }) {
   return (
-    <div
-      className="relative aspect-[16/10] overflow-hidden rounded-[20px] border border-line/80 bg-lime-100"
-      role="img"
-      aria-label={project.coverAria}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.85),transparent_38%),linear-gradient(145deg,rgba(178,201,110,0.18),rgba(255,255,255,0.35))]" />
-
-      {project.cover === "web" && (
-        <>
-          <div className="absolute inset-x-[14%] top-[20%] h-[54%] rounded-xl border border-moss-900/15 bg-paper shadow-[0_18px_30px_-22px_rgba(38,46,27,0.65)]">
-            <div className="flex h-6 items-center gap-1.5 border-b border-line px-2.5"><i className="size-1.5 rounded-full bg-lime-500" /><i className="size-1.5 rounded-full bg-line-strong" /><i className="size-1.5 rounded-full bg-line-strong" /></div>
-            <div className="space-y-2.5 p-3"><i className="block h-2 w-2/3 rounded bg-moss-900/70" /><i className="block h-1.5 w-full rounded bg-line-strong" /><i className="block h-1.5 w-4/5 rounded bg-line-strong" /><i className="block h-5 w-16 rounded-full bg-lime-400" /></div>
-          </div>
-          <span className="absolute bottom-[16%] right-[12%] rotate-[-18deg] text-2xl text-moss-900" aria-hidden>↖</span>
-        </>
-      )}
-
-      {project.cover === "calculator" && (
-        <div className="absolute inset-x-[13%] top-[18%] rounded-2xl border border-moss-900/10 bg-paper/90 p-4 shadow-[0_18px_30px_-22px_rgba(38,46,27,0.6)]">
-          <i className="block h-2 w-20 rounded bg-line-strong" /><strong className="mt-3 block font-display text-2xl text-moss-900">42 500</strong><i className="mt-3 block h-2 w-full rounded-full bg-lime-300" /><i className="mt-3 block h-6 w-24 rounded-full bg-moss-900" />
-        </div>
-      )}
-
-      {project.cover === "quiz" && (
-        <div className="absolute inset-x-[12%] top-[17%] space-y-2.5 rounded-2xl border border-moss-900/10 bg-paper/90 p-4 shadow-[0_18px_30px_-22px_rgba(38,46,27,0.6)]">
-          <div className="h-1.5 overflow-hidden rounded-full bg-line"><i className="block h-full w-3/5 rounded-full bg-lime-500" /></div>
-          {["A", "B", "C"].map((letter, index) => <span key={letter} className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-xs font-semibold ${index === 1 ? "border-lime-500 bg-lime-100" : "border-line bg-milk"}`}><i className="grid size-5 place-items-center rounded-full bg-paper not-italic">{letter}</i><i className="h-1.5 flex-1 rounded bg-line-strong" /></span>)}
-        </div>
-      )}
-
-      {project.cover === "ideas" && (
-        <div className="absolute inset-x-[11%] top-[17%] grid grid-cols-2 gap-2.5">
-          {["✦", "★", "✺", "✧"].map((symbol, index) => <span key={`${symbol}-${index}`} className="grid aspect-[1.45] place-items-center rounded-xl border border-moss-900/10 bg-paper/90 text-xl text-lime-700 shadow-sm">{symbol}</span>)}
-        </div>
-      )}
-
-      {project.cover === "habits" && (
-        <div className="absolute inset-x-[13%] top-[18%] rounded-2xl border border-moss-900/10 bg-paper/90 p-4 shadow-[0_18px_30px_-22px_rgba(38,46,27,0.6)]">
-          <div className="grid grid-cols-5 gap-2">{Array.from({ length: 10 }, (_, index) => <i key={index} className={`grid aspect-square place-items-center rounded-md border not-italic ${[0, 1, 3, 4, 5, 7, 8].includes(index) ? "border-lime-500 bg-lime-300 text-moss-900" : "border-line bg-milk"}`}>{[0, 1, 3, 4, 5, 7, 8].includes(index) ? "✓" : ""}</i>)}</div>
-          <div className="mt-3 h-2 overflow-hidden rounded-full bg-line"><i className="block h-full w-[70%] rounded-full bg-lime-500" /></div>
-        </div>
-      )}
-
-      <span className="absolute left-4 top-4 grid size-10 place-items-center rounded-xl bg-moss-900/90 text-lg shadow-sm" aria-hidden>{project.emoji}</span>
-      <span className="pill absolute bottom-4 left-4 bg-paper/90 px-3 py-1.5 text-[10px] text-ink-soft shadow-sm backdrop-blur-sm">{project.coverLabel}</span>
+    <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] border border-line/80 bg-lime-100">
+      <Image
+        src={project.coverImage}
+        alt=""
+        fill
+        sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) calc(50vw - 48px), 352px"
+        className="object-cover"
+      />
     </div>
   );
 }

@@ -58,13 +58,21 @@ describe("leadmagnet content", () => {
       "Генератор идей",
       "Трекер привычек",
     ]);
+    expect(projects.map((project) => project.coverImage)).toEqual([
+      "/images/project-covers/project-page.webp",
+      "/images/project-covers/calculator.webp",
+      "/images/project-covers/quiz.webp",
+      "/images/project-covers/idea-generator.webp",
+      "/images/project-covers/habit-tracker.webp",
+    ]);
+    expect(new Set(projects.map((project) => project.coverImage)).size).toBe(projects.length);
 
     for (const project of projects) {
       expect(project.cardDescription.length).toBeGreaterThan(20);
       expect(project.description.length).toBeGreaterThan(40);
       expect(project.prompt.length).toBeGreaterThan(1_000);
       expect(project.services).toEqual(["Qwen", "Google AI Studio", "GLM"]);
-      expect(["web", "calculator", "quiz", "ideas", "habits"]).toContain(project.cover);
+      expect(project.coverImage.endsWith(".webp")).toBe(true);
     }
   });
 

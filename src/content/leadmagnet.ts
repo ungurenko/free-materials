@@ -9,8 +9,6 @@ export interface Service {
   buttonLabel: string;
 }
 
-export type ProjectCover = "web" | "calculator" | "quiz" | "ideas" | "habits";
-
 export interface Project {
   id: string;
   cardTitle: string;
@@ -20,9 +18,7 @@ export interface Project {
   emoji: string;
   level: "Простой" | "Средний";
   time: string;
-  cover: ProjectCover;
-  coverLabel: string;
-  coverAria: string;
+  coverImage: string;
   services: string[];
   examples: string[];
   replace: string;
@@ -162,9 +158,7 @@ export const projects: Project[] = [
     emoji: "🌐",
     level: "Простой",
     time: "20–40 минут",
-    cover: "web",
-    coverLabel: "Страница проекта",
-    coverAria: "Минималистичное окно сайта, несколько аккуратных блоков и курсор",
+    coverImage: "/images/project-covers/project-page.webp",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "книжный клуб",
@@ -205,9 +199,7 @@ export const projects: Project[] = [
     emoji: "🧮",
     level: "Простой",
     time: "30–50 минут",
-    cover: "calculator",
-    coverLabel: "Калькулятор",
-    coverAria: "Крупные цифры, поле ввода и аккуратная карточка результата",
+    coverImage: "/images/project-covers/calculator.webp",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "бюджет путешествия",
@@ -252,9 +244,7 @@ export const projects: Project[] = [
     emoji: "🧩",
     level: "Средний",
     time: "30–60 минут",
-    cover: "quiz",
-    coverLabel: "Персональный тест",
-    coverAria: "Карточки ответов, индикатор прогресса и итоговый результат",
+    coverImage: "/images/project-covers/quiz.webp",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "какой проект собрать первым",
@@ -300,9 +290,7 @@ export const projects: Project[] = [
     emoji: "💡",
     level: "Средний",
     time: "30–60 минут",
-    cover: "ideas",
-    coverLabel: "Генератор идей",
-    coverAria: "Карточки с идеями, звёздочка избранного и кнопка генерации",
+    coverImage: "/images/project-covers/idea-generator.webp",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "идеи для выходных",
@@ -347,9 +335,7 @@ export const projects: Project[] = [
     emoji: "✅",
     level: "Средний",
     time: "40–70 минут",
-    cover: "habits",
-    coverLabel: "Трекер привычек",
-    coverAria: "Сетка дней, отметки выполнения и небольшой индикатор прогресса",
+    coverImage: "/images/project-covers/habit-tracker.webp",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [],
     replace: "",
