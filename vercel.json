@@ -1,4 +1,18 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://free.ungurenko.ru/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "free-materials.vercel.app"
+        }
+      ]
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

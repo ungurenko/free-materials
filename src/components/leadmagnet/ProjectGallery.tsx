@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { projects, howToUseSteps, pageCopy, type Project } from "@/content/leadmagnet";
-import { trackPromptCopy } from "@/lib/analytics/umami";
 import { copyText } from "@/lib/copy";
 import { getProjectIdFromHash } from "@/lib/leadmagnet-state";
 import { IconCheck, IconCopy } from "@/components/icons";
@@ -29,7 +28,7 @@ export default function ProjectGallery() {
   const [copyStatus, setCopyStatus] = useState("");
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const closeButton = useRef<HTMLButtonElement | null>(null);
-  const modal = useRef<HTMLElement | null>(null);
+  const modal = useRef<HTMLDialogElement | null>(null);
   const copyTimer = useRef<number | undefined>(undefined);
   const activeProject = projects.find((project) => project.id === activeId) ?? null;
   const copy = pageCopy.projectModal;
@@ -62,49 +61,27 @@ export default function ProjectGallery() {
   useEffect(() => {
     if (!activeProject) return;
 
+    const dialog = modal.current;
+    if (!dialog) return;
+
     const scrollY = window.scrollY;
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = "100%";
+    if (!dialog.open) dialog.showModal();
     requestAnimationFrame(() => closeButton.current?.focus());
-
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeProject();
-        return;
-      }
-      if (event.key !== "Tab" || !modal.current) return;
-
-      const focusable = [...modal.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')]
-        .filter((element) => element.offsetParent !== null);
-      const first = focusable.at(0);
-      const last = focusable.at(-1);
-      if (!first || !last) return;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeydown);
     return () => {
-      document.removeEventListener("keydown", handleKeydown);
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       window.scrollTo(0, scrollY);
       requestAnimationFrame(() => lastFocusedElement.current?.focus());
     };
-  }, [activeProject, closeProject]);
+  }, [activeProject]);
 
   const handleCopy = async (project: Project) => {
     const copied = await copyText(project.prompt);
     setCopyStatus(copied ? copy.copiedStatus : copy.copyErrorStatus);
-    if (copied) trackPromptCopy("leadmagnet", project.id);
     window.clearTimeout(copyTimer.current);
     copyTimer.current = window.setTimeout(() => setCopyStatus(""), 2100);
   };
@@ -135,17 +112,19 @@ export default function ProjectGallery() {
       </div>
 
       {activeProject && (
-        <div
-          className="modal-overlay fixed inset-0 z-[80] grid place-items-center bg-moss-950/55 p-3 backdrop-blur-sm sm:p-6"
+        <dialog
+          ref={modal}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+          className="modal-overlay fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none place-items-center overflow-hidden border-0 bg-transparent p-3 backdrop:bg-moss-950/55 backdrop:backdrop-blur-sm open:grid sm:p-6"
           onMouseDown={(event) => { if (event.target === event.currentTarget) closeProject(); }}
+          onCancel={(event) => {
+            event.preventDefault();
+            closeProject();
+          }}
         >
           <section
-            ref={modal}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            aria-describedby="modal-description"
-            className="max-h-[calc(100dvh-24px)] w-full max-w-3xl overflow-y-auto rounded-[26px] border border-line bg-paper shadow-[0_35px_90px_-30px_rgba(27,33,19,0.8)] sm:max-h-[calc(100dvh-48px)]"
+            className="max-h-[calc(100dvh-24px)] w-full max-w-3xl overscroll-contain overflow-y-auto rounded-[26px] border border-line bg-paper shadow-[0_35px_90px_-30px_rgba(27,33,19,0.8)] sm:max-h-[calc(100dvh-48px)]"
           >
             <div className="sticky top-0 z-10 flex justify-end border-b border-line bg-paper/90 px-4 py-3 backdrop-blur-xl">
               <button ref={closeButton} type="button" onClick={() => closeProject()} aria-label={copy.closeLabel} className="grid size-10 place-items-center rounded-full border border-line bg-milk text-2xl leading-none text-ink transition-colors hover:border-lime-500 hover:bg-lime-100">×</button>
@@ -198,7 +177,7 @@ export default function ProjectGallery() {
               </section>
             </div>
           </section>
-        </div>
+        </dialog>
       )}
 
       <p className={`fixed bottom-5 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-moss-950 px-4 py-2.5 text-sm text-paper shadow-xl transition ${copyStatus ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`} role="status" aria-live="polite">{copyStatus}</p>

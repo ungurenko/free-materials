@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Golos_Text, JetBrains_Mono, Unbounded } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/config/site";
@@ -33,12 +34,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  authors: [{ name: siteConfig.author.name, url: siteConfig.siteUrl }],
+  creator: siteConfig.author.name,
   openGraph: {
     type: "website",
     locale: "ru_RU",
     siteName: siteConfig.siteName,
     title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
     description: siteConfig.siteDescription,
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",
@@ -56,20 +60,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { analytics } = siteConfig;
-
   return (
     <html lang="ru" className={`${golos.variable} ${unbounded.variable} ${jetbrains.variable}`}>
       <head>
         <meta name="theme-color" content="#F6F6F0" />
-        {analytics.umami.enabled && analytics.umami.websiteId && analytics.umami.src && (
-          <script
-            defer
-            src={analytics.umami.src}
-            data-website-id={analytics.umami.websiteId}
-            data-do-not-track="true"
-          />
-        )}
       </head>
       <body>
         <a
@@ -83,6 +77,7 @@ export default function RootLayout({
           <main id="main" className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );

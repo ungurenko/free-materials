@@ -9,14 +9,6 @@ interface SocialLink {
   url: string;
 }
 
-interface AnalyticsConfig {
-  umami: {
-    enabled: boolean;
-    websiteId?: string;
-    src: string;
-  };
-}
-
 interface PromoMedia {
   src: string;
   alt: string;
@@ -54,14 +46,13 @@ interface SiteConfig {
     youtube: SocialLink;
     ideaBot: SocialLink;
   };
-  analytics: AnalyticsConfig;
 }
 
 export const siteConfig: SiteConfig = {
   siteName: "Вайб-кодинг с нуля",
   siteDescription:
     "5 готовых промптов для создания первого сайта, калькулятора, теста, генератора идей или трекера привычек с помощью Qwen, Google AI Studio и GLM.",
-  siteUrl: "https://example.com", // TODO: заменить на production-домен
+  siteUrl: "https://free.ungurenko.ru",
 
   author: {
     name: "Александр Унгуренко",
@@ -113,14 +104,6 @@ export const siteConfig: SiteConfig = {
       label: "Бот с идеями",
       handle: "@Vibecoding_Ideas_Bot",
       url: "https://t.me/Vibecoding_Ideas_Bot",
-    },
-  },
-
-  analytics: {
-    umami: {
-      enabled: false, // TODO: включить при деплое
-      websiteId: undefined, // TODO: Umami website ID
-      src: "https://cloud.umami.is/script.js",
     },
   },
 };

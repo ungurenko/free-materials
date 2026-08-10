@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { siteConfig } from "./site";
 
+describe("production site identity", () => {
+  it("uses the approved public domain instead of a placeholder", () => {
+    expect(siteConfig.siteUrl).toBe("https://free.ungurenko.ru");
+    expect(JSON.stringify(siteConfig)).not.toContain("example.com");
+  });
+});
+
 describe("site promo banner configuration", () => {
   it("keeps the VIBES promotion editable from one configuration object", () => {
     expect(siteConfig.promoBanner).toEqual(

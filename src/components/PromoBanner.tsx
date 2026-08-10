@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { trackEvent } from "@/lib/analytics/umami";
 import { IconArrowUpRight } from "./icons";
 import Reveal from "./Reveal";
 
@@ -48,12 +47,6 @@ export default function PromoBanner() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-on-dark mt-7 min-h-12 w-full px-6 text-[15px] shadow-[0_14px_34px_-16px_rgba(178,201,110,0.75)] sm:w-fit"
-                onClick={() =>
-                  trackEvent({
-                    name: "promo_click",
-                    props: { promo_id: promo.id, placement: "home_after_hero" },
-                  })
-                }
               >
                 {promo.buttonLabel}
                 <IconArrowUpRight className="size-[18px]" />
