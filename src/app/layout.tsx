@@ -43,11 +43,25 @@ export const metadata: Metadata = {
     title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
     description: siteConfig.siteDescription,
     url: "/",
+    images: [
+      {
+        url: siteConfig.socialPreviewImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.socialPreviewAlt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
     description: siteConfig.siteDescription,
+    images: [
+      {
+        url: siteConfig.socialPreviewImage,
+        alt: siteConfig.socialPreviewAlt,
+      },
+    ],
   },
   robots: {
     index: true,

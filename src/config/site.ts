@@ -31,6 +31,8 @@ interface SiteConfig {
   siteName: string;
   siteDescription: string;
   siteUrl: string;
+  socialPreviewImage: string;
+  socialPreviewAlt: string;
   author: {
     name: string;
     role: string;
@@ -53,6 +55,9 @@ export const siteConfig: SiteConfig = {
   siteDescription:
     "5 готовых промптов для создания первого сайта, калькулятора, теста, генератора идей или трекера привычек с помощью Qwen, Google AI Studio и GLM.",
   siteUrl: "https://free.ungurenko.ru",
+  socialPreviewImage: "/social-preview.png",
+  socialPreviewAlt:
+    "Вайб-кодинг с нуля — 5 готовых промптов для первого проекта от Александра Унгуренко",
 
   author: {
     name: "Александр Унгуренко",

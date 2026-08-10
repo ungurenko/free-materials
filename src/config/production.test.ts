@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
+import { siteConfig } from "@/config/site";
 
 const productionUrl = "https://free.ungurenko.ru";
 
@@ -39,5 +40,14 @@ describe("production discovery files", () => {
       permanent: true,
       has: [{ type: "host", value: "free-materials.vercel.app" }],
     });
+  });
+
+  it("publishes the social preview as an explicit PNG asset", () => {
+    expect(siteConfig.socialPreviewImage).toBe("/social-preview.png");
+
+    const image = readFileSync(
+      new URL("../../public/social-preview.png", import.meta.url),
+    );
+    expect(image.subarray(0, 8).toString("hex")).toBe("89504e470d0a1a0a");
   });
 });
