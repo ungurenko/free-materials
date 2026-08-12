@@ -65,17 +65,33 @@ export default function ProjectGallery() {
     if (!dialog) return;
 
     const scrollY = window.scrollY;
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
+    const body = document.body;
+    const root = document.documentElement;
+    const scrollbarWidth = Math.max(0, window.innerWidth - root.clientWidth);
+    const bodyPaddingRight = Number.parseFloat(window.getComputedStyle(body).paddingRight) || 0;
+    const originalBodyStyles = {
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+      paddingRight: body.style.paddingRight,
+    };
+    const originalScrollBehavior = root.style.scrollBehavior;
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    if (scrollbarWidth > 0) body.style.paddingRight = `${bodyPaddingRight + scrollbarWidth}px`;
     if (!dialog.open) dialog.showModal();
     requestAnimationFrame(() => closeButton.current?.focus());
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
+      body.style.position = originalBodyStyles.position;
+      body.style.top = originalBodyStyles.top;
+      body.style.width = originalBodyStyles.width;
+      body.style.paddingRight = originalBodyStyles.paddingRight;
+      root.style.scrollBehavior = "auto";
       window.scrollTo(0, scrollY);
-      requestAnimationFrame(() => lastFocusedElement.current?.focus());
+      root.style.scrollBehavior = originalScrollBehavior;
+      requestAnimationFrame(() => lastFocusedElement.current?.focus({ preventScroll: true }));
     };
   }, [activeProject]);
 
@@ -124,7 +140,7 @@ export default function ProjectGallery() {
           }}
         >
           <section
-            className="max-h-[calc(100dvh-24px)] w-full max-w-3xl overscroll-contain overflow-y-auto rounded-[26px] border border-line bg-paper shadow-[0_35px_90px_-30px_rgba(27,33,19,0.8)] sm:max-h-[calc(100dvh-48px)]"
+            className="modal-scroll-region max-h-[calc(100dvh-24px)] w-full max-w-3xl overscroll-contain overflow-y-auto rounded-[26px] border border-line bg-paper shadow-[0_35px_90px_-30px_rgba(27,33,19,0.8)] sm:max-h-[calc(100dvh-48px)]"
           >
             <div className="sticky top-0 z-10 flex justify-end border-b border-line bg-paper/90 px-4 py-3 backdrop-blur-xl">
               <button ref={closeButton} type="button" onClick={() => closeProject()} aria-label={copy.closeLabel} className="grid size-10 place-items-center rounded-full border border-line bg-milk text-2xl leading-none text-ink transition-colors hover:border-lime-500 hover:bg-lime-100">×</button>

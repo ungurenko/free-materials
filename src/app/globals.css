@@ -107,6 +107,14 @@ iframe {
 
 /* ---------- переиспользуемые классы ---------- */
 @layer components {
+  /* окно промпта прокручивается без отдельного визуального ползунка */
+  .modal-scroll-region {
+    scrollbar-width: none;
+  }
+  .modal-scroll-region::-webkit-scrollbar {
+    display: none;
+  }
+
   .container-x {
     margin-inline: auto;
     width: 100%;
