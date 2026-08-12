@@ -52,7 +52,7 @@ describe("leadmagnet content", () => {
       "habit-tracker",
     ]);
     expect(projects.map((project) => project.cardTitle)).toEqual([
-      "Страница проекта",
+      "Продающий лендинг",
       "Интерактивный калькулятор",
       "Тест с\u00A0результатом",
       "Генератор идей",
@@ -175,9 +175,8 @@ describe("leadmagnet content", () => {
     const prompts = Object.fromEntries(projects.map((project) => [project.id, project.prompt]));
     const allPrompts = projects.map((project) => project.prompt).join("\n");
 
-    expect(prompts["project-page"]).toContain(
-      "светлый фон, тёмный текст, один акцентный цвет",
-    );
+    expect(prompts["project-page"]).toContain("одно целевое действие");
+    expect(prompts["project-page"]).toContain("Не выдумывай отзывы, цифры, кейсы и гарантии");
     expect(prompts.calculator).toContain("кнопки «Рассчитать»");
     expect(prompts.calculator).toContain("формулу, которая соответствует выбранной теме");
     expect(prompts.quiz).toContain(
@@ -191,10 +190,44 @@ describe("leadmagnet content", () => {
     );
   });
 
+  it("gives every project a professional role and protection from template AI design", () => {
+    const prompts = Object.fromEntries(projects.map((project) => [project.id, project.prompt]));
+
+    for (const prompt of Object.values(prompts)) {
+      const sectionPositions = [
+        "Роль и навыки",
+        "Специализация",
+        "Задача",
+        "Визуальное направление",
+        "Функции",
+        "Ограничения",
+        "Проверка",
+      ].map((section) => prompt.indexOf(section));
+
+      expect(sectionPositions.every((position) => position >= 0)).toBe(true);
+      expect(sectionPositions).toEqual([...sectionPositions].sort((a, b) => a - b));
+      expect(prompt).toContain("Работай как автономная продуктовая команда");
+      expect(prompt).toContain(
+        "продуктовый разработчик, UX/UI-дизайнер, редактор интерфейсов и тестировщик",
+      );
+      expect(prompt).toContain("Не останавливайся после описания концепции");
+      expect(prompt).toContain("Выбери одну визуальную идею, связанную с темой проекта");
+      expect(prompt).toContain("Избегай шаблонного AI-дизайна");
+      expect(prompt).toContain("фиолетово-синих свечений");
+      expect(prompt).toContain("большого пустого первого экрана");
+    }
+
+    expect(prompts["project-page"]).toContain("сформулировать ясный оффер");
+    expect(prompts.calculator).toContain("граничные значения");
+    expect(prompts.quiz).toContain("прозрачную систему подсчёта");
+    expect(prompts["idea-generator"]).toContain("логику категорий");
+    expect(prompts["habit-tracker"]).toContain("логику дат и серий");
+  });
+
   it("keeps project ids unique and replacement markers source-accurate", () => {
     expect(new Set(projects.map((project) => project.id)).size).toBe(projects.length);
     expect(projects.map((project) => project.replace)).toEqual([
-      "[ВПИШИТЕ ТЕМУ]",
+      "[ОПИШИТЕ, ЧТО ВЫ ПРЕДЛАГАЕТЕ, КОМУ И КАКОЕ ДЕЙСТВИЕ НУЖНО СОВЕРШИТЬ]",
       "[ВПИШИТЕ, ЧТО ОН ДОЛЖЕН РАССЧИТЫВАТЬ]",
       "[ВПИШИТЕ ТЕМУ ТЕСТА]",
       "[ВПИШИТЕ ТЕМУ]",
