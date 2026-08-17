@@ -178,7 +178,7 @@ export const projects: Project[] = [
     emoji: "🌐",
     level: "Простой",
     time: "20–40 минут",
-    coverImage: "/images/project-covers/project-page.webp",
+    coverImage: "/images/project-covers/project-page.webp?v=20260817",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "консультация специалиста",
@@ -243,7 +243,7 @@ ${visualDirection}
     emoji: "🧮",
     level: "Простой",
     time: "30–50 минут",
-    coverImage: "/images/project-covers/calculator.webp",
+    coverImage: "/images/project-covers/calculator.webp?v=20260817",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "стоимость ремонта",
@@ -304,7 +304,7 @@ ${visualDirection}
     emoji: "🧩",
     level: "Средний",
     time: "30–60 минут",
-    coverImage: "/images/project-covers/quiz.webp",
+    coverImage: "/images/project-covers/quiz.webp?v=20260817",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "какая программа питания подходит",
@@ -366,7 +366,7 @@ ${visualDirection}
     emoji: "💡",
     level: "Средний",
     time: "30–60 минут",
-    coverImage: "/images/project-covers/idea-generator.webp",
+    coverImage: "/images/project-covers/idea-generator.webp?v=20260817",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "темы публикаций для мастера",
@@ -429,7 +429,7 @@ ${visualDirection}
     emoji: "✅",
     level: "Средний",
     time: "40–70 минут",
-    coverImage: "/images/project-covers/habit-tracker.webp",
+    coverImage: "/images/project-covers/habit-tracker.webp?v=20260817",
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "программа обучения",

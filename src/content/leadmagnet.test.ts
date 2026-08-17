@@ -59,11 +59,11 @@ describe("leadmagnet content", () => {
       "Трекер прогресса",
     ]);
     expect(projects.map((project) => project.coverImage)).toEqual([
-      "/images/project-covers/project-page.webp",
-      "/images/project-covers/calculator.webp",
-      "/images/project-covers/quiz.webp",
-      "/images/project-covers/idea-generator.webp",
-      "/images/project-covers/habit-tracker.webp",
+      "/images/project-covers/project-page.webp?v=20260817",
+      "/images/project-covers/calculator.webp?v=20260817",
+      "/images/project-covers/quiz.webp?v=20260817",
+      "/images/project-covers/idea-generator.webp?v=20260817",
+      "/images/project-covers/habit-tracker.webp?v=20260817",
     ]);
     expect(new Set(projects.map((project) => project.coverImage)).size).toBe(projects.length);
 
@@ -72,7 +72,7 @@ describe("leadmagnet content", () => {
       expect(project.description.length).toBeGreaterThan(40);
       expect(project.prompt.length).toBeGreaterThan(1_000);
       expect(project.services).toEqual(["Qwen", "Google AI Studio", "GLM"]);
-      expect(project.coverImage.endsWith(".webp")).toBe(true);
+      expect(project.coverImage.split("?")[0].endsWith(".webp")).toBe(true);
     }
   });
 
