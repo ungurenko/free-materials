@@ -154,6 +154,17 @@ export default function ProjectGallery() {
               <h2 id="modal-title" className="mt-5 font-display text-[1.55rem] font-semibold leading-tight tracking-[-0.015em] text-ink sm:text-[2rem]">{activeProject.title}</h2>
               <p id="modal-description" className="mt-4 text-[15px] leading-relaxed text-ink-soft sm:text-base">{activeProject.description}</p>
 
+              <section className="mt-6 rounded-2xl border border-lime-300 bg-lime-100 p-4 sm:flex sm:items-end sm:justify-between sm:gap-5 sm:p-5">
+                <div className="min-w-0">
+                  <h3 className="font-display text-sm font-semibold text-ink">{copy.replaceTitle}</h3>
+                  <code className="mt-2 block break-words font-mono text-[11px] leading-relaxed text-lime-700 sm:text-xs">{activeProject.replace}</code>
+                </div>
+                <button type="button" onClick={() => handleCopy(activeProject)} className="btn-primary mt-4 h-11 w-full shrink-0 px-5 text-sm sm:mt-0 sm:w-fit">
+                  {copyStatus === copy.copiedStatus ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
+                  {copy.copyLabel}
+                </button>
+              </section>
+
               <section className="mt-8 border-t border-line pt-6">
                 <h3 className="font-display text-base font-semibold text-ink">{copy.servicesTitle}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">{activeProject.services.map((service) => <span key={service} className="rounded-full border border-line bg-milk px-3 py-1.5 text-sm text-ink-soft">{service}</span>)}</div>
@@ -166,22 +177,11 @@ export default function ProjectGallery() {
                 </section>
               )}
 
-              {activeProject.replace && (
-                <section className="mt-7 border-t border-line pt-6">
-                  <h3 className="font-display text-base font-semibold text-ink">{copy.replaceTitle}</h3>
-                  <code className="mt-3 block w-fit rounded-xl border border-lime-300 bg-lime-100 px-3 py-2 font-mono text-xs text-lime-700">{activeProject.replace}</code>
-                </section>
-              )}
-
               <section className="mt-7 border-t border-line pt-6">
                 <h3 className="font-display text-base font-semibold text-ink">{copy.promptTitle}</h3>
                 <div className="mt-3 overflow-hidden rounded-2xl border border-line bg-[#f1f2e9]">
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-paper/80 px-4 py-3">
+                  <div className="border-b border-line bg-paper/80 px-4 py-3">
                     <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink-faint">{copy.promptLabel}</span>
-                    <button type="button" onClick={() => handleCopy(activeProject)} className="btn-primary h-10 px-4 text-sm">
-                      {copyStatus === copy.copiedStatus ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
-                      {copy.copyLabel}
-                    </button>
                   </div>
                   <pre className="overflow-x-auto whitespace-pre-wrap break-words px-4 py-5 font-mono text-[12.5px] leading-[1.72] text-ink/85 sm:px-6 sm:text-[13px]">{activeProject.prompt}</pre>
                 </div>

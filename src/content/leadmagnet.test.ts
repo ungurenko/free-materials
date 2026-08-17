@@ -11,20 +11,20 @@ import {
 
 describe("leadmagnet content", () => {
   it("uses the approved concise copy on the first screen", () => {
-    expect(pageCopy.header.brand).toBe("Вайб-кодинг с\u00A0нуля");
-    expect(pageCopy.hero.eyebrow).toBe("Первый проект с\u00A0ИИ");
+    expect(pageCopy.header.brand).toBe("Стартовый набор");
+    expect(pageCopy.hero.eyebrow).toBe("Бесплатный стартовый набор");
     expect(pageCopy.hero.lead).toBe(
-      "5 готовых промптов для первого сайта или веб-сервиса. Опыт программирования не\u00A0нужен.",
+      "10 готовых промптов, чтобы без опыта в\u00A0коде собрать первый сайт или веб-приложение и\u00A0довести его до\u00A0рабочей версии.",
     );
     expect(pageCopy.hero.paragraphs).toEqual([
-      "Выберите проект, откройте карточку и\u00A0вставьте промпт в\u00A0Qwen, Google AI Studio или GLM. Сервис соберёт первую рабочую версию.",
+      "Выберите один из\u00A0пяти проектов, скопируйте промпт в\u00A0ИИ-сервис, а\u00A0затем доведите результат пятью короткими промптами.",
     ]);
-    expect(pageCopy.hero.note).toBe(
-      "Для старта нужны браузер, аккаунт в\u00A0одном из\u00A0сервисов и\u00A020–70 минут.",
-    );
-    expect(pageCopy.projects.title).toBe("Выберите первый проект");
+    expect(pageCopy.hero.primaryAction).toBe("Выбрать проект");
+    expect(pageCopy.hero.courseAction).toBe("Собрать свой проект на\u00A0ВАЙБС");
+    expect(pageCopy.projects.eyebrow).toBe("Этап 1 из\u00A02");
+    expect(pageCopy.projects.title).toBe("Выберите один из\u00A0пяти проектов");
     expect(pageCopy.projects.description).toBe(
-      "Выберите один из\u00A0пяти проектов — этого достаточно для первого результата.",
+      "Начните с\u00A0задачи, которая пригодится вам, клиентам или бизнесу. Внутри каждой карточки — готовый промпт и\u00A0примеры адаптации.",
     );
     expect(pageCopy.resources.title).toBe("Материалы для первого запуска");
     expect(pageCopy.resources.description).toBe(
@@ -52,11 +52,11 @@ describe("leadmagnet content", () => {
       "habit-tracker",
     ]);
     expect(projects.map((project) => project.cardTitle)).toEqual([
-      "Продающий лендинг",
-      "Интерактивный калькулятор",
-      "Тест с\u00A0результатом",
-      "Генератор идей",
-      "Трекер привычек",
+      "Лендинг для услуги",
+      "Калькулятор стоимости",
+      "Квиз для клиента",
+      "Генератор идей для\u00A0ниши",
+      "Трекер прогресса",
     ]);
     expect(projects.map((project) => project.coverImage)).toEqual([
       "/images/project-covers/project-page.webp",
@@ -95,8 +95,8 @@ describe("leadmagnet content", () => {
 
   it("presents improvement prompts as a dedicated next step", () => {
     expect(pageCopy.improvementPrompts).toEqual({
-      eyebrow: "После первой версии",
-      title: "5 промптов для улучшения проекта",
+      eyebrow: "Этап 2 из\u00A02",
+      title: "Доведите результат пятью промптами",
       description:
         "Отправляйте промпты в\u00A0том же диалоге по\u00A0одному: сначала проверьте работу приложения, затем мобильную версию, дизайн и\u00A0понятность интерфейса.",
       copyLabel: "Скопировать промпт",
@@ -107,20 +107,20 @@ describe("leadmagnet content", () => {
 
   it("provides compact Hero copy for phone screens", () => {
     expect(pageCopy.hero.mobile).toEqual({
-      eyebrow: "Первый проект с\u00A0ИИ",
-      meta: "Один проект · один сервис · 20–70 минут",
+      eyebrow: "Бесплатный стартовый набор",
+      meta: "5 проектов · 5 промптов для доводки · бесплатно",
     });
   });
 
-  it("provides approved copy for the YouTube channel and idea bot", () => {
+  it("provides compact copy for the three secondary resources", () => {
     expect(pageCopy.usefulLinks).toEqual({
-      eyebrow: "Бесплатные материалы",
-      title: "Выберите, что создать дальше",
+      eyebrow: "Ещё можно открыть",
+      title: "Дополнительные материалы",
       description:
-        "Посмотрите бесплатные уроки на\u00A0YouTube или получите пять идей для своей ниши в\u00A0Telegram-боте.",
+        "Уроки, идеи для вашей ниши и\u00A0новые разборы — если хотите продолжить самостоятельно.",
       youtube: {
-        metaLabel: "YouTube",
-        title: "Уроки и\u00A0прямые эфиры о\u00A0вайб-кодинге",
+        metaLabel: "Бесплатно · YouTube",
+        title: "Бесплатные уроки и\u00A0прямые эфиры о\u00A0вайб-кодинге",
         description:
           "На\u00A0YouTube я\u00A0показываю, как создавать сайты, приложения и\u00A0Telegram-ботов с\u00A0помощью ИИ, и\u00A0провожу прямые эфиры по\u00A0вайб-кодингу.",
         buttonLabel: "Перейти на\u00A0YouTube",
@@ -130,6 +130,13 @@ describe("leadmagnet content", () => {
         title: "Пять идей для вашей ниши",
         description: "Опишите свою нишу, и\u00A0бот предложит пять проектов для старта.",
         buttonLabel: "Получить идеи в\u00A0Telegram",
+      },
+      telegram: {
+        metaLabel: "Telegram",
+        title: "Новые промпты и\u00A0разборы",
+        description:
+          "В\u00A0канале я\u00A0показываю, как с\u00A0помощью ИИ создавать сайты, приложения, ботов и\u00A0сервисы.",
+        buttonLabel: "Открыть канал",
       },
     });
   });
@@ -221,7 +228,7 @@ describe("leadmagnet content", () => {
     expect(prompts.calculator).toContain("граничные значения");
     expect(prompts.quiz).toContain("прозрачную систему подсчёта");
     expect(prompts["idea-generator"]).toContain("логику категорий");
-    expect(prompts["habit-tracker"]).toContain("логику дат и серий");
+    expect(prompts["habit-tracker"]).toContain("логику дат и этапов");
   });
 
   it("keeps project ids unique and replacement markers source-accurate", () => {
@@ -231,7 +238,14 @@ describe("leadmagnet content", () => {
       "[ВПИШИТЕ, ЧТО ОН ДОЛЖЕН РАССЧИТЫВАТЬ]",
       "[ВПИШИТЕ ТЕМУ ТЕСТА]",
       "[ВПИШИТЕ ТЕМУ]",
-      "",
+      "[ОПИШИТЕ ПРОГРАММУ, ЦЕЛЬ И\u00A0ДЕЙСТВИЯ ДЛЯ ОТМЕТКИ]",
     ]);
+  });
+
+  it("packages five project prompts and five improvement prompts as one starter kit", () => {
+    expect(projects).toHaveLength(5);
+    expect(improvementPrompts).toHaveLength(5);
+    expect(pageCopy.hero.lead).toContain("10 готовых промптов");
+    expect(pageCopy.hero.mobile.meta).toContain("5 проектов · 5 промптов");
   });
 });

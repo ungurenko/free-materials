@@ -4,6 +4,7 @@ import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { IconArrowUpRight } from "./icons";
 import Reveal from "./Reveal";
+import TrackedCourseLink from "./TrackedCourseLink";
 
 export default function PromoBanner() {
   const promo = siteConfig.promoBanner;
@@ -11,7 +12,7 @@ export default function PromoBanner() {
   if (!promo.enabled) return null;
 
   return (
-    <section className="promo-banner-section container-x pb-12 sm:pb-16" aria-labelledby="promo-banner-title">
+    <section className="promo-banner-section container-x pt-12 sm:pt-16" aria-labelledby="promo-banner-title">
       <Reveal>
         <div className="group relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-moss-950 text-paper shadow-[0_34px_80px_-42px_rgba(27,33,19,0.75)] sm:rounded-[36px]">
           <div className="pointer-events-none absolute -left-24 -top-28 size-80 rounded-full bg-fuchsia-400/15 blur-3xl" aria-hidden />
@@ -25,8 +26,6 @@ export default function PromoBanner() {
                 alt={promo.logo.alt}
                 width={640}
                 height={339}
-                priority
-                fetchPriority="high"
                 className="h-auto w-36 drop-shadow-[0_12px_28px_rgba(238,170,255,0.24)] sm:w-44"
               />
 
@@ -42,15 +41,13 @@ export default function PromoBanner() {
               <p className="mt-5 text-sm font-medium leading-relaxed text-lime-300 sm:text-[15px]">
                 {promo.meta}
               </p>
-              <a
-                href={promo.url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <TrackedCourseLink
+                placement="after_prompts"
                 className="btn-on-dark mt-7 min-h-12 w-full px-6 text-[15px] shadow-[0_14px_34px_-16px_rgba(178,201,110,0.75)] sm:w-fit"
               >
                 {promo.buttonLabel}
                 <IconArrowUpRight className="size-[18px]" />
-              </a>
+              </TrackedCourseLink>
             </div>
 
             <div className="relative min-h-[255px] overflow-hidden px-5 pb-0 sm:min-h-[360px] sm:px-10 lg:min-h-[520px] lg:px-0">
@@ -60,8 +57,6 @@ export default function PromoBanner() {
                   alt={promo.image.alt}
                   width={1200}
                   height={890}
-                  priority
-                  fetchPriority="high"
                   sizes="(min-width: 1024px) 58vw, calc(100vw - 80px)"
                   className="h-auto w-full drop-shadow-[0_28px_42px_rgba(0,0,0,0.38)]"
                 />

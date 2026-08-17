@@ -15,15 +15,15 @@ describe("site promo banner configuration", () => {
         enabled: true,
         id: "vibes-course",
         url: "https://vibes.ungurenko.ru",
-        eyebrow: "Курс по\u00A0вайб-кодингу",
-        title: "Создайте свой проект с\u00A0ИИ на\u00A0курсе ВАЙБС",
+        eyebrow: "Следующий шаг — ВАЙБС",
+        title: "Пройдите тот же путь на\u00A0двух своих проектах",
         description:
-          "На\u00A0курсе вы\u00A0соберёте и\u00A0запустите сайт, сервис, Telegram-бота или приложение. Программа рассчитана на\u00A0новичков без опыта в\u00A0программировании.",
-        meta: "Доступ сразу · от\u00A09\u202F990\u00A0₽ · материалы остаются навсегда",
+          "Стартовый набор помогает попробовать процесс на\u00A0готовом промпте. На\u00A0ВАЙБС вы\u00A0соберёте и\u00A0опубликуете свой лендинг и\u00A0веб-сервис — с\u00A0уроками, готовыми инструментами и\u00A0поддержкой.",
+        meta: "Старт сразу · два проекта · от\u00A09\u202F990\u00A0₽ · доступ навсегда",
         buttonLabel: "Посмотреть программу курса",
       }),
     );
-    expect(siteConfig.promoBanner.title).toContain("ВАЙБС");
+    expect(siteConfig.promoBanner.eyebrow).toContain("ВАЙБС");
     expect(siteConfig.promoBanner.logo.src).toBe("/images/vibes-logo.webp");
     expect(siteConfig.promoBanner.image.src).toBe("/images/vibes-platform.webp");
   });

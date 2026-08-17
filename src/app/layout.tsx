@@ -26,8 +26,8 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
-    template: "%s — Вайб-кодинг с нуля",
+    default: "Стартовый набор для вайб-кодинга — 10 готовых промптов",
+    template: "%s — Стартовый набор для вайб-кодинга",
   },
   description: siteConfig.siteDescription,
   metadataBase: new URL(siteConfig.siteUrl),
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_RU",
     siteName: siteConfig.siteName,
-    title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
+    title: "Стартовый набор для вайб-кодинга — 10 готовых промптов",
     description: siteConfig.siteDescription,
     url: "/",
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Вайб-кодинг с нуля — 5 промптов для первого проекта",
+    title: "Стартовый набор для вайб-кодинга — 10 готовых промптов",
     description: siteConfig.siteDescription,
     images: [
       {

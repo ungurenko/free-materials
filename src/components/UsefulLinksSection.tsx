@@ -1,83 +1,106 @@
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { pageCopy } from "@/content/leadmagnet";
-import { IconArrowUpRight, IconSpark, IconYoutube } from "./icons";
+import { IconArrowUpRight, IconSpark, IconTelegram, IconYoutube } from "./icons";
 
 const links = [
   {
     id: "youtube",
-    index: "01",
     icon: IconYoutube,
     content: pageCopy.usefulLinks.youtube,
     url: siteConfig.socials.youtube.url,
-    cardClassName: "bg-[#fff0ec] text-ink shadow-[0_24px_52px_-40px_rgba(130,54,43,0.55)]",
-    iconClassName: "bg-[#f25f51] text-paper",
-    labelClassName: "text-[#a23d31]",
-    descriptionClassName: "text-ink-soft",
-    decorationClassName: "text-[#f25f51]/10",
   },
   {
     id: "idea-bot",
-    index: "02",
     icon: IconSpark,
     content: pageCopy.usefulLinks.ideaBot,
     url: siteConfig.socials.ideaBot.url,
-    cardClassName: "bg-moss-900 text-paper shadow-[0_24px_52px_-40px_rgba(27,33,19,0.8)]",
-    iconClassName: "bg-lime-300 text-moss-950",
-    labelClassName: "text-lime-300",
-    descriptionClassName: "text-paper/70",
-    decorationClassName: "text-lime-300/10",
+  },
+  {
+    id: "telegram",
+    icon: IconTelegram,
+    content: pageCopy.usefulLinks.telegram,
+    url: siteConfig.socials.telegram.url,
   },
 ];
 
 export default function UsefulLinksSection() {
-  return (
-    <section className="container-x pt-16 sm:pt-20" aria-labelledby="useful-links-title">
-      <div className="relative isolate overflow-hidden rounded-[30px] border border-line bg-paper px-6 py-8 shadow-[0_30px_70px_-52px_rgba(38,40,31,0.45)] sm:px-10 sm:py-11 lg:px-14 lg:py-14">
-        <span className="pointer-events-none absolute -right-4 -top-10 select-none font-display text-[clamp(4.5rem,13vw,10.5rem)] font-semibold leading-none tracking-[-0.1em] text-lime-100" aria-hidden>
-          СОЗДАВАЙ
-        </span>
+  const [youtube, ideaBot, telegram] = links;
 
-        <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-end lg:gap-12">
-          <div className="max-w-3xl">
-            <p className="pill w-fit border border-lime-300 bg-lime-100 px-3.5 py-2 text-lime-700">{pageCopy.usefulLinks.eyebrow}</p>
-            <h2 id="useful-links-title" className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3.35rem)] font-semibold leading-[1.06] tracking-[-0.045em] text-ink">
+  return (
+    <section className="container-x pt-12 sm:pt-16" aria-labelledby="useful-links-title">
+      <div className="overflow-hidden rounded-[30px] border border-line bg-paper px-5 py-7 shadow-[0_28px_70px_-50px_rgba(38,40,31,0.45)] sm:px-8 sm:py-10 lg:px-10">
+        <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] sm:items-end sm:gap-10">
+          <div>
+            <p className="pill w-fit border border-line bg-milk px-3 py-1.5 text-ink-faint">{pageCopy.usefulLinks.eyebrow}</p>
+            <h2 id="useful-links-title" className="mt-4 font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
               {pageCopy.usefulLinks.title}
             </h2>
           </div>
-          <p className="max-w-sm text-[15px] leading-relaxed text-ink-soft sm:text-base lg:pb-1">{pageCopy.usefulLinks.description}</p>
+          <p className="text-sm leading-relaxed text-ink-soft sm:text-[15px]">{pageCopy.usefulLinks.description}</p>
         </div>
 
-        <div className="relative mt-9 grid gap-4 sm:grid-cols-2 sm:gap-5">
-          {links.map(({ id, index, icon: Icon, content, url, cardClassName, iconClassName, labelClassName, descriptionClassName, decorationClassName }) => (
-            <article key={id} className="min-w-0">
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group relative flex min-h-[290px] h-full flex-col overflow-hidden rounded-[24px] p-6 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-600 sm:min-h-[330px] sm:p-8 ${cardClassName}`}
-              >
-                <span className={`pointer-events-none absolute -right-6 -top-14 select-none font-display text-[11rem] font-semibold leading-none tracking-[-0.12em] ${decorationClassName}`} aria-hidden>
-                  {index}
-                </span>
-                <div className="relative flex items-start justify-between gap-5">
-                  <span className="font-mono text-[11px] font-medium tracking-[0.13em]">{index} / {content.metaLabel}</span>
-                  <span className={`grid size-11 place-items-center rounded-2xl ${iconClassName}`} aria-hidden>
-                    <Icon className="size-5" />
-                  </span>
-                </div>
-                <div className="relative mt-auto">
-                  <h3 className="max-w-sm font-display text-[1.45rem] font-semibold leading-[1.12] tracking-[-0.035em] sm:text-[1.7rem]">{content.title}</h3>
-                  <p className={`mt-4 max-w-md text-[15px] leading-relaxed ${descriptionClassName}`}>{content.description}</p>
-                  <span className={`mt-7 inline-flex items-center gap-2 text-sm font-semibold ${labelClassName}`}>
-                    {content.buttonLabel}
-                    <IconArrowUpRight className="size-[18px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </div>
-              </a>
-            </article>
-          ))}
+        <div className="mt-7 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+          <ResourceCard resource={youtube} featured />
+          <div className="grid gap-4">
+            <ResourceCard resource={ideaBot} tone="dark" />
+            <ResourceCard resource={telegram} tone="lime" />
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+type Resource = (typeof links)[number];
+
+function ResourceCard({ resource, featured = false, tone = "light" }: { resource: Resource; featured?: boolean; tone?: "light" | "dark" | "lime" }) {
+  const { icon: Icon, content, url } = resource;
+  const toneClasses = {
+    light: "border-[#f0d7ce] bg-[#fff4ef] text-ink",
+    dark: "border-moss-800 bg-moss-950 text-paper",
+    lime: "border-lime-300 bg-lime-100 text-ink",
+  }[tone];
+  const mutedClasses = tone === "dark" ? "text-paper/70" : "text-ink-soft";
+  const iconClasses = tone === "dark" ? "bg-paper/10 text-lime-300" : "bg-paper text-lime-700";
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative flex flex-col overflow-hidden rounded-[24px] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-34px_rgba(38,40,31,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-lime-600 ${featured ? "min-h-[320px] sm:p-8" : "min-h-[210px]"} ${toneClasses}`}
+    >
+      {featured ? (
+        <>
+          <Image
+            src="/images/resources/youtube-play.webp"
+            alt=""
+            width={800}
+            height={560}
+            className="pointer-events-none absolute -right-[14%] -top-[4%] w-[78%] rotate-[-5deg] opacity-25 sm:-right-[10%] sm:-top-[8%] sm:w-[72%]"
+            aria-hidden
+          />
+          <span className="relative z-10 w-fit rounded-full border border-[#efb5ab] bg-paper/85 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#b83227] backdrop-blur-sm">
+            Бесплатно
+          </span>
+        </>
+      ) : (
+        <span className={`grid size-12 shrink-0 place-items-center rounded-2xl shadow-sm ${iconClasses}`} aria-hidden>
+          <Icon className="size-5" />
+        </span>
+      )}
+      <span className="relative z-10 mt-auto block pt-10">
+        <span className={`block font-mono text-[10px] uppercase tracking-[0.12em] ${mutedClasses}`}>{content.metaLabel}</span>
+        <span className={`mt-2 block font-display font-semibold leading-tight tracking-[-0.02em] ${featured ? "max-w-md text-[1.65rem] sm:text-[2rem]" : "text-xl"}`}>
+          {content.title}
+        </span>
+        <span className={`mt-3 block max-w-xl text-sm leading-relaxed ${mutedClasses}`}>{content.description}</span>
+        <span className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold ${tone === "dark" ? "text-lime-300" : "text-lime-700"}`}>
+          {content.buttonLabel}
+          <IconArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+      </span>
+    </a>
   );
 }

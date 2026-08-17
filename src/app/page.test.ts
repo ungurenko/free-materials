@@ -2,13 +2,15 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 describe("home page promotion", () => {
-  it("places the VIBES promotion before the project materials", () => {
+  it("places the VIBES promotion after both prompt stages", () => {
     const pageSource = readFileSync(new URL("./page.tsx", import.meta.url), "utf8");
     const promoPosition = pageSource.indexOf("<PromoBanner");
     const projectsPosition = pageSource.indexOf('aria-labelledby="projects-title"');
+    const improvementsPosition = pageSource.indexOf("<ImprovementPromptsSection");
 
     expect(promoPosition).toBeGreaterThan(-1);
-    expect(promoPosition).toBeLessThan(projectsPosition);
+    expect(promoPosition).toBeGreaterThan(projectsPosition);
+    expect(promoPosition).toBeGreaterThan(improvementsPosition);
     expect(pageSource).toContain('import PromoBanner from "@/components/PromoBanner"');
   });
 
@@ -18,15 +20,15 @@ describe("home page promotion", () => {
     expect(componentSource).toMatch(/className="[^"]*w-full[^"]*sm:w-fit[^"]*"/);
   });
 
-  it("places free resource links between the guide materials and Telegram CTA", () => {
+  it("places compact free resource links after the course and guide materials", () => {
     const pageSource = readFileSync(new URL("./page.tsx", import.meta.url), "utf8");
+    const promoPosition = pageSource.indexOf("<PromoBanner");
     const resourcesPosition = pageSource.indexOf("<ResourcesSection");
     const usefulLinksPosition = pageSource.indexOf("<UsefulLinksSection");
-    const telegramPosition = pageSource.indexOf("<CtaTelegram");
 
     expect(pageSource).toContain('import UsefulLinksSection from "@/components/UsefulLinksSection"');
-    expect(resourcesPosition).toBeGreaterThan(-1);
+    expect(resourcesPosition).toBeGreaterThan(promoPosition);
     expect(usefulLinksPosition).toBeGreaterThan(resourcesPosition);
-    expect(usefulLinksPosition).toBeLessThan(telegramPosition);
+    expect(pageSource).not.toContain("<CtaTelegram");
   });
 });
