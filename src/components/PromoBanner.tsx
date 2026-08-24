@@ -12,7 +12,7 @@ export default function PromoBanner() {
   if (!promo.enabled) return null;
 
   return (
-    <section className="promo-banner-section container-x pt-12 sm:pt-16" aria-labelledby="promo-banner-title">
+    <section className="promo-banner-section container-x pt-4 sm:pt-6" aria-labelledby="promo-banner-title">
       <Reveal>
         <div className="group relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-moss-950 text-paper shadow-[0_34px_80px_-42px_rgba(27,33,19,0.75)] sm:rounded-[36px]">
           <div className="pointer-events-none absolute -left-24 -top-28 size-80 rounded-full bg-fuchsia-400/15 blur-3xl" aria-hidden />
@@ -20,7 +20,7 @@ export default function PromoBanner() {
           <div className="dot-grid-light pointer-events-none absolute inset-0 opacity-35" aria-hidden />
 
           <div className="relative grid items-center lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="z-10 min-w-0 px-6 py-8 sm:px-10 sm:py-11 lg:py-14 lg:pl-14 lg:pr-6">
+            <div className="z-10 min-w-0 px-6 py-8 sm:px-10 sm:py-10 lg:py-12 lg:pl-12 lg:pr-6">
               <Image
                 src={promo.logo.src}
                 alt={promo.logo.alt}
@@ -35,10 +35,10 @@ export default function PromoBanner() {
               <h2 id="promo-banner-title" className="mt-5 max-w-xl font-display text-[clamp(1.7rem,3.5vw,2.75rem)] font-semibold leading-[1.12] tracking-[-0.025em] text-paper">
                 {promo.title}
               </h2>
-              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70 sm:text-base">
+              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-white/70 sm:text-base">
                 {promo.description}
               </p>
-              <p className="mt-5 text-sm font-medium leading-relaxed text-lime-300 sm:text-[15px]">
+              <p className="mt-4 text-sm font-medium leading-relaxed text-lime-300 sm:text-[15px]">
                 {promo.meta}
               </p>
               <TrackedCourseLink

@@ -33,15 +33,15 @@ export default function ImprovementPromptsSection() {
       <div className="container-x relative">
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
           <div>
-            <p className="pill w-fit border border-lime-400/70 bg-paper/70 px-4 py-2 text-lime-700">{copy.eyebrow}</p>
-            <h2 id="improvement-prompts-title" className="mt-4 max-w-xl font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
+            <p className="pill w-fit border border-lime-400/70 bg-paper/70 px-3.5 py-2 text-lime-700">{copy.eyebrow}</p>
+            <h2 id="improvement-prompts-title" className="mt-5 max-w-xl font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
               {copy.title}
             </h2>
           </div>
           <p className="max-w-2xl text-[15px] leading-relaxed text-ink-soft sm:text-base lg:pb-1">{copy.description}</p>
         </div>
 
-        <div className="mt-7 space-y-2 lg:hidden">
+        <div className="mt-8 space-y-3 lg:hidden">
           {improvementPrompts.map((prompt, index) => {
             const active = activePromptId === prompt.id;
             const copied = copiedPromptId === prompt.id;
@@ -68,7 +68,7 @@ export default function ImprovementPromptsSection() {
                       type="button"
                       onClick={() => handlePromptCopy(prompt.id, prompt.text)}
                       aria-label={`${copy.copyLabel}: ${prompt.title}`}
-                      className="btn-primary mt-4 h-11 w-full px-4 text-sm sm:w-fit"
+                      className="btn-primary mt-4 h-11 w-full px-5 text-sm sm:w-fit"
                     >
                       {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
                       {copy.copyLabel}
@@ -81,7 +81,7 @@ export default function ImprovementPromptsSection() {
         </div>
 
         <div className="mt-8 hidden overflow-hidden rounded-[26px] border border-lime-300/80 bg-paper/85 shadow-[0_26px_64px_-46px_rgba(38,40,31,0.55)] lg:grid lg:grid-cols-[0.72fr_1.28fr]">
-          <div className="border-r border-lime-200 bg-milk/70 p-3" role="tablist" aria-label="Пять промптов для доводки проекта">
+          <div className="space-y-1.5 border-r border-lime-200 bg-milk/70 p-3" role="tablist" aria-label="Пять промптов для доводки проекта">
             {improvementPrompts.map((prompt, index) => {
               const active = activePromptId === prompt.id;
 
@@ -128,7 +128,7 @@ export default function ImprovementPromptsSection() {
               type="button"
               onClick={() => handlePromptCopy(activePrompt.id, activePrompt.text)}
               aria-label={`${copy.copyLabel}: ${activePrompt.title}`}
-              className="btn-primary relative z-10 mt-auto h-12 w-fit px-5 text-sm"
+              className="btn-primary relative z-10 mt-auto h-12 w-fit px-6 text-sm"
             >
               {copiedPromptId === activePrompt.id ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
               {copy.copyLabel}

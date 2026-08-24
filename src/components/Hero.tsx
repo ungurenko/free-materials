@@ -9,7 +9,7 @@ export default function Hero() {
   const { author } = siteConfig;
 
   return (
-    <section className="relative overflow-hidden pb-10 pt-8 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-20">
+    <section className="relative overflow-hidden pb-4 pt-8 sm:pb-6 sm:pt-14 lg:pb-8 lg:pt-20">
       <div className="dot-grid pointer-events-none absolute -right-16 top-10 hidden size-72 opacity-70 lg:block" style={{ maskImage: "radial-gradient(closest-side, black, transparent)" }} aria-hidden />
       <div className="pointer-events-none absolute -left-32 top-40 size-80 rounded-full bg-lime-200/50 blur-3xl" aria-hidden />
 

@@ -104,7 +104,7 @@ export default function ProjectGallery() {
 
   return (
     <>
-      <div className="project-grid mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="project-grid mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <button
             key={project.id}
@@ -165,7 +165,7 @@ export default function ProjectGallery() {
                 </button>
               </section>
 
-              <section className="mt-8 border-t border-line pt-6">
+              <section className="mt-7 border-t border-line pt-6">
                 <h3 className="font-display text-base font-semibold text-ink">{copy.servicesTitle}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">{activeProject.services.map((service) => <span key={service} className="rounded-full border border-line bg-milk px-3 py-1.5 text-sm text-ink-soft">{service}</span>)}</div>
               </section>

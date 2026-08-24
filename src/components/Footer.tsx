@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 export default function Footer() {
   return (
     <footer className="site-footer mt-16 border-t border-line sm:mt-20">
-      <div className="container-x flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between">
+      <div className="container-x flex flex-col gap-5 py-8 sm:flex-row sm:items-center sm:justify-between">
         <strong className="font-display text-sm font-medium tracking-tight">{pageCopy.footer.brand}</strong>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs text-ink-faint">
           <a

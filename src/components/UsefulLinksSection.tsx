@@ -28,19 +28,19 @@ export default function UsefulLinksSection() {
   const [youtube, ideaBot, telegram] = links;
 
   return (
-    <section className="container-x pt-12 sm:pt-16" aria-labelledby="useful-links-title">
+    <section className="container-x pt-16 sm:pt-20" aria-labelledby="useful-links-title">
       <div className="overflow-hidden rounded-[30px] border border-line bg-paper px-5 py-7 shadow-[0_28px_70px_-50px_rgba(38,40,31,0.45)] sm:px-8 sm:py-10 lg:px-10">
         <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] sm:items-end sm:gap-10">
           <div>
-            <p className="pill w-fit border border-line bg-milk px-3 py-1.5 text-ink-faint">{pageCopy.usefulLinks.eyebrow}</p>
-            <h2 id="useful-links-title" className="mt-4 font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
+            <p className="pill w-fit border border-line bg-milk px-3.5 py-2 text-ink-faint">{pageCopy.usefulLinks.eyebrow}</p>
+            <h2 id="useful-links-title" className="mt-5 font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
               {pageCopy.usefulLinks.title}
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-ink-soft sm:text-[15px]">{pageCopy.usefulLinks.description}</p>
         </div>
 
-        <div className="mt-7 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="mt-8 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
           <ResourceCard resource={youtube} featured />
           <div className="grid gap-4">
             <ResourceCard resource={ideaBot} tone="dark" />

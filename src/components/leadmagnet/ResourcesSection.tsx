@@ -84,14 +84,14 @@ export default function ResourcesSection() {
         <p className="mt-4 text-[15px] leading-relaxed text-ink-soft sm:text-base">{pageCopy.resources.description}</p>
       </div>
 
-      <div className="mt-9 space-y-3">
+      <div className="mt-8 space-y-3">
         <Accordion id="services" title={pageCopy.resources.servicesTitle} open={openPanels.includes("services")} onToggle={() => togglePanel("services")}>
           <div className="grid gap-4 lg:grid-cols-3">
             {services.map((service) => (
               <article key={service.id} className="flex flex-col rounded-2xl border border-line bg-milk/55 p-5">
                 <h4 className="font-display text-base font-semibold text-ink">{service.name}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{service.description}</p>
-                <a href={service.url} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 h-11 px-4 text-sm">{service.buttonLabel}</a>
+                <a href={service.url} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 h-11 px-5 text-sm">{service.buttonLabel}</a>
               </article>
             ))}
           </div>
