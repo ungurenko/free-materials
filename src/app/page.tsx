@@ -17,7 +17,7 @@ export default function HomePage() {
           <h2 id="projects-title" className="mt-5 font-display text-[1.65rem] font-semibold leading-tight tracking-[-0.015em] text-ink sm:text-[2.15rem]">
             {pageCopy.projects.title}
           </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-ink-soft sm:text-base">{pageCopy.projects.description}</p>
+          <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft sm:text-base">{pageCopy.projects.description}</p>
         </div>
         <ProjectGallery />
       </section>

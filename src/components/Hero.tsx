@@ -14,13 +14,13 @@ export default function Hero() {
       <div className="pointer-events-none absolute -left-32 top-40 size-80 rounded-full bg-lime-200/50 blur-3xl" aria-hidden />
 
       <div className="container-x grid items-center gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:gap-16">
-        <Reveal className="relative z-10 max-w-2xl">
+        <Reveal className="relative z-10 min-w-0 max-w-2xl">
           <p className="pill w-fit border border-lime-300/70 bg-lime-100 px-3.5 py-2 text-lime-700">
             <span className="anim-pulse-dot size-1.5 rounded-full bg-lime-600" aria-hidden />
             {pageCopy.hero.eyebrow}
           </p>
 
-          <h1 data-hero-headline="true" className="mt-5 font-display text-[clamp(2rem,7vw,4.1rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ink">
+          <h1 data-hero-headline="true" className="mt-5 min-w-0 break-words font-display text-[clamp(2rem,7vw,4.1rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ink hyphens-auto">
             Стартовый набор
             <span className="mt-1 block text-lime-700">для вайб-кодинга</span>
           </h1>
@@ -40,17 +40,17 @@ export default function Hero() {
           </figure>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href="#projects" className="btn-primary min-h-12 w-full px-6 text-[15px] sm:w-fit">
+            <a href="#projects" className="btn-primary h-auto min-h-12 w-full whitespace-normal px-6 py-3 text-center text-[0.9375rem] sm:w-fit sm:whitespace-nowrap">
               {pageCopy.hero.primaryAction}
-              <IconArrowRight className="size-4" />
+              <IconArrowRight className="size-4 shrink-0 rtl:-scale-x-100" />
             </a>
-            <TrackedCourseLink placement="hero" className="btn-ghost min-h-12 w-full px-6 text-[15px] sm:w-fit">
+            <TrackedCourseLink placement="hero" className="btn-ghost h-auto min-h-12 w-full whitespace-normal px-6 py-3 text-center text-[0.9375rem] sm:w-fit sm:whitespace-nowrap">
               {pageCopy.hero.courseAction}
-              <IconArrowUpRight className="size-[18px]" />
+              <IconArrowUpRight className="size-[1.125rem] shrink-0 rtl:-scale-x-100" />
             </TrackedCourseLink>
           </div>
 
-          <div className="mt-6 flex items-center gap-2.5 border-t border-line pt-4 text-[13px] leading-snug text-ink-soft">
+          <div className="mt-6 flex items-start gap-2.5 border-t border-line pt-4 text-[0.8125rem] leading-snug text-ink-soft">
             <span className="font-semibold text-lime-600" aria-hidden>✓</span>
             <p>{pageCopy.hero.mobile.meta}</p>
           </div>
@@ -70,12 +70,12 @@ export default function Hero() {
                 className="object-cover object-center"
               />
             </div>
-            <figcaption className="absolute -bottom-5 left-8 flex min-w-[310px] items-center gap-3.5 rounded-2xl border border-line bg-paper px-5 py-4 shadow-[0_18px_44px_-22px_rgba(38,40,31,0.35)]">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-lime-200 font-display text-sm font-semibold text-lime-700">
+            <figcaption className="absolute -bottom-5 start-8 end-8 flex min-w-0 items-center gap-3.5 rounded-2xl border border-line bg-paper px-5 py-4 shadow-[0_18px_44px_-22px_rgba(38,40,31,0.35)]">
+              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-lime-200 font-display text-sm font-semibold text-on-accent">
                 {author.initials}
               </span>
               <span className="min-w-0">
-                <span className="block text-[15px] font-semibold text-ink">{author.name}</span>
+                <span className="block text-[0.9375rem] font-semibold text-ink">{author.name}</span>
                 <span className="mt-0.5 block text-xs text-ink-soft">{author.role}</span>
               </span>
             </figcaption>

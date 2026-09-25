@@ -11,8 +11,8 @@ export default function NotFound() {
       <p className="mt-4 text-base leading-relaxed text-ink-soft">
         {"Возможно, ссылка устарела. На\u00A0главной — «Вайб-кодинг с\u00A0нуля» и\u00A0пять готовых промптов."}
       </p>
-      <Link href="/" className="btn-primary mt-8 h-12 px-6 text-[15px]">
-        <IconChevronLeft className="size-5" />
+      <Link href="/" className="btn-primary mt-8 h-auto min-h-12 whitespace-normal px-6 py-3 text-center text-[0.9375rem] sm:whitespace-nowrap">
+        <IconChevronLeft className="size-5 shrink-0 rtl:-scale-x-100" />
         На главную
       </Link>
     </div>

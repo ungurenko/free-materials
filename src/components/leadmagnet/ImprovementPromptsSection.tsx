@@ -32,13 +32,13 @@ export default function ImprovementPromptsSection() {
       <div className="dot-grid pointer-events-none absolute -right-20 -top-16 size-80 opacity-60" aria-hidden />
       <div className="container-x relative">
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
-          <div>
+          <div className="min-w-0">
             <p className="pill w-fit border border-lime-400/70 bg-paper/70 px-3.5 py-2 text-lime-700">{copy.eyebrow}</p>
             <h2 id="improvement-prompts-title" className="mt-5 max-w-xl font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
               {copy.title}
             </h2>
           </div>
-          <p className="max-w-2xl text-[15px] leading-relaxed text-ink-soft sm:text-base lg:pb-1">{copy.description}</p>
+          <p className="min-w-0 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-soft sm:text-base lg:pb-1">{copy.description}</p>
         </div>
 
         <div className="mt-8 space-y-3 lg:hidden">
@@ -53,13 +53,13 @@ export default function ImprovementPromptsSection() {
                   onClick={() => setActivePromptId(prompt.id)}
                   aria-expanded={active}
                   aria-controls={`mobile-panel-${prompt.id}`}
-                  className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
+                  className="flex w-full min-w-0 items-center gap-3 px-4 py-3.5 text-start"
                 >
-                  <span className={`grid size-8 shrink-0 place-items-center rounded-full font-mono text-[11px] font-semibold ${active ? "bg-moss-950 text-paper" : "bg-lime-200 text-lime-700"}`} aria-hidden>
+                  <span className={`grid size-8 shrink-0 place-items-center rounded-full font-mono text-[0.6875rem] font-semibold ${active ? "bg-moss-950 text-on-dark" : "bg-lime-200 text-on-accent"}`} aria-hidden>
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="min-w-0 flex-1 font-display text-[15px] font-semibold leading-snug text-ink">{prompt.title}</span>
-                  <IconArrowRight className={`size-4 shrink-0 text-lime-700 transition-transform ${active ? "rotate-90" : ""}`} />
+                  <span className="min-w-0 flex-1 font-display text-[0.9375rem] font-semibold leading-snug text-ink">{prompt.title}</span>
+                  <IconArrowRight className={`size-4 shrink-0 text-lime-700 transition-transform rtl:-scale-x-100 ${active ? "rotate-90" : ""}`} />
                 </button>
                 {active && (
                   <div id={`mobile-panel-${prompt.id}`} className="border-t border-lime-200 px-4 pb-4 pt-3">
@@ -68,7 +68,7 @@ export default function ImprovementPromptsSection() {
                       type="button"
                       onClick={() => handlePromptCopy(prompt.id, prompt.text)}
                       aria-label={`${copy.copyLabel}: ${prompt.title}`}
-                      className="btn-primary mt-4 h-11 w-full px-5 text-sm sm:w-fit"
+                      className="btn-primary mt-4 h-auto min-h-11 w-full whitespace-normal px-5 py-3 text-center text-sm sm:w-fit"
                     >
                       {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
                       {copy.copyLabel}
@@ -81,7 +81,7 @@ export default function ImprovementPromptsSection() {
         </div>
 
         <div className="mt-8 hidden overflow-hidden rounded-[26px] border border-lime-300/80 bg-paper/85 shadow-[0_26px_64px_-46px_rgba(38,40,31,0.55)] lg:grid lg:grid-cols-[0.72fr_1.28fr]">
-          <div className="space-y-1.5 border-r border-lime-200 bg-milk/70 p-3" role="tablist" aria-label="Пять промптов для доводки проекта">
+          <div className="space-y-1.5 border-e border-lime-200 bg-milk/70 p-3" role="tablist" aria-label="Пять промптов для доводки проекта">
             {improvementPrompts.map((prompt, index) => {
               const active = activePromptId === prompt.id;
 
@@ -94,13 +94,13 @@ export default function ImprovementPromptsSection() {
                   aria-selected={active}
                   aria-controls={`desktop-panel-${prompt.id}`}
                   onClick={() => setActivePromptId(prompt.id)}
-                  className={`group flex min-h-[68px] w-full items-center gap-3 rounded-2xl px-4 py-3 text-left transition ${active ? "bg-moss-950 text-paper shadow-[0_14px_30px_-22px_rgba(27,33,19,0.75)]" : "text-ink hover:bg-lime-100"}`}
+                  className={`group flex min-h-[68px] w-full min-w-0 items-center gap-3 rounded-2xl px-4 py-3 text-start transition ${active ? "bg-moss-950 text-on-dark shadow-[0_14px_30px_-22px_rgba(27,33,19,0.75)]" : "text-ink hover:bg-lime-100"}`}
                 >
-                  <span className={`grid size-8 shrink-0 place-items-center rounded-full font-mono text-[11px] font-semibold ${active ? "bg-lime-300 text-moss-950" : "bg-paper text-lime-700"}`} aria-hidden>
+                  <span className={`grid size-8 shrink-0 place-items-center rounded-full font-mono text-[0.6875rem] font-semibold ${active ? "bg-lime-300 text-moss-950" : "bg-paper text-lime-700"}`} aria-hidden>
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="min-w-0 flex-1 font-display text-sm font-semibold leading-snug">{prompt.title}</span>
-                  <IconArrowRight className={`size-4 shrink-0 transition-transform ${active ? "translate-x-0.5 text-lime-300" : "text-ink-faint group-hover:translate-x-0.5"}`} />
+                  <IconArrowRight className={`size-4 shrink-0 transition-transform rtl:-scale-x-100 ${active ? "text-lime-300 ltr:translate-x-0.5 rtl:-translate-x-0.5" : "text-ink-faint ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5"}`} />
                 </button>
               );
             })}
@@ -116,19 +116,19 @@ export default function ImprovementPromptsSection() {
               {String(activePromptIndex + 1).padStart(2, "0")}
             </span>
             <div className="relative z-10">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.13em] text-lime-700">
+              <p className="font-mono text-[0.6875rem] font-semibold uppercase tracking-[0.13em] text-lime-700">
                 Шаг {activePromptIndex + 1} из {improvementPrompts.length}
               </p>
               <h3 className="mt-4 max-w-xl font-display text-[1.75rem] font-semibold leading-tight tracking-[-0.025em] text-ink xl:text-[2rem]">
                 {activePrompt.title}
               </h3>
-              <p className="mt-5 max-w-2xl text-[15px] leading-[1.75] text-ink-soft xl:text-base">{activePrompt.text}</p>
+              <p className="mt-5 max-w-2xl text-[0.9375rem] leading-[1.75] text-ink-soft xl:text-base">{activePrompt.text}</p>
             </div>
             <button
               type="button"
               onClick={() => handlePromptCopy(activePrompt.id, activePrompt.text)}
               aria-label={`${copy.copyLabel}: ${activePrompt.title}`}
-              className="btn-primary relative z-10 mt-auto h-12 w-fit px-6 text-sm"
+              className="btn-primary relative z-10 mt-auto h-auto min-h-12 w-fit whitespace-normal px-6 py-3 text-center text-sm"
             >
               {copiedPromptId === activePrompt.id ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
               {copy.copyLabel}
@@ -137,7 +137,7 @@ export default function ImprovementPromptsSection() {
         </div>
       </div>
 
-      <p className={`fixed bottom-5 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-moss-950 px-4 py-2.5 text-sm text-paper shadow-xl transition ${copyStatus ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`} role="status" aria-live="polite">
+      <p className={`fixed bottom-5 left-1/2 z-[90] -translate-x-1/2 rounded-full bg-moss-950 px-4 py-2.5 text-sm text-on-dark shadow-xl transition ${copyStatus ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`} role="status" aria-live="polite">
         {copyStatus}
       </p>
     </section>

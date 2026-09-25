@@ -52,3 +52,12 @@ describe("site free resource links", () => {
     });
   });
 });
+
+describe("site analytics configuration", () => {
+  it("enables the dedicated Cloudflare Web Analytics site", () => {
+    expect(siteConfig.analytics.cloudflare).toEqual({
+      enabled: true,
+      token: "9986d96ba3bb4bc38ff5359411de7533",
+    });
+  });
+});

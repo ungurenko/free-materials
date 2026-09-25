@@ -30,14 +30,14 @@ export default function UsefulLinksSection() {
   return (
     <section className="container-x pt-16 sm:pt-20" aria-labelledby="useful-links-title">
       <div className="overflow-hidden rounded-[30px] border border-line bg-paper px-5 py-7 shadow-[0_28px_70px_-50px_rgba(38,40,31,0.45)] sm:px-8 sm:py-10 lg:px-10">
-        <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] sm:items-end sm:gap-10">
-          <div>
+        <div className="grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] xl:items-end xl:gap-10">
+          <div className="min-w-0">
             <p className="pill w-fit border border-line bg-milk px-3.5 py-2 text-ink-faint">{pageCopy.usefulLinks.eyebrow}</p>
-            <h2 id="useful-links-title" className="mt-5 font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[2.35rem]">
+            <h2 id="useful-links-title" className="mt-5 min-w-0 break-words font-display text-[1.8rem] font-semibold leading-tight tracking-[-0.025em] text-ink hyphens-auto sm:text-[2.35rem]">
               {pageCopy.usefulLinks.title}
             </h2>
           </div>
-          <p className="text-sm leading-relaxed text-ink-soft sm:text-[15px]">{pageCopy.usefulLinks.description}</p>
+          <p className="min-w-0 break-words text-sm leading-relaxed text-ink-soft hyphens-auto sm:text-[0.9375rem]">{pageCopy.usefulLinks.description}</p>
         </div>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
@@ -57,19 +57,19 @@ type Resource = (typeof links)[number];
 function ResourceCard({ resource, featured = false, tone = "light" }: { resource: Resource; featured?: boolean; tone?: "light" | "dark" | "lime" }) {
   const { icon: Icon, content, url } = resource;
   const toneClasses = {
-    light: "border-[#f0d7ce] bg-[#fff4ef] text-ink",
-    dark: "border-moss-800 bg-moss-950 text-paper",
+    light: "border-blush-border bg-blush-surface text-ink",
+    dark: "border-moss-800 bg-moss-950 text-on-dark",
     lime: "border-lime-300 bg-lime-100 text-ink",
   }[tone];
-  const mutedClasses = tone === "dark" ? "text-paper/70" : "text-ink-soft";
-  const iconClasses = tone === "dark" ? "bg-paper/10 text-lime-300" : "bg-paper text-lime-700";
+  const mutedClasses = tone === "dark" ? "text-on-dark/70" : "text-ink-soft";
+  const iconClasses = tone === "dark" ? "bg-on-dark/10 text-lime-300" : "bg-paper text-lime-700";
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative flex flex-col overflow-hidden rounded-[24px] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-34px_rgba(38,40,31,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-lime-600 ${featured ? "min-h-[320px] sm:p-8" : "min-h-[210px]"} ${toneClasses}`}
+      className={`group relative flex min-w-0 flex-col overflow-hidden rounded-[24px] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-34px_rgba(38,40,31,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-lime-600 ${featured ? "min-h-[320px] sm:p-8" : "min-h-[210px]"} ${toneClasses}`}
     >
       {featured ? (
         <>
@@ -81,7 +81,7 @@ function ResourceCard({ resource, featured = false, tone = "light" }: { resource
             className="pointer-events-none absolute -right-[14%] -top-[4%] w-[78%] rotate-[-5deg] opacity-25 sm:-right-[10%] sm:-top-[8%] sm:w-[72%]"
             aria-hidden
           />
-          <span className="relative z-10 w-fit rounded-full border border-[#efb5ab] bg-paper/85 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#b83227] backdrop-blur-sm">
+          <span className="relative z-10 w-fit rounded-full border border-blush-strong bg-paper/85 px-3 py-1.5 font-mono text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-blush-text backdrop-blur-sm">
             Бесплатно
           </span>
         </>
@@ -90,15 +90,15 @@ function ResourceCard({ resource, featured = false, tone = "light" }: { resource
           <Icon className="size-5" />
         </span>
       )}
-      <span className="relative z-10 mt-auto block pt-10">
-        <span className={`block font-mono text-[10px] uppercase tracking-[0.12em] ${mutedClasses}`}>{content.metaLabel}</span>
+      <span className="relative z-10 mt-auto block min-w-0 break-words pt-10 hyphens-auto">
+        <span className={`block font-mono text-[0.625rem] uppercase tracking-[0.12em] ${mutedClasses}`}>{content.metaLabel}</span>
         <span className={`mt-2 block font-display font-semibold leading-tight tracking-[-0.02em] ${featured ? "max-w-md text-[1.65rem] sm:text-[2rem]" : "text-xl"}`}>
           {content.title}
         </span>
         <span className={`mt-3 block max-w-xl text-sm leading-relaxed ${mutedClasses}`}>{content.description}</span>
         <span className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold ${tone === "dark" ? "text-lime-300" : "text-lime-700"}`}>
           {content.buttonLabel}
-          <IconArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <IconArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 rtl:-scale-x-100" />
         </span>
       </span>
     </a>

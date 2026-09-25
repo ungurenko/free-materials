@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
@@ -8,9 +8,14 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM caddy:2-alpine AS runner
+FROM caddy:2-alpine
 
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY --from=builder /app/out /srv
+WORKDIR /app
 
-EXPOSE 3000
+COPY Caddyfile ./Caddyfile
+RUN caddy fmt Caddyfile --overwrite \
+    && caddy validate --config Caddyfile --adapter caddyfile
+
+COPY --from=build /app/out ./out
+
+CMD ["caddy", "run", "--config", "Caddyfile", "--adapter", "caddyfile"]

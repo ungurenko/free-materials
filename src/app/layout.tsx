@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Golos_Text, JetBrains_Mono, Unbounded } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/config/site";
@@ -69,20 +70,36 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f6f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#171913" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { analytics } = siteConfig;
+
   return (
     <html lang="ru" className={`${golos.variable} ${unbounded.variable} ${jetbrains.variable}`}>
       <head>
-        <meta name="theme-color" content="#F6F6F0" />
+        {analytics.cloudflare.enabled && analytics.cloudflare.token && (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: analytics.cloudflare.token })}
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body>
         <a
           href="#main"
-          className="fixed left-3 top-3 z-[100] -translate-y-24 rounded-xl bg-moss-950 px-4 py-2.5 text-sm font-medium text-paper transition-transform focus:translate-y-0"
+          className="fixed start-3 top-3 z-[100] -translate-y-24 rounded-xl bg-moss-950 px-4 py-2.5 text-sm font-medium text-on-dark transition-transform focus:translate-y-0"
         >
           Перейти к материалам
         </a>

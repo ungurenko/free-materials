@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Дизайн-токены: молочная палитра + приглушённый салатовый акцент
+   Дизайн-токены: светлая и тёмная палитры
    ============================================================ */
 @theme {
   --color-milk: #f6f6f0;
   --color-paper: #fdfdf8;
+  --color-on-dark: #fdfdf8;
+  --color-on-accent: #262e1b;
   --color-ink: #26281f;
   --color-ink-soft: #5f6355;
-  --color-ink-faint: #8f927f;
+  --color-ink-faint: #6e7362;
   --color-line: #e5e6da;
   --color-line-strong: #d3d5c4;
 
@@ -18,11 +20,20 @@
   --color-lime-400: #b2c96e;
   --color-lime-500: #99b64f;
   --color-lime-600: #7c9838;
-  --color-lime-700: #637a2c;
+  --color-lime-700: #5f7629;
 
   --color-moss-800: #38422a;
   --color-moss-900: #262e1b;
   --color-moss-950: #1b2113;
+
+  --color-blush-surface: #fff4ef;
+  --color-blush-border: #f0d7ce;
+  --color-blush-strong: #efb5ab;
+  --color-blush-text: #b83227;
+  --color-code-surface: #f1f2e9;
+  --color-safety-surface: #fff7f4;
+  --color-safety-border: #e4c9c2;
+  --color-safety-text: #6d3530;
 
   --font-display: var(--font-unbounded), "Golos Text", sans-serif;
   --font-body: var(--font-golos), "Segoe UI", Tahoma, sans-serif;
@@ -30,8 +41,18 @@
 }
 
 /* ---------- база ---------- */
+:root {
+  --spacing: min(0.25rem, 4px);
+}
+
 html {
+  color-scheme: light dark;
   scroll-behavior: smooth;
+}
+
+html[dir="rtl"] {
+  --font-display: Tahoma, Arial, sans-serif;
+  --font-body: Tahoma, Arial, sans-serif;
 }
 
 body {
@@ -39,8 +60,8 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
   position: relative;
 }
 
@@ -55,6 +76,46 @@ body::before {
     radial-gradient(900px 420px at 8% -6%, rgba(153, 182, 79, 0.14), transparent 62%),
     radial-gradient(720px 380px at 96% 4%, rgba(153, 182, 79, 0.09), transparent 60%),
     linear-gradient(180deg, #f9f9f3 0%, #f6f6f0 340px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-milk: #171913;
+    --color-paper: #20241b;
+    --color-on-dark: #f4f5ec;
+    --color-on-accent: #f4f5ec;
+    --color-ink: #f4f5ec;
+    --color-ink-soft: #c2c6b7;
+    --color-ink-faint: #a5aa99;
+    --color-line: #363b2f;
+    --color-line-strong: #4a5140;
+    --color-lime-100: #26301d;
+    --color-lime-200: #334020;
+    --color-lime-700: #c9e293;
+    --color-blush-surface: #2b211e;
+    --color-blush-border: #60483f;
+    --color-blush-strong: #86574f;
+    --color-blush-text: #ffb6aa;
+    --color-code-surface: #25291f;
+    --color-safety-surface: #2a201d;
+    --color-safety-border: #6b4b44;
+    --color-safety-text: #f0b8ad;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body::before {
+    background:
+      radial-gradient(900px 420px at 8% -6%, rgba(153, 182, 79, 0.1), transparent 62%),
+      radial-gradient(720px 380px at 96% 4%, rgba(153, 182, 79, 0.07), transparent 60%),
+      linear-gradient(180deg, #1b1e17 0%, #171913 340px);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(rgba(244, 245, 236, 0.12) 1px, transparent 1.3px);
+  }
 }
 
 /* деликатное зерно поверх всего */
@@ -135,11 +196,11 @@ iframe {
     margin-inline: auto;
     width: 100%;
     max-width: 72rem;
-    padding-inline: 1.25rem;
+    padding-inline: min(1.25rem, 20px);
   }
   @media (min-width: 640px) {
     .container-x {
-      padding-inline: 2rem;
+      padding-inline: min(2rem, 32px);
     }
   }
 
@@ -154,7 +215,9 @@ iframe {
     font-weight: 500;
     line-height: 1;
     cursor: pointer;
-    white-space: nowrap;
+    min-width: 0;
+    text-align: center;
+    white-space: normal;
     transition:
       background-color 0.2s ease,
       border-color 0.2s ease,
@@ -200,7 +263,10 @@ iframe {
   .pill {
     display: inline-flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    max-width: 100%;
+    min-width: 0;
     border-radius: 9999px;
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -214,16 +280,16 @@ iframe {
   .nav-link::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 100%;
+    inset-inline-start: 0;
+    inset-inline-end: 100%;
     bottom: -4px;
     height: 2px;
     border-radius: 2px;
     background: var(--color-lime-500);
-    transition: right 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: inset-inline-end 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .nav-link:hover::after {
-    right: 0;
+    inset-inline-end: 0;
   }
 
   .dot-grid {

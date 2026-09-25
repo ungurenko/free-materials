@@ -9,6 +9,17 @@ interface SocialLink {
   url: string;
 }
 
+interface AnalyticsConfig {
+  cloudflare: {
+    enabled: boolean;
+    token: string;
+  };
+  umami: {
+    enabled: boolean;
+    websiteId?: string;
+    src: string;
+  };
+}
 interface PromoMedia {
   src: string;
   alt: string;
@@ -48,6 +59,7 @@ interface SiteConfig {
     youtube: SocialLink;
     ideaBot: SocialLink;
   };
+  analytics: AnalyticsConfig;
 }
 
 export const siteConfig: SiteConfig = {
@@ -109,6 +121,18 @@ export const siteConfig: SiteConfig = {
       label: "Бот с идеями",
       handle: "@Vibecoding_Ideas_Bot",
       url: "https://t.me/Vibecoding_Ideas_Bot",
+    },
+  },
+
+  analytics: {
+    cloudflare: {
+      enabled: true,
+      token: "9986d96ba3bb4bc38ff5359411de7533",
+    },
+    umami: {
+      enabled: false,
+      websiteId: undefined,
+      src: "https://cloud.umami.is/script.js",
     },
   },
 };

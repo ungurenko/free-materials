@@ -10,8 +10,10 @@ Production: [free.ungurenko.ru](https://free.ungurenko.ru)
 - **React 19**
 - **TypeScript** (strict mode)
 - **Tailwind CSS 4**
+- **Zod** (валидация контента)
 - **Vercel Analytics**
-- **Vercel**
+- **Railway + Caddy** (деплой статического сайта)
+- **Cloudflare Web Analytics** (статистика посещений)
 
 ## Быстрый старт
 
@@ -38,7 +40,41 @@ public/images/         # фото автора, обложки и баннер
 
 Основные данные сайта находятся в `src/config/site.ts`: production-домен, SEO, автор, соцсети и баннер. Контент лид-магнита редактируется в `src/content/leadmagnet.ts`.
 
-Базовая веб-аналитика подключена через Vercel Analytics. Отдельные ключи или переменные окружения для неё не нужны.
+Базовая веб-аналитика подключена через Vercel Analytics. Cloudflare Web Analytics включается
+и настраивается в `src/config/site.ts`; сайт статический, поэтому конфигурация добавляется во время сборки.
+
+## Деплой на Railway
+
+Сайт работает по адресу [https://free.ungurenko.ru](https://free.ungurenko.ru).
+
+Railway собирает проект через `Dockerfile`. Next.js создаёт статическую версию сайта в папке
+`out/`, после чего Caddy раздаёт готовые файлы и отвечает `ok` по адресу `/health`.
+
+Домен `free.ungurenko.ru` направлен на Railway через DNS-запись в Cloudflare.
+
+## Статистика Cloudflare Web Analytics
+
+Для `free.ungurenko.ru` создан отдельный сайт в Cloudflare Web Analytics. Счётчик подключён
+в `src/app/layout.tsx`, а его настройка хранится в `src/config/site.ts`.
+
+### Как открыть статистику
+
+1. Откройте [Cloudflare Dashboard](https://dash.cloudflare.com/) и войдите в аккаунт Александра.
+2. В левом меню выберите **Web Analytics**.
+3. Откройте сайт **free.ungurenko.ru**.
+4. В правом верхнем углу выберите нужный период: последние сутки, неделю или месяц.
+
+В отчёте доступны:
+
+- **Visits** — количество посещений;
+- **Page views** — сколько страниц просмотрели;
+- **Referrers** — откуда пришли посетители;
+- **Paths** — какие страницы смотрели;
+- страны, устройства, браузеры и операционные системы;
+- скорость загрузки и показатели Core Web Vitals.
+
+Новые посещения могут появляться в отчёте с задержкой в несколько минут. Техническую нагрузку
+сайта — процессор, память, сеть и ответы сервера — нужно смотреть отдельно в метриках Railway.
 
 ## Проверки
 
@@ -53,7 +89,9 @@ npm run build
 
 ## Деплой
 
-Сайт публикуется в Vercel из ветки `main`. Старый адрес `free-materials.vercel.app` после деплоя перенаправляет посетителя на `https://free.ungurenko.ru`.
+Основной сайт публикуется в Railway из ветки `main` через `Dockerfile` и Caddy.
+Конфигурация Vercel сохраняет перенаправление со старого адреса
+`free-materials.vercel.app` на `https://free.ungurenko.ru`.
 
 ## Лицензия
 

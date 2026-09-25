@@ -20,7 +20,7 @@ function Accordion({
   children: ReactNode;
 }) {
   return (
-    <article className="overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_16px_38px_-34px_rgba(38,40,31,0.4)]">
+    <article className="min-w-0 overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_16px_38px_-34px_rgba(38,40,31,0.4)]">
       <h3>
         <button
           type="button"
@@ -28,9 +28,9 @@ function Accordion({
           aria-expanded={open}
           aria-controls={`panel-${id}`}
           id={`trigger-${id}`}
-          className="flex w-full items-center justify-between gap-5 px-5 py-5 text-left transition-colors hover:bg-lime-100/60 sm:px-6"
+          className="flex w-full min-w-0 items-center justify-between gap-5 px-5 py-5 text-start transition-colors hover:bg-lime-100/60 sm:px-6"
         >
-          <span className="font-display text-[15px] font-semibold leading-snug text-ink sm:text-base">{title}</span>
+          <span className="min-w-0 break-words font-display text-[0.9375rem] font-semibold leading-snug text-ink sm:text-base">{title}</span>
           <span className={`grid size-8 shrink-0 place-items-center rounded-full border border-line bg-milk text-xl font-light text-ink-soft transition-transform ${open ? "rotate-45" : ""}`} aria-hidden>+</span>
         </button>
       </h3>
@@ -39,7 +39,7 @@ function Accordion({
         role="region"
         aria-labelledby={`trigger-${id}`}
         hidden={!open}
-        className="accordion-panel border-t border-line px-5 py-6 sm:px-6"
+        className="accordion-panel min-w-0 border-t border-line px-5 py-6 sm:px-6"
       >
         {children}
       </section>
@@ -81,21 +81,21 @@ export default function ResourcesSection() {
         <h2 id="resources-title" className="font-display text-[1.65rem] font-semibold leading-tight tracking-[-0.015em] text-ink sm:text-[2.15rem]">
           {pageCopy.resources.title}
         </h2>
-        <p className="mt-4 text-[15px] leading-relaxed text-ink-soft sm:text-base">{pageCopy.resources.description}</p>
+        <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft sm:text-base">{pageCopy.resources.description}</p>
       </div>
 
       <div className="mt-8 space-y-3">
         <Accordion id="services" title={pageCopy.resources.servicesTitle} open={openPanels.includes("services")} onToggle={() => togglePanel("services")}>
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid min-w-0 gap-4 lg:grid-cols-3">
             {services.map((service) => (
-              <article key={service.id} className="flex flex-col rounded-2xl border border-line bg-milk/55 p-5">
+              <article key={service.id} className="flex min-w-0 flex-col rounded-2xl border border-line bg-milk/55 p-5">
                 <h4 className="font-display text-base font-semibold text-ink">{service.name}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{service.description}</p>
-                <a href={service.url} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 h-11 px-5 text-sm">{service.buttonLabel}</a>
+                <a href={service.url} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 h-auto min-h-11 w-full whitespace-normal px-5 py-3 text-center text-sm">{service.buttonLabel}</a>
               </article>
             ))}
           </div>
-          <p className="mt-5 text-[15px] font-semibold text-ink">{pageCopy.resources.servicesRecommendation}</p>
+          <p className="mt-5 break-words text-[0.9375rem] font-semibold text-ink">{pageCopy.resources.servicesRecommendation}</p>
         </Accordion>
 
         <Accordion id="checklist" title={pageCopy.resources.checklistTitle} open={openPanels.includes("checklist")} onToggle={() => togglePanel("checklist")}>
@@ -104,7 +104,7 @@ export default function ResourcesSection() {
             {checklistItems.map((item, index) => (
               <label key={item} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-milk/55 p-3.5 transition-colors hover:border-lime-400">
                 <input type="checkbox" checked={checkedIndexes.includes(index)} onChange={() => handleCheck(index)} className="mt-0.5 size-5 shrink-0 accent-lime-600" />
-                <span className="text-sm leading-snug text-ink">{item}</span>
+                <span className="min-w-0 text-sm leading-snug text-ink">{item}</span>
               </label>
             ))}
           </div>
@@ -112,13 +112,13 @@ export default function ResourcesSection() {
             <span className="shrink-0 font-mono text-xs text-ink-soft">Проверено: {progress.count} из {checklistItems.length}</span>
             <span className="h-2 flex-1 overflow-hidden rounded-full bg-line" aria-hidden><span className="block h-full rounded-full bg-lime-500 transition-[width] duration-300" style={{ width: `${progress.percent}%` }} /></span>
           </div>
-          {progress.complete && <p className="mt-5 rounded-xl border border-lime-300 bg-lime-100 p-4 text-sm font-semibold text-moss-900">{pageCopy.resources.completeStatus}</p>}
+          {progress.complete && <p className="mt-5 rounded-xl border border-lime-300 bg-lime-100 p-4 text-sm font-semibold text-on-accent">{pageCopy.resources.completeStatus}</p>}
         </Accordion>
 
         <Accordion id="safety" title={pageCopy.resources.safetyTitle} open={openPanels.includes("safety")} onToggle={() => togglePanel("safety")}>
-          <div className="rounded-2xl border border-[#e4c9c2] bg-[#fff7f4] p-5 text-[#6d3530]">
-            <strong className="text-[15px]">{safetyRules.intro}</strong>
-            <ul className="mt-4 list-disc space-y-1.5 pl-5 text-sm leading-relaxed">{safetyRules.items.map((item) => <li key={item}>{item}</li>)}</ul>
+          <div className="rounded-2xl border border-safety-border bg-safety-surface p-5 text-safety-text">
+            <strong className="text-[0.9375rem]">{safetyRules.intro}</strong>
+            <ul className="mt-4 list-disc space-y-1.5 ps-5 text-sm leading-relaxed">{safetyRules.items.map((item) => <li key={item}>{item}</li>)}</ul>
             <p className="mt-4 text-sm leading-relaxed">{safetyRules.note}</p>
           </div>
         </Accordion>
