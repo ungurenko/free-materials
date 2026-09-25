@@ -140,9 +140,14 @@ export default function ProjectGallery() {
             key={project.id}
             type="button"
             onClick={() => openProject(project.id)}
-            aria-label={`${copy.openAriaPrefix}: ${project.cardTitle}`}
-            className="tilt-card group flex h-full min-w-0 flex-col rounded-[26px] border border-line bg-paper p-3 text-start shadow-[0_22px_52px_-38px_rgba(38,40,31,0.4)] hover:border-lime-400 hover:shadow-[0_28px_58px_-34px_rgba(38,40,31,0.45)]"
+            aria-label={`${copy.openAriaPrefix}: ${project.cardTitle}${project.isNew ? `. ${pageCopy.projects.newLabel}` : ""}`}
+            className={`tilt-card group relative flex h-full min-w-0 flex-col rounded-[26px] border p-3 text-start shadow-[0_22px_52px_-38px_rgba(38,40,31,0.4)] hover:border-lime-400 hover:shadow-[0_28px_58px_-34px_rgba(38,40,31,0.45)] ${project.isNew ? "border-lime-400 bg-lime-100" : "border-line bg-paper"}`}
           >
+            {project.isNew && (
+              <span className="pill absolute left-6 top-6 z-10 bg-moss-900 px-3 py-1.5 text-[0.6875rem] font-semibold text-lime-300 shadow-[0_8px_20px_-10px_rgba(38,40,31,0.6)]">
+                <span aria-hidden="true">✦</span> {pageCopy.projects.newLabel}
+              </span>
+            )}
             <ProjectCover project={project} />
             <span className="flex flex-1 flex-col px-2 pb-2 pt-5">
               <span className="font-display text-[1.05rem] font-semibold leading-tight text-ink">{project.cardTitle}</span>

@@ -23,6 +23,7 @@ export interface Project {
   examples: string[];
   replace: string;
   prompt: string;
+  isNew?: boolean;
 }
 
 export interface ImprovementPrompt {
@@ -55,6 +56,7 @@ export const pageCopy = {
     title: "Выберите один из\u00A0шести проектов",
     description: "Начните с\u00A0задачи, которая пригодится вам, клиентам или бизнесу. Внутри каждой карточки — готовый промпт и\u00A0примеры адаптации.",
     openLabel: "Открыть промпт",
+    newLabel: "Новый промпт",
   },
   projectModal: {
     openAriaPrefix: "Открыть проект",
@@ -497,6 +499,7 @@ ${visualDirection}
     level: "Средний",
     time: "60–90 минут",
     coverImage: "/images/project-covers/telegram-bot.webp?v=20260925",
+    isNew: true,
     services: ["Qwen", "Google AI Studio", "GLM"],
     examples: [
       "запись к мастеру",
