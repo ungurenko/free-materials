@@ -2,6 +2,7 @@ import Image from "next/image";
 import { IconArrowRight, IconArrowUpRight } from "./icons";
 import { siteConfig } from "@/config/site";
 import { pageCopy } from "@/content/leadmagnet";
+import HeroOrbit from "./hero/HeroOrbit";
 import Reveal from "./Reveal";
 import TrackedCourseLink from "./TrackedCourseLink";
 
@@ -20,9 +21,19 @@ export default function Hero() {
             {pageCopy.hero.eyebrow}
           </p>
 
-          <h1 data-hero-headline="true" className="mt-5 min-w-0 break-words font-display text-[clamp(2rem,7vw,4.1rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ink hyphens-auto">
-            Стартовый набор
-            <span className="mt-1 block text-lime-700">для вайб-кодинга</span>
+          <h1 data-hero-headline="true" className="mt-5 min-w-0 break-words font-display text-[clamp(2rem,7vw,4.1rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ink lg:text-[clamp(2.5rem,4.9vw,3.6rem)]">
+            <span className="block">Стартовый</span>{" "}
+            <span className="block">
+              набор <span className="text-lime-700">для</span>
+            </span>{" "}
+            <span className="mt-1 block text-lime-700">
+              <span className="relative inline-block whitespace-nowrap">
+                вайб-кодинга
+                <svg viewBox="0 0 300 16" preserveAspectRatio="none" className="hero-underline pointer-events-none absolute -bottom-2 left-0 h-3 w-full text-lime-500" aria-hidden>
+                  <path d="M4 11 C 40 3, 70 3, 100 9 S 160 15, 196 8 S 262 2, 296 7" fill="none" stroke="currentColor" strokeWidth={4} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                </svg>
+              </span>
+            </span>
           </h1>
 
           <p className="mt-5 max-w-xl text-[1.05rem] font-medium leading-relaxed text-ink-soft sm:text-[1.2rem]">
@@ -57,7 +68,7 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={120} className="relative mx-auto hidden w-full max-w-[560px] lg:block lg:max-w-none">
-          <div className="anim-spin-slow pointer-events-none absolute -right-7 -top-9 size-44 rounded-full border border-dashed border-lime-500/60" aria-hidden />
+          <HeroOrbit>
           <figure data-hero-photo="true" className="relative rotate-[1.2deg] rounded-[34px] border border-line bg-paper p-3 pb-12 shadow-[0_32px_76px_-38px_rgba(38,40,31,0.44)] transition-transform duration-500 hover:rotate-0">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[26px] bg-milk">
               <Image
@@ -80,6 +91,7 @@ export default function Hero() {
               </span>
             </figcaption>
           </figure>
+          </HeroOrbit>
         </Reveal>
       </div>
     </section>

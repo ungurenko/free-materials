@@ -10,8 +10,9 @@ describe("mobile Hero composition", () => {
 
     expect(headlinePosition).toBeGreaterThan(-1);
     expect(authorPosition).toBeGreaterThan(headlinePosition);
-    expect(html).toContain("Стартовый набор");
-    expect(html).toContain("для вайб-кодинга");
+    const headlineText = (html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+    expect(headlineText).toBe("Стартовый набор для вайб-кодинга");
+    expect(html).toMatch(/class="[^"]*whitespace-nowrap[^"]*">вайб-кодинга/);
     expect(html).toContain("Александр Унгуренко");
     expect(html).toContain("Показываю, как создавать сайты, приложения и\u00A0ИИ-агентов");
   });

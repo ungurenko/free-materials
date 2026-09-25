@@ -14,10 +14,16 @@ export default function PromoBanner() {
   return (
     <section className="promo-banner-section container-x pt-4 sm:pt-6" aria-labelledby="promo-banner-title">
       <Reveal>
-        <div className="group relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-moss-950 text-on-dark shadow-[0_34px_80px_-42px_rgba(27,33,19,0.75)] sm:rounded-[36px]">
-          <div className="pointer-events-none absolute -left-24 -top-28 size-80 rounded-full bg-fuchsia-400/15 blur-3xl" aria-hidden />
-          <div className="pointer-events-none absolute -bottom-36 right-0 size-96 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden />
-          <div className="dot-grid-light pointer-events-none absolute inset-0 opacity-35" aria-hidden />
+        <div
+          onPointerMove={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect();
+            event.currentTarget.style.setProperty("--gx", `${event.clientX - rect.left}px`);
+            event.currentTarget.style.setProperty("--gy", `${event.clientY - rect.top}px`);
+          }}
+          className="promo-glow group relative isolate overflow-hidden rounded-[28px] border border-white/10 bg-moss-950 text-on-dark shadow-[0_34px_80px_-42px_rgba(27,33,19,0.75)] sm:rounded-[36px]">
+          <div className="pointer-events-none absolute -left-24 -top-28 size-80 rounded-full bg-fuchsia-400/15 blur-3xl blob-drift" aria-hidden />
+          <div className="pointer-events-none absolute -bottom-36 right-0 size-96 rounded-full bg-cyan-300/10 blur-3xl blob-drift-alt" aria-hidden />
+          <div className="dot-grid-light dot-drift pointer-events-none absolute inset-0 opacity-35" aria-hidden />
 
           <div className="relative grid items-center lg:grid-cols-[0.92fr_1.08fr]">
             <div className="z-10 min-w-0 px-6 py-8 sm:px-10 sm:py-10 lg:py-12 lg:ps-12 lg:pe-6">

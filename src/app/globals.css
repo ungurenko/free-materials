@@ -348,6 +348,273 @@ iframe {
   animation: pulse-dot 2.4s ease-out infinite;
 }
 
+/* ---------- орбита наклеек вокруг фото ---------- */
+.orbit-ring {
+  stroke: var(--color-lime-500);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 9;
+  stroke-linecap: round;
+  animation: orbit-dash 2.4s linear infinite;
+}
+@keyframes orbit-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.orbit-tether {
+  stroke: var(--color-lime-500);
+  stroke-width: 2;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.orbit-sticker {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+}
+.hero-orbit[data-dragging="true"],
+.hero-orbit[data-dragging="true"] .orbit-sticker {
+  cursor: grabbing;
+}
+
+/* ---------- завиток под заголовком ---------- */
+.hero-underline {
+  clip-path: inset(0 100% 0 0);
+  animation: draw-underline 1.1s 0.45s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes draw-underline {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------- сцена «промпт → сайт» ---------- */
+.scene-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-inline-start: 2px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.prompt-scene:not([data-phase="typing"]) .scene-caret {
+  opacity: 0;
+  animation: none;
+}
+.scene-reply {
+  animation: bubble-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+.scene-dots span {
+  animation: dot-bounce 1s infinite;
+}
+.scene-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.scene-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes dot-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+.scene-block {
+  opacity: 0.12;
+  transform: scale(0.92);
+  transition:
+    opacity 0.4s ease,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.scene-block[data-built="true"] {
+  opacity: 1;
+  transform: none;
+  animation: block-flash 0.8s ease-out;
+}
+@keyframes block-flash {
+  from {
+    box-shadow: 0 0 0 0 rgba(178, 201, 110, 0.9);
+  }
+  to {
+    box-shadow: 0 0 0 12px rgba(178, 201, 110, 0);
+  }
+}
+.scene-cover {
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 0.8s ease,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.prompt-scene[data-phase="typing"] .scene-cover {
+  transition: none;
+}
+.prompt-scene[data-phase="done"] .scene-cover,
+.prompt-scene[data-phase="fade"] .scene-cover {
+  opacity: 1;
+  transform: none;
+}
+.scene-fade {
+  transition: opacity 0.45s ease;
+}
+.prompt-scene[data-phase="fade"] .scene-fade {
+  opacity: 0.2;
+}
+.scene-dot span {
+  background: rgba(253, 253, 248, 0.3);
+  transition:
+    background-color 0.2s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.scene-dot:hover span {
+  background: rgba(253, 253, 248, 0.6);
+}
+.scene-dot[aria-pressed="true"] span {
+  background: var(--color-lime-400);
+  transform: scale(1.5);
+}
+
+/* ---------- дорожка от этапа 1 к этапу 2 ---------- */
+.stage-connector-track,
+.stage-connector-lit {
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+.stage-connector-track {
+  stroke: var(--color-line-strong);
+  stroke-width: 2;
+  stroke-dasharray: 2 8;
+}
+.stage-connector-lit {
+  stroke: var(--color-lime-500);
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 0 6px rgba(153, 182, 79, 0.6));
+}
+.stage-connector-comet {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-lime-300);
+  box-shadow:
+    0 0 0 4px rgba(178, 201, 110, 0.3),
+    0 0 18px 4px rgba(153, 182, 79, 0.7);
+  transition: opacity 0.3s ease;
+}
+
+/* ---------- карточки проектов с наклоном ---------- */
+@layer components {
+  .tilt-card {
+    position: relative;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+    transition:
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .tilt-card[data-tilting="true"] {
+    transition-duration: 0.12s, 0.3s, 0.3s;
+  }
+  .tilt-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(202, 221, 151, 0.32), transparent 65%);
+    transition: opacity 0.3s ease;
+  }
+  .tilt-media {
+    transform: translate(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -10px)) scale(1.05);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tilt-card:hover {
+      --lift: -4px;
+    }
+    .tilt-card:hover::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---------- живой баннер и фон ---------- */
+@keyframes blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(60px, 30px) scale(1.12);
+  }
+  66% {
+    transform: translate(-30px, 50px) scale(0.92);
+  }
+}
+.blob-drift {
+  animation: blob-drift 18s ease-in-out infinite;
+}
+.blob-drift-alt {
+  animation: blob-drift 22s ease-in-out -8s infinite reverse;
+}
+@keyframes dot-drift {
+  to {
+    background-position: 44px 22px;
+  }
+}
+.dot-drift {
+  animation: dot-drift 6s linear infinite;
+}
+.promo-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(360px circle at var(--gx, 50%) var(--gy, 50%), rgba(202, 221, 151, 0.14), transparent 70%);
+  transition: opacity 0.4s ease;
+}
+.promo-glow:hover::after {
+  opacity: 1;
+}
+
+/* ---------- блик на полоске прогресса ---------- */
+.progress-shimmer {
+  background-image: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -359,8 +626,22 @@ iframe {
   }
   .anim-spin-slow,
   .anim-float,
-  .anim-pulse-dot {
+  .anim-pulse-dot,
+  .orbit-ring,
+  .scene-caret,
+  .blob-drift,
+  .blob-drift-alt,
+  .dot-drift,
+  .progress-shimmer {
     animation: none;
+  }
+  .hero-underline {
+    animation: none;
+    clip-path: none;
+  }
+  .tilt-card,
+  .tilt-media {
+    transform: none;
   }
   *,
   *::before,

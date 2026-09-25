@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IconArrowRight, IconCheck, IconCopy } from "@/components/icons";
 import { improvementPrompts, pageCopy } from "@/content/leadmagnet";
+import { sparkBurst } from "@/lib/celebrate";
 import { copyText } from "@/lib/copy";
 
 export default function ImprovementPromptsSection() {
@@ -16,8 +17,9 @@ export default function ImprovementPromptsSection() {
 
   useEffect(() => () => window.clearTimeout(copyTimer.current), []);
 
-  const handlePromptCopy = async (id: string, text: string) => {
+  const handlePromptCopy = async (id: string, text: string, trigger: HTMLElement) => {
     const copied = await copyText(text);
+    if (copied) sparkBurst(trigger);
     setCopiedPromptId(copied ? id : "");
     setCopyStatus(copied ? copy.copiedStatus : copy.copyErrorStatus);
     window.clearTimeout(copyTimer.current);
@@ -28,7 +30,7 @@ export default function ImprovementPromptsSection() {
   };
 
   return (
-    <section className="relative mt-16 scroll-mt-24 overflow-hidden border-y border-lime-300/80 bg-lime-100 py-12 sm:mt-20 sm:py-14" aria-labelledby="improvement-prompts-title">
+    <section className="relative scroll-mt-24 overflow-hidden border-y border-lime-300/80 bg-lime-100 py-12 sm:py-14" aria-labelledby="improvement-prompts-title">
       <div className="dot-grid pointer-events-none absolute -right-20 -top-16 size-80 opacity-60" aria-hidden />
       <div className="container-x relative">
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
@@ -66,7 +68,7 @@ export default function ImprovementPromptsSection() {
                     <p className="text-sm leading-relaxed text-ink-soft">{prompt.text}</p>
                     <button
                       type="button"
-                      onClick={() => handlePromptCopy(prompt.id, prompt.text)}
+                      onClick={(event) => handlePromptCopy(prompt.id, prompt.text, event.currentTarget)}
                       aria-label={`${copy.copyLabel}: ${prompt.title}`}
                       className="btn-primary mt-4 h-auto min-h-11 w-full whitespace-normal px-5 py-3 text-center text-sm sm:w-fit"
                     >
@@ -126,7 +128,7 @@ export default function ImprovementPromptsSection() {
             </div>
             <button
               type="button"
-              onClick={() => handlePromptCopy(activePrompt.id, activePrompt.text)}
+              onClick={(event) => handlePromptCopy(activePrompt.id, activePrompt.text, event.currentTarget)}
               aria-label={`${copy.copyLabel}: ${activePrompt.title}`}
               className="btn-primary relative z-10 mt-auto h-auto min-h-12 w-fit whitespace-normal px-6 py-3 text-center text-sm"
             >

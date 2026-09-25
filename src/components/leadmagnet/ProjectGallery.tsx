@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { projects, howToUseSteps, pageCopy, type Project } from "@/content/leadmagnet";
+import { sparkBurst } from "@/lib/celebrate";
 import { copyText } from "@/lib/copy";
 import { getProjectIdFromHash } from "@/lib/leadmagnet-state";
 import { IconCheck, IconCopy } from "@/components/icons";
@@ -17,7 +18,7 @@ function ProjectCover({ project }: { project: Project }) {
         alt=""
         fill
         sizes="(max-width: 639px) calc(100vw - 64px), (max-width: 1023px) calc(50vw - 48px), 352px"
-        className="object-cover"
+        className="tilt-media object-cover"
       />
     </div>
   );
@@ -30,6 +31,7 @@ export default function ProjectGallery() {
   const closeButton = useRef<HTMLButtonElement | null>(null);
   const modal = useRef<HTMLDialogElement | null>(null);
   const copyTimer = useRef<number | undefined>(undefined);
+  const tiltedCard = useRef<HTMLElement | null>(null);
   const activeProject = projects.find((project) => project.id === activeId) ?? null;
   const copy = pageCopy.projectModal;
 
@@ -95,23 +97,51 @@ export default function ProjectGallery() {
     };
   }, [activeProject]);
 
-  const handleCopy = async (project: Project) => {
+  const handleCopy = async (project: Project, trigger: HTMLElement) => {
     const copied = await copyText(project.prompt);
+    if (copied) sparkBurst(trigger);
     setCopyStatus(copied ? copy.copiedStatus : copy.copyErrorStatus);
     window.clearTimeout(copyTimer.current);
     copyTimer.current = window.setTimeout(() => setCopyStatus(""), 2100);
   };
 
+  // Карточка наклоняется за мышкой: координаты курсора уходят в CSS-переменные.
+  const tiltCard = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    const card = (event.target as Element).closest<HTMLElement>(".tilt-card");
+    if (tiltedCard.current && tiltedCard.current !== card) resetTilt();
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    card.style.setProperty("--rx", `${(-y * 7).toFixed(2)}deg`);
+    card.style.setProperty("--ry", `${(x * 9).toFixed(2)}deg`);
+    card.style.setProperty("--px", x.toFixed(3));
+    card.style.setProperty("--py", y.toFixed(3));
+    card.style.setProperty("--mx", `${((x + 0.5) * 100).toFixed(1)}%`);
+    card.style.setProperty("--my", `${((y + 0.5) * 100).toFixed(1)}%`);
+    card.dataset.tilting = "true";
+    tiltedCard.current = card;
+  };
+
+  const resetTilt = () => {
+    const card = tiltedCard.current;
+    if (!card) return;
+    ["--rx", "--ry", "--px", "--py"].forEach((name) => card.style.removeProperty(name));
+    delete card.dataset.tilting;
+    tiltedCard.current = null;
+  };
+
   return (
     <>
-      <div className="project-grid mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="project-grid mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" onPointerMove={tiltCard} onPointerLeave={resetTilt}>
         {projects.map((project) => (
           <button
             key={project.id}
             type="button"
             onClick={() => openProject(project.id)}
             aria-label={`${copy.openAriaPrefix}: ${project.cardTitle}`}
-            className="group flex h-full min-w-0 flex-col rounded-[26px] border border-line bg-paper p-3 text-start shadow-[0_22px_52px_-38px_rgba(38,40,31,0.4)] transition duration-300 hover:-translate-y-1 hover:border-lime-400 hover:shadow-[0_28px_58px_-34px_rgba(38,40,31,0.45)]"
+            className="tilt-card group flex h-full min-w-0 flex-col rounded-[26px] border border-line bg-paper p-3 text-start shadow-[0_22px_52px_-38px_rgba(38,40,31,0.4)] hover:border-lime-400 hover:shadow-[0_28px_58px_-34px_rgba(38,40,31,0.45)]"
           >
             <ProjectCover project={project} />
             <span className="flex flex-1 flex-col px-2 pb-2 pt-5">
@@ -159,7 +189,7 @@ export default function ProjectGallery() {
                   <h3 className="font-display text-sm font-semibold text-ink">{copy.replaceTitle}</h3>
                   <code className="mt-2 block break-words font-mono text-[0.6875rem] leading-relaxed text-lime-700 sm:text-xs">{activeProject.replace}</code>
                 </div>
-                <button type="button" onClick={() => handleCopy(activeProject)} className="btn-primary mt-4 h-auto min-h-11 w-full shrink-0 whitespace-normal px-5 py-3 text-center text-sm sm:mt-0 sm:w-fit">
+                <button type="button" onClick={(event) => handleCopy(activeProject, event.currentTarget)} className="btn-primary mt-4 h-auto min-h-11 w-full shrink-0 whitespace-normal px-5 py-3 text-center text-sm sm:mt-0 sm:w-fit">
                   {copyStatus === copy.copiedStatus ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
                   {copy.copyLabel}
                 </button>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { checklistItems, pageCopy, safetyRules, services } from "@/content/leadmagnet";
+import { confettiBurst } from "@/lib/celebrate";
 import { getChecklistProgress, parseChecklistState } from "@/lib/leadmagnet-state";
 
 const checklistStorageKey = "vibeCodingChecklist";
@@ -72,7 +73,9 @@ export default function ResourcesSection() {
   };
 
   const handleCheck = (index: number) => {
-    setCheckedIndexes((current) => current.includes(index) ? current.filter((item) => item !== index) : [...current, index].sort((a, b) => a - b));
+    const next = checkedIndexes.includes(index) ? checkedIndexes.filter((item) => item !== index) : [...checkedIndexes, index].sort((a, b) => a - b);
+    setCheckedIndexes(next);
+    if (!progress.complete && getChecklistProgress(next, checklistItems.length).complete) confettiBurst();
   };
 
   return (
@@ -110,7 +113,7 @@ export default function ResourcesSection() {
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
             <span className="shrink-0 font-mono text-xs text-ink-soft">Проверено: {progress.count} из {checklistItems.length}</span>
-            <span className="h-2 flex-1 overflow-hidden rounded-full bg-line" aria-hidden><span className="block h-full rounded-full bg-lime-500 transition-[width] duration-300" style={{ width: `${progress.percent}%` }} /></span>
+            <span className="h-2 flex-1 overflow-hidden rounded-full bg-line" aria-hidden><span className="progress-shimmer block h-full rounded-full bg-lime-500 transition-[width] duration-300" style={{ width: `${progress.percent}%` }} /></span>
           </div>
           {progress.complete && <p className="mt-5 rounded-xl border border-lime-300 bg-lime-100 p-4 text-sm font-semibold text-on-accent">{pageCopy.resources.completeStatus}</p>}
         </Accordion>
