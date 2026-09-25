@@ -14,15 +14,15 @@ describe("leadmagnet content", () => {
     expect(pageCopy.header.brand).toBe("Стартовый набор");
     expect(pageCopy.hero.eyebrow).toBe("Бесплатный стартовый набор");
     expect(pageCopy.hero.lead).toBe(
-      "10 готовых промптов, чтобы без опыта в\u00A0коде собрать первый сайт или веб-приложение и\u00A0довести его до\u00A0рабочей версии.",
+      "11 готовых промптов, чтобы без опыта в\u00A0коде собрать первый сайт, веб-приложение или Telegram-бота и\u00A0довести его до\u00A0рабочей версии.",
     );
     expect(pageCopy.hero.paragraphs).toEqual([
-      "Выберите один из\u00A0пяти проектов, скопируйте промпт в\u00A0ИИ-сервис, а\u00A0затем доведите результат пятью короткими промптами.",
+      "Выберите один из\u00A0шести проектов, скопируйте промпт в\u00A0ИИ-сервис, а\u00A0затем доведите результат пятью короткими промптами.",
     ]);
     expect(pageCopy.hero.primaryAction).toBe("Выбрать проект");
     expect(pageCopy.hero.courseAction).toBe("Собрать свой проект на\u00A0ВАЙБС");
     expect(pageCopy.projects.eyebrow).toBe("Этап 1 из\u00A02");
-    expect(pageCopy.projects.title).toBe("Выберите один из\u00A0пяти проектов");
+    expect(pageCopy.projects.title).toBe("Выберите один из\u00A0шести проектов");
     expect(pageCopy.projects.description).toBe(
       "Начните с\u00A0задачи, которая пригодится вам, клиентам или бизнесу. Внутри каждой карточки — готовый промпт и\u00A0примеры адаптации.",
     );
@@ -42,14 +42,15 @@ describe("leadmagnet content", () => {
     expect(pageCopy.footer.note).toBe("Возможности и\u00A0лимиты нейросетей могут меняться.");
   });
 
-  it("contains exactly five source projects with complete modal content", () => {
-    expect(projects).toHaveLength(5);
+  it("contains exactly six source projects with complete modal content", () => {
+    expect(projects).toHaveLength(6);
     expect(projects.map((project) => project.id)).toEqual([
       "project-page",
       "calculator",
       "quiz",
       "idea-generator",
       "habit-tracker",
+      "telegram-bot",
     ]);
     expect(projects.map((project) => project.cardTitle)).toEqual([
       "Лендинг для услуги",
@@ -57,6 +58,7 @@ describe("leadmagnet content", () => {
       "Квиз для клиента",
       "Генератор идей для\u00A0ниши",
       "Трекер прогресса",
+      "Telegram-бот для\u00A0заявок",
     ]);
     expect(projects.map((project) => project.coverImage)).toEqual([
       "/images/project-covers/project-page.webp?v=20260817",
@@ -64,6 +66,7 @@ describe("leadmagnet content", () => {
       "/images/project-covers/quiz.webp?v=20260817",
       "/images/project-covers/idea-generator.webp?v=20260817",
       "/images/project-covers/habit-tracker.webp?v=20260817",
+      "/images/project-covers/telegram-bot.webp?v=20260925",
     ]);
     expect(new Set(projects.map((project) => project.coverImage)).size).toBe(projects.length);
 
@@ -76,7 +79,7 @@ describe("leadmagnet content", () => {
     }
   });
 
-  it("contains five projects and compact launch resources", () => {
+  it("contains six projects and compact launch resources", () => {
     expect(services.map((service) => service.name)).toEqual(["Google AI Studio", "Qwen", "GLM"]);
     expect(services.map((service) => service.url)).toEqual([
       "https://aistudio.google.com/",
@@ -108,7 +111,7 @@ describe("leadmagnet content", () => {
   it("provides compact Hero copy for phone screens", () => {
     expect(pageCopy.hero.mobile).toEqual({
       eyebrow: "Бесплатный стартовый набор",
-      meta: "5 проектов · 5 промптов для доводки · бесплатно",
+      meta: "6 проектов · 5 промптов для доводки · бесплатно",
     });
   });
 
@@ -197,8 +200,9 @@ describe("leadmagnet content", () => {
     );
   });
 
-  it("gives every project a professional role and protection from template AI design", () => {
-    const prompts = Object.fromEntries(projects.map((project) => [project.id, project.prompt]));
+  it("gives every web project a professional role and protection from template AI design", () => {
+    const webProjects = projects.filter((project) => project.id !== "telegram-bot");
+    const prompts = Object.fromEntries(webProjects.map((project) => [project.id, project.prompt]));
 
     for (const prompt of Object.values(prompts)) {
       const sectionPositions = [
@@ -231,6 +235,29 @@ describe("leadmagnet content", () => {
     expect(prompts["habit-tracker"]).toContain("логику дат и этапов");
   });
 
+  it("gives the Telegram bot prompt a safe beginner-friendly Python setup", () => {
+    const prompt = projects.find((project) => project.id === "telegram-bot")?.prompt ?? "";
+    const sectionPositions = [
+      "Роль и навыки",
+      "Специализация",
+      "Задача",
+      "Сценарий диалога",
+      "Функции",
+      "Ограничения",
+      "Запуск",
+      "Проверка",
+    ].map((section) => prompt.indexOf(section));
+
+    expect(sectionPositions.every((position) => position >= 0)).toBe(true);
+    expect(sectionPositions).toEqual([...sectionPositions].sort((a, b) => a - b));
+    expect(prompt).toContain("aiogram 3");
+    expect(prompt).toContain("BOT_TOKEN и ADMIN_ID");
+    expect(prompt).toContain("@BotFather");
+    expect(prompt).toContain("Никогда не вписывай токен прямо в код");
+    expect(prompt).toContain("Не выдумывай цены, адреса, отзывы и гарантии");
+    expect(prompt).toContain("пока на компьютере открыто окно терминала");
+  });
+
   it("keeps project ids unique and replacement markers source-accurate", () => {
     expect(new Set(projects.map((project) => project.id)).size).toBe(projects.length);
     expect(projects.map((project) => project.replace)).toEqual([
@@ -239,13 +266,14 @@ describe("leadmagnet content", () => {
       "[ВПИШИТЕ ТЕМУ ТЕСТА]",
       "[ВПИШИТЕ ТЕМУ]",
       "[ОПИШИТЕ ПРОГРАММУ, ЦЕЛЬ И\u00A0ДЕЙСТВИЯ ДЛЯ ОТМЕТКИ]",
+      "[ОПИШИТЕ УСЛУГУ, КОМУ ОНА НУЖНА И\u00A0КАКИЕ ДАННЫЕ СОБРАТЬ В\u00A0ЗАЯВКЕ]",
     ]);
   });
 
-  it("packages five project prompts and five improvement prompts as one starter kit", () => {
-    expect(projects).toHaveLength(5);
+  it("packages six project prompts and five improvement prompts as one starter kit", () => {
+    expect(projects).toHaveLength(6);
     expect(improvementPrompts).toHaveLength(5);
-    expect(pageCopy.hero.lead).toContain("10 готовых промптов");
-    expect(pageCopy.hero.mobile.meta).toContain("5 проектов · 5 промптов");
+    expect(pageCopy.hero.lead).toContain("11 готовых промптов");
+    expect(pageCopy.hero.mobile.meta).toContain("6 проектов · 5 промптов");
   });
 });
